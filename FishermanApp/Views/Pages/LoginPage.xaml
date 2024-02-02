@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FishermanApp.Views.Pages.LoginPage"
+             Title="LoginPage"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Core;assembly=CommunityToolkit.Maui.Core"
+             xmlns:res="clr-namespace:FishermanApp.Resources.Localization"
+             Background="{StaticResource BlueGradient}">
+    <Grid 
+        HorizontalOptions="FillAndExpand" 
+        VerticalOptions="FillAndExpand" 
+        Padding="16">
+             
+        <Border 
+            StrokeShape="RoundRectangle 25"
+            HeightRequest="400" 
+            BackgroundColor="White">
+            
+            <Grid  
+                HorizontalOptions="FillAndExpand">
+
+                <VerticalStackLayout WidthRequest="300" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Image Source="insite_logo" WidthRequest="250"/>
+
+                    <Entry 
+                        FontSize="Medium"
+                        Placeholder="{x:Static res:AppResources.Username}"/>
+                    <Entry 
+                        FontSize="Medium"
+                        Placeholder="{x:Static res:AppResources.Password}"/>
+
+                    <HorizontalStackLayout HorizontalOptions="Start">
+                        <CheckBox />
+                        <Label 
+                            Text="{x:Static res:AppResources.RememberMe}" 
+                            VerticalOptions="Center" 
+                            VerticalTextAlignment="Center"/>
+                    </HorizontalStackLayout>
+
+                    <Button 
+                        HeightRequest="65"
+                        FontSize="Large"
+                        Text="{x:Static res:AppResources.Login}"
+                        Clicked="Button_Clicked"/>
+                    
+                    <Label 
+                        Text="{Binding VersionString}" 
+                        HorizontalOptions="Center" 
+                        TextColor="Gray"/>
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+       
+    </Grid>
+</ContentPage>
