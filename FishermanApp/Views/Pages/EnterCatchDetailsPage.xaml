@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FishermanApp.Views.Pages.EnterCatchDetailsPage"
+             Shell.FlyoutBehavior="Disabled"
+             xmlns:res="clr-namespace:FishermanApp.Resources.Localization"  
+             Title="{x:Static res:AppResources.CatchDetails}"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             BackgroundColor="White">
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="8"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+
+        <Grid 
+                Margin="16,8"
+                Grid.Row="0" 
+                HorizontalOptions="FillAndExpand">
+            <Label
+                            TextColor="{StaticResource Primary}"
+                            FontAttributes="Bold"
+                            VerticalTextAlignment="Center"
+                            FontSize="30"
+                            Text="{x:Static res:AppResources.AddRow}"/>
+
+            <ImageButton 
+                    Command="{Binding AddRowCommand}"
+                    Source="add_icon" 
+                    HorizontalOptions="End" 
+                    WidthRequest="50">
+
+                <ImageButton.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="{StaticResource ButtonGreen}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
+        </Grid>
+
+        <BoxView 
+                VerticalOptions="Center"
+                HorizontalOptions="FillAndExpand"
+                Grid.Row="1" HeightRequest="4"
+                Color="{StaticResource Primary}"/>
+
+        <CollectionView 
+                Grid.Row="2"
+                VerticalOptions="FillAndExpand"
+                SelectionMode="None"
+                Margin="16"
+                ItemsSource="{Binding CatchDataCollection}" 
+                SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}"
+                >
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout Margin="0,0,0,8">
+                        <Label
+                            TextColor="{StaticResource Primary}"
+                            FontAttributes="Bold"
+                            FontSize="30"
+                            Text="{x:Static res:AppResources.Species}"/>
+
+                        <Border 
+                    StrokeThickness="4"
+                    Stroke ="{StaticResource ButtonGreen}"
+                    StrokeShape="RoundRectangle 10,10,10,10"
+                    HeightRequest="80">
+
+                            <Grid>
+                                <Entry
+                       ReturnType="Next"
+                        Margin="8,0"
+                        Keyboard="Default"
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        FontSize="40"
+                        Text="{Binding Species}"
+                        />
+
+                                <Image HorizontalOptions="End" HeightRequest="40" VerticalOptions="Center" Source="caret_down" Margin="0,0,16,0">
+                                    <Image.Behaviors>
+                                        <toolkit:IconTintColorBehavior TintColor="{StaticResource ButtonGreen}"/>
+                                    </Image.Behaviors>
+                                </Image>
+                            </Grid>
+
+                        </Border>
+
+                        <Label
+                            TextColor="{StaticResource Primary}"
+                            FontAttributes="Bold"
+                            FontSize="30"
+                            Text="{x:Static res:AppResources.Quanity}"/>
+
+                        <Border 
+                    StrokeThickness="4"
+                    Stroke ="{StaticResource ButtonGreen}"
+                    StrokeShape="RoundRectangle 10,10,10,10"
+                    HeightRequest="80">
+
+                            <Entry
+                       ReturnType="Done"
+                        Margin="8,0"
+                        Keyboard="Numeric"
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        FontSize="40"
+                        Text="{Binding CatchQuanity}"
+                        />
+                        </Border>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button 
+                Grid.Row="3"
+                Margin="16,8"
+                Command="{Binding AddCatchCommand}"
+                Text="{x:Static res:AppResources.AddCatchEvent}"
+                TextColor="White"
+                BackgroundColor="{StaticResource ButtonGreen}"
+                HeightRequest="65"
+                FontSize="30"
+                VerticalOptions="End"/>
+    </Grid>
+</ContentPage>

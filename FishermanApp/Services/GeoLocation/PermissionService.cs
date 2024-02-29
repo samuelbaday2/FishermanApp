@@ -8,9 +8,9 @@ namespace FishermanApp.Services.GeoLocation
 {
     public class PermissionService : IPermissionService
     {
-        public async Task RequestPermissionAsync()
+        public async Task<PermissionStatus> RequestPermissionAsync()
         {
-            await CheckAndRequestLocationPermission();
+            return await CheckAndRequestLocationPermission();
         }
 
         public async Task<PermissionStatus> CheckAndRequestLocationPermission()

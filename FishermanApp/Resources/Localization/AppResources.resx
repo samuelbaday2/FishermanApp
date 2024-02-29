@@ -117,25 +117,151 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddCatchEvent" xml:space="preserve">
+    <value>Record Catch</value>
+  </data>
+  <data name="AddRow" xml:space="preserve">
+    <value>Add Another Row</value>
+  </data>
+  <data name="BaitSpecie" xml:space="preserve">
+    <value>SPECIES OF BAIT :</value>
+  </data>
+  <data name="BaitType" xml:space="preserve">
+    <value>TYPE OF BAIT : </value>
+  </data>
+  <data name="Bycatch" xml:space="preserve">
+    <value>BYCATCH : </value>
+  </data>
+  <data name="Captain" xml:space="preserve">
+    <value>Captain : </value>
+  </data>
+  <data name="CatchDetails" xml:space="preserve">
+    <value>CATCH DETAILS :</value>
+  </data>
+  <data name="Dead" xml:space="preserve">
+    <value>DEAD</value>
+  </data>
+  <data name="DownArrow" xml:space="preserve">
+    <value>⮟</value>
+  </data>
+  <data name="EndSet" xml:space="preserve">
+    <value>Stop Fishing</value>
+  </data>
+  <data name="EndTrip" xml:space="preserve">
+    <value>Dock Ship</value>
+  </data>
+  <data name="FlyoutStartTrip" xml:space="preserve">
+    <value>START TRIP</value>
+  </data>
+  <data name="GangionLength" xml:space="preserve">
+    <value>LENGTH OF GANGION : </value>
+  </data>
+  <data name="Gear" xml:space="preserve">
+    <value>GEAR : </value>
+  </data>
+  <data name="GearSelection" xml:space="preserve">
+    <value>GEAR SELECTION</value>
+  </data>
+  <data name="GpsOff" xml:space="preserve">
+    <value>GPS OFF</value>
+  </data>
+  <data name="GpsStatus" xml:space="preserve">
+    <value>GPS STATUS : </value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>HOME</value>
+  </data>
+  <data name="HomePort" xml:space="preserve">
+    <value>Home Port : </value>
+  </data>
+  <data name="HooksPerBasket" xml:space="preserve">
+    <value>HOOKS PER BASKET :</value>
+  </data>
+  <data name="HookType" xml:space="preserve">
+    <value>TYPE OF HOOK : </value>
+  </data>
+  <data name="Hostname" xml:space="preserve">
+    <value>dev.norpacexport.com:8076/</value>
+  </data>
+  <data name="InternetStatus" xml:space="preserve">
+    <value>INTERNET STATUS : </value>
+  </data>
+  <data name="Live" xml:space="preserve">
+    <value>LIVE</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
   </data>
   <data name="Logout" xml:space="preserve">
     <value>Logout</value>
   </data>
+  <data name="LongLineLength" xml:space="preserve">
+    <value>LENGTH OF LONGLINE : </value>
+  </data>
+  <data name="Longlines" xml:space="preserve">
+    <value>Longlines</value>
+  </data>
+  <data name="MiscGear" xml:space="preserve">
+    <value>Misc Gear</value>
+  </data>
+  <data name="Nets" xml:space="preserve">
+    <value>Nets</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>NO</value>
+  </data>
+  <data name="NumberOfBaskets" xml:space="preserve">
+    <value>NUMBER OF BASKETS : </value>
+  </data>
+  <data name="Offline" xml:space="preserve">
+    <value>OFFLINE</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>ONLINE</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="Quanity" xml:space="preserve">
+    <value>Quantity : </value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>QUANTITY : </value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember me</value>
   </data>
+  <data name="RemoteAppHostName" xml:space="preserve">
+    <value>dev.norpacexport.com:8086/</value>
+  </data>
+  <data name="SetDetails" xml:space="preserve">
+    <value>SET DETAILS</value>
+  </data>
+  <data name="SetNumber" xml:space="preserve">
+    <value>SET NUMBER : </value>
+  </data>
+  <data name="Species" xml:space="preserve">
+    <value>Species : </value>
+  </data>
+  <data name="StartSet" xml:space="preserve">
+    <value> Begin Fishing</value>
+  </data>
   <data name="StartTrip" xml:space="preserve">
-    <value>Start Trip</value>
+    <value>Depart Dock</value>
+  </data>
+  <data name="TrollAndPole" xml:space="preserve">
+    <value>Troll and Pole</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version</value>
+  </data>
+  <data name="VesselName" xml:space="preserve">
+    <value>Vessel Name : </value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>YES</value>
   </data>
 </root>

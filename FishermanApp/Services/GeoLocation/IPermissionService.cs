@@ -8,6 +8,6 @@ namespace FishermanApp.Services
 {
     public interface IPermissionService
     {
-        Task RequestPermissionAsync();
+        Task<PermissionStatus> RequestPermissionAsync();
     }
 }

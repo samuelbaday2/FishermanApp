@@ -2,23 +2,247 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:res="clr-namespace:FishermanApp.Resources.Localization"
-             x:Class="FishermanApp.MainPage">
+             x:Class="FishermanApp.MainPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Background="White">
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource Primary}" StatusBarStyle="LightContent" />
+    </ContentPage.Behaviors>
 
     <ScrollView>
-        <Grid
-            
+        <Grid    
             Padding="16"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand">
 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="65"/>
+            </Grid.RowDefinitions>
+
+            <Border
+                Margin="0,0,0,16"
+                Grid.Row="0">
+                
+                <ScrollView Orientation="Vertical">
+                    <VerticalStackLayout Padding="16">
+                        <VerticalStackLayout Margin="0,0,0,8">
+                            <Label
+                            TextColor="{StaticResource Primary}"
+                            FontAttributes="Bold"
+                            FontSize="Large"
+                            Text="{x:Static res:AppResources.VesselName}"/>
+
+                            <Label
+                            TextColor="Black"
+                            FontAttributes="Bold"
+                            FontSize="40"
+                            Text="{Binding VesselName}"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Margin="0,0,0,8">
+                            <Label
+                            TextColor="{StaticResource Primary}"
+                            FontAttributes="Bold"
+                            FontSize="Large"
+                            Text="{x:Static res:AppResources.HomePort}"/>
+
+                            <Label
+                            TextColor="Black"
+                            FontAttributes="Bold"
+                            FontSize="40"
+                            Text="{Binding HomePort}"/>
+                        </VerticalStackLayout>
+
+                        
+                        <VerticalStackLayout Margin="0,0,0,8">
+                            <Label
+                            TextColor="{StaticResource Primary}"
+                            FontAttributes="Bold"
+                            FontSize="Large"
+                            Text="{x:Static res:AppResources.Captain}"/>
+
+                            <Border 
+                    StrokeThickness="4"
+                    Stroke ="{StaticResource ButtonGreen}"
+                    StrokeShape="RoundRectangle 10,10,10,10"
+                    HeightRequest="80">
+
+                                <Entry
+                            TextColor="Black"
+                            FontAttributes="Bold"
+                            FontSize="40"
+                            Text="{Binding CaptainName}"/>
+                            </Border>
+                           
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Margin="0,0,0,8">
+                            <Label
+                            TextColor="{StaticResource Primary}"
+                            FontAttributes="Bold"
+                            FontSize="Large"
+                            Text="{x:Static res:AppResources.GpsStatus}"/>
+
+                            <HorizontalStackLayout>
+                                <Ellipse 
+                                Margin="0,0,8,0"
+                                Fill="DarkBlue"
+                                Stroke="{StaticResource Tertiary}"
+                                StrokeThickness="4"
+                                WidthRequest="30"
+                                HeightRequest="30"
+                                HorizontalOptions="Start" >
+
+                                    <Ellipse.Triggers>
+                                        <DataTrigger TargetType="Ellipse"
+                                        Binding="{Binding Source={x:Reference GpsnStatusLabel},
+                                            Path=Text}" 
+                                        
+                                        Value="{x:Static res:AppResources.Online}">
+                                            <Setter Property="Fill"
+                                        Value="{StaticResource ButtonGreen}" />
+
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Ellipse"
+                                         Binding="{Binding Source={x:Reference GpsnStatusLabel},
+                                            Path=Text}" 
+                                        Value="{x:Static res:AppResources.Offline}">
+                                            <Setter Property="Fill"
+                                        Value="{StaticResource ButtonRed}" />
+
+                                        </DataTrigger>
+                                    </Ellipse.Triggers>
+                                </Ellipse>
+
+                                <Label
+                            x:Name="GpsnStatusLabel"
+                            TextColor="Black"
+                            FontAttributes="Bold"
+                            FontSize="40"
+                            Text="{Binding GpsStatus}">
+                                    <Label.Triggers>
+                                        <Trigger TargetType="Label"
+                                    Property="Text"
+                                    Value="{x:Static res:AppResources.Online}">
+                                            <Setter Property="TextColor"
+                                        Value="{StaticResource ButtonGreen}" />
+
+                                        </Trigger>
+                                        <Trigger TargetType="Label"
+                                    Property="Text"
+                                    Value="{x:Static res:AppResources.Offline}">
+                                            <Setter Property="TextColor"
+                                        Value="{StaticResource ButtonRed}" />
+
+                                        </Trigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </HorizontalStackLayout>
+
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Margin="0,0,0,8">
+                            <Label
+                            TextColor="{StaticResource Primary}"
+                            FontAttributes="Bold"
+                            FontSize="Large"
+                            Text="{x:Static res:AppResources.InternetStatus}"/>
+
+                            <HorizontalStackLayout>
+                                <Ellipse 
+                                Margin="0,0,8,0"
+                                Fill="DarkBlue"
+                                Stroke="{StaticResource Tertiary}"
+                                StrokeThickness="4"
+                                WidthRequest="30"
+                                HeightRequest="30"
+                                HorizontalOptions="Start" >
+
+                                    <Ellipse.Triggers>
+                                        <DataTrigger TargetType="Ellipse"
+                                        Binding="{Binding Source={x:Reference ConnectionStatusLabel},
+                                            Path=Text}" 
+                                        
+                                        Value="{x:Static res:AppResources.Online}">
+                                            <Setter Property="Fill"
+                                        Value="{StaticResource ButtonGreen}" />
+
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Ellipse"
+                                         Binding="{Binding Source={x:Reference ConnectionStatusLabel},
+                                            Path=Text}" 
+                                        Value="{x:Static res:AppResources.Offline}">
+                                            <Setter Property="Fill"
+                                        Value="{StaticResource ButtonRed}" />
+
+                                        </DataTrigger>
+                                    </Ellipse.Triggers>
+                                </Ellipse>
+
+                                <Label
+                                x:Name="ConnectionStatusLabel"
+                                TextColor="Black"
+                                FontAttributes="Bold"
+                                FontSize="40"
+                                Text="{Binding ConnectionStatus}">
+                                    <Label.Triggers>
+                                        <Trigger TargetType="Label"
+                                    Property="Text"
+                                    Value="{x:Static res:AppResources.Online}">
+                                            <Setter Property="TextColor"
+                                        Value="{StaticResource ButtonGreen}" />
+
+                                        </Trigger>
+                                        <Trigger TargetType="Label"
+                                    Property="Text"
+                                    Value="{x:Static res:AppResources.Offline}">
+                                            <Setter Property="TextColor"
+                                        Value="{StaticResource ButtonRed}" />
+
+                                        </Trigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </HorizontalStackLayout>
+
+                            <Button 
+                                Command="{Binding StartSetCommand}"
+                                FontSize="30"
+                                Grid.Row="1"
+                                IsVisible="{Binding HasPendingTrip}"
+                                Text="{x:Static res:AppResources.StartSet}"
+                                TextColor="White"
+                                BackgroundColor="{StaticResource ButtonGreen}"
+                                HeightRequest="65"
+                                Margin="0,16"
+                                VerticalOptions="End"/>
 
 
-            <Button 
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </ScrollView>
+                
+            </Border>
+
+            <Button           
+                FontSize="30"
+                Grid.Row="1"
                 Command="{Binding StartTripCommand}"
                 Text="{x:Static res:AppResources.StartTrip}"
+                TextColor="White"
                 BackgroundColor="{StaticResource ButtonGreen}"
+                HeightRequest="65"            
+                VerticalOptions="End"/>
+
+            <Button 
+                Grid.Row="1"
+                Command="{Binding EndTripCommand}"
+                Text="{x:Static res:AppResources.EndTrip}"
+                TextColor="White"
+                BackgroundColor="{StaticResource ButtonRed}"
                 HeightRequest="65"
-                FontSize="Large"
+                FontSize="30"
+                IsVisible="{Binding HasPendingTrip}"
                 VerticalOptions="End"/>
         </Grid>
     </ScrollView>

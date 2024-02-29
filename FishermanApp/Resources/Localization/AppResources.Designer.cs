@@ -61,6 +61,222 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Record Catch.
+        /// </summary>
+        public static string AddCatchEvent {
+            get {
+                return ResourceManager.GetString("AddCatchEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Another Row.
+        /// </summary>
+        public static string AddRow {
+            get {
+                return ResourceManager.GetString("AddRow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SPECIES OF BAIT :.
+        /// </summary>
+        public static string BaitSpecie {
+            get {
+                return ResourceManager.GetString("BaitSpecie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TYPE OF BAIT : .
+        /// </summary>
+        public static string BaitType {
+            get {
+                return ResourceManager.GetString("BaitType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BYCATCH : .
+        /// </summary>
+        public static string Bycatch {
+            get {
+                return ResourceManager.GetString("Bycatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Captain : .
+        /// </summary>
+        public static string Captain {
+            get {
+                return ResourceManager.GetString("Captain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CATCH DETAILS :.
+        /// </summary>
+        public static string CatchDetails {
+            get {
+                return ResourceManager.GetString("CatchDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DEAD.
+        /// </summary>
+        public static string Dead {
+            get {
+                return ResourceManager.GetString("Dead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ⮟.
+        /// </summary>
+        public static string DownArrow {
+            get {
+                return ResourceManager.GetString("DownArrow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop Fishing.
+        /// </summary>
+        public static string EndSet {
+            get {
+                return ResourceManager.GetString("EndSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dock Ship.
+        /// </summary>
+        public static string EndTrip {
+            get {
+                return ResourceManager.GetString("EndTrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to START TRIP.
+        /// </summary>
+        public static string FlyoutStartTrip {
+            get {
+                return ResourceManager.GetString("FlyoutStartTrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LENGTH OF GANGION : .
+        /// </summary>
+        public static string GangionLength {
+            get {
+                return ResourceManager.GetString("GangionLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GEAR : .
+        /// </summary>
+        public static string Gear {
+            get {
+                return ResourceManager.GetString("Gear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GEAR SELECTION.
+        /// </summary>
+        public static string GearSelection {
+            get {
+                return ResourceManager.GetString("GearSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GPS OFF.
+        /// </summary>
+        public static string GpsOff {
+            get {
+                return ResourceManager.GetString("GpsOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GPS STATUS : .
+        /// </summary>
+        public static string GpsStatus {
+            get {
+                return ResourceManager.GetString("GpsStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HOME.
+        /// </summary>
+        public static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home Port : .
+        /// </summary>
+        public static string HomePort {
+            get {
+                return ResourceManager.GetString("HomePort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HOOKS PER BASKET :.
+        /// </summary>
+        public static string HooksPerBasket {
+            get {
+                return ResourceManager.GetString("HooksPerBasket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TYPE OF HOOK : .
+        /// </summary>
+        public static string HookType {
+            get {
+                return ResourceManager.GetString("HookType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to dev.norpacexport.com:8076/.
+        /// </summary>
+        public static string Hostname {
+            get {
+                return ResourceManager.GetString("Hostname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INTERNET STATUS : .
+        /// </summary>
+        public static string InternetStatus {
+            get {
+                return ResourceManager.GetString("InternetStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LIVE.
+        /// </summary>
+        public static string Live {
+            get {
+                return ResourceManager.GetString("Live", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Login {
@@ -79,11 +295,101 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to LENGTH OF LONGLINE : .
+        /// </summary>
+        public static string LongLineLength {
+            get {
+                return ResourceManager.GetString("LongLineLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Longlines.
+        /// </summary>
+        public static string Longlines {
+            get {
+                return ResourceManager.GetString("Longlines", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Misc Gear.
+        /// </summary>
+        public static string MiscGear {
+            get {
+                return ResourceManager.GetString("MiscGear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nets.
+        /// </summary>
+        public static string Nets {
+            get {
+                return ResourceManager.GetString("Nets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NO.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NUMBER OF BASKETS : .
+        /// </summary>
+        public static string NumberOfBaskets {
+            get {
+                return ResourceManager.GetString("NumberOfBaskets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OFFLINE.
+        /// </summary>
+        public static string Offline {
+            get {
+                return ResourceManager.GetString("Offline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ONLINE.
+        /// </summary>
+        public static string Online {
+            get {
+                return ResourceManager.GetString("Online", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity : .
+        /// </summary>
+        public static string Quanity {
+            get {
+                return ResourceManager.GetString("Quanity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QUANTITY : .
+        /// </summary>
+        public static string Quantity {
+            get {
+                return ResourceManager.GetString("Quantity", resourceCulture);
             }
         }
         
@@ -97,11 +403,65 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start Trip.
+        ///   Looks up a localized string similar to dev.norpacexport.com:8086/.
+        /// </summary>
+        public static string RemoteAppHostName {
+            get {
+                return ResourceManager.GetString("RemoteAppHostName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SET DETAILS.
+        /// </summary>
+        public static string SetDetails {
+            get {
+                return ResourceManager.GetString("SetDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SET NUMBER : .
+        /// </summary>
+        public static string SetNumber {
+            get {
+                return ResourceManager.GetString("SetNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Species : .
+        /// </summary>
+        public static string Species {
+            get {
+                return ResourceManager.GetString("Species", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Begin Fishing.
+        /// </summary>
+        public static string StartSet {
+            get {
+                return ResourceManager.GetString("StartSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Depart Dock.
         /// </summary>
         public static string StartTrip {
             get {
                 return ResourceManager.GetString("StartTrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Troll and Pole.
+        /// </summary>
+        public static string TrollAndPole {
+            get {
+                return ResourceManager.GetString("TrollAndPole", resourceCulture);
             }
         }
         
@@ -120,6 +480,24 @@ namespace FishermanApp.Resources.Localization {
         public static string Version {
             get {
                 return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vessel Name : .
+        /// </summary>
+        public static string VesselName {
+            get {
+                return ResourceManager.GetString("VesselName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YES.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

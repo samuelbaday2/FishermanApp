@@ -3,9 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FishermanApp.Views.Pages.LoginPage"
              Title="LoginPage"
-             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Core;assembly=CommunityToolkit.Maui.Core"
              xmlns:res="clr-namespace:FishermanApp.Resources.Localization"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Background="{StaticResource BlueGradient}">
+    
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource Primary}" StatusBarStyle="LightContent" />
+    </ContentPage.Behaviors>
+    
     <Grid 
         HorizontalOptions="FillAndExpand" 
         VerticalOptions="FillAndExpand" 
@@ -23,25 +28,39 @@
                     <Image Source="insite_logo" WidthRequest="250"/>
 
                     <Entry 
-                        FontSize="Medium"
+                        TextColor="Black"
+                        Text="{Binding Username}"
+                        FontSize="30"
+                        HorizontalTextAlignment="Center"
                         Placeholder="{x:Static res:AppResources.Username}"/>
                     <Entry 
-                        FontSize="Medium"
+                        IsVisible="False"
+                        TextColor="Black"
+                        FontSize="Large"
                         Placeholder="{x:Static res:AppResources.Password}"/>
 
-                    <HorizontalStackLayout HorizontalOptions="Start">
-                        <CheckBox />
+                    <HorizontalStackLayout 
+                        HorizontalOptions="Start" 
+                        Margin="0,8">
+                        
+                        <CheckBox 
+                            IsChecked="{Binding IsRemembered}"
+                            Color="{StaticResource Primary}"/>
                         <Label 
                             Text="{x:Static res:AppResources.RememberMe}" 
                             VerticalOptions="Center" 
+                            FontSize="25"
+                            TextColor="{StaticResource Primary}"
                             VerticalTextAlignment="Center"/>
                     </HorizontalStackLayout>
 
                     <Button 
                         HeightRequest="65"
-                        FontSize="Large"
+                        FontSize="30"
+                        TextColor="White"
+                        BackgroundColor="{StaticResource Primary}"
                         Text="{x:Static res:AppResources.Login}"
-                        Clicked="Button_Clicked"/>
+                        Command="{Binding LoginCommand}"/>
                     
                     <Label 
                         Text="{Binding VersionString}" 

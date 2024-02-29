@@ -1,10 +1,13 @@
-﻿using System;
+﻿using FishermanApp.Constants.LocalDatabase.Tables;
+using Microsoft.Maui.Devices.Sensors;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit;
 
 namespace FishermanApp.ViewModels
 {
@@ -17,12 +20,24 @@ namespace FishermanApp.ViewModels
         private bool isBusyReversed = true;
         private string title = string.Empty;
 
+        public readonly SemaphoreSlim sephamoreSlim = new SemaphoreSlim(1,1);
+
+        public TripTable _tripTable;
+        public TripSetTable _tripSetTable;
+        public BaitSpeciesTable _baitSpeciesTable;
+        public CatchTable _catchTable;
+
         public BaseViewModel()
         {
-          
+            _tripTable = new TripTable();
+            _tripSetTable = new TripSetTable();
+            _baitSpeciesTable = new BaitSpeciesTable();
+            _catchTable = new CatchTable();
+
+            _baitSpeciesTable.AddSpeciesAsync();
         }
       
-        public async Task GetCurrentLocation()
+        public async Task<Location> GetCurrentLocation()
         {
             try
             {
@@ -36,6 +51,8 @@ namespace FishermanApp.ViewModels
 
                 if (location != null)
                     Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+
+                return location;
             }
             // Catch one of the following exceptions:
             //   FeatureNotSupportedException
@@ -44,6 +61,7 @@ namespace FishermanApp.ViewModels
             catch (Exception ex)
             {
                 // Unable to get location
+                return null;
             }
             finally
             {

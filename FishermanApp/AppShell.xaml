@@ -6,19 +6,25 @@
     xmlns:local="clr-namespace:FishermanApp"
     Shell.FlyoutBehavior="Flyout"
     xmlns:view="clr-namespace:FishermanApp.Views.Pages"
+    xmlns:selection="clr-namespace:FishermanApp.Views.Selection"
     xmlns:res="clr-namespace:FishermanApp.Resources.Localization"
-    Navigating="Shell_Navigating">
-    
+    Navigating="Shell_Navigating"
+    BackgroundColor="{StaticResource Primary}"
+    FlyoutBackgroundColor="White">
+
+   
     <Shell.ItemTemplate>
         <DataTemplate>
-            <Grid ColumnDefinitions="0.2*,0.8*">
+            <Grid ColumnDefinitions="0.2*,0.8*" Margin="0,16">
                 <Image Source="{Binding FlyoutIcon}"
                        Margin="5"
-                       HeightRequest="45" />
+                       HeightRequest="60" />
                 <Label Grid.Column="1"
                        Text="{Binding Title}"
+                       TextColor="{StaticResource Primary}"
+   
+                       FontSize="35"
                        FontAttributes="Bold"
-                       FontSize="Large"
                        VerticalTextAlignment="Center" />
 
                 <VisualStateManager.VisualStateGroups>
@@ -45,9 +51,60 @@
     </Shell.ItemTemplate>
 
     <ShellContent
-        Title="Home"
+        Title="HOME"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+
+    <ShellContent
+        IsVisible="False"
+        Title="{x:Static res:AppResources.FlyoutStartTrip}"
+        ContentTemplate="{DataTemplate view:TripPage}"
+        Route="TripPage" />
+
+   
+    <!--DATA INPUT-->
+    <FlyoutItem
+        IsVisible="False"
+        Title="{x:Static res:AppResources.SetDetails}" >
+        <Tab>
+            <ShellContent Route="EnterSetDetailPage" ContentTemplate="{DataTemplate view:EnterSetDetailPage}"/>
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem
+        IsVisible="False"
+        Title="{x:Static res:AppResources.CatchDetails}" >
+        <Tab>
+            <ShellContent Route="EnterCatchDetailsPage" ContentTemplate="{DataTemplate view:EnterCatchDetailsPage}"/>
+        </Tab>
+    </FlyoutItem>
+    <!--END OF DATA INPUT-->
+
+    <!--SELECTIONS-->
+    <FlyoutItem
+        IsVisible="False"
+        Title="{x:Static res:AppResources.GearSelection}" >
+        <Tab>
+            <ShellContent Route="GearSelection" ContentTemplate="{DataTemplate view:GearSelection}"/>
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem
+        IsVisible="False"
+        Title="{x:Static res:AppResources.HookType}" >
+        <Tab>
+            <ShellContent Route="HookTypeSelection" ContentTemplate="{DataTemplate selection:HookTypeSelection}"/>
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem
+        IsVisible="False"
+        Title="{x:Static res:AppResources.BaitSpecie}" >
+        <Tab>
+            <ShellContent Route="SpeciesSelection" ContentTemplate="{DataTemplate selection:SpeciesSelection}"/>
+        </Tab>
+    </FlyoutItem>
+    <!--END OF SELECTIONS-->
 
     <Shell.FlyoutHeader>
         <Grid 
@@ -61,13 +118,13 @@
     
     <Shell.FlyoutFooter>
         <Grid 
-            HeightRequest="55"
+            HeightRequest="65"
             Padding="8" 
             BackgroundColor="{StaticResource Primary}">
             <Label 
                 TextColor="White" 
                 HorizontalOptions="Center" 
-                FontSize="Medium" 
+                FontSize="35" 
                 Text="{x:Static res:AppResources.Logout}" />
 
             <Grid.GestureRecognizers>
