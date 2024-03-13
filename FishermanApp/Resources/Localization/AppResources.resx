@@ -138,6 +138,12 @@
   <data name="CatchDetails" xml:space="preserve">
     <value>CATCH DETAILS :</value>
   </data>
+  <data name="CatchSpeciesSelection" xml:space="preserve">
+    <value>CATCH SPECIES SELECTION</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
   <data name="Dead" xml:space="preserve">
     <value>DEAD</value>
   </data>
@@ -249,6 +255,9 @@
   <data name="StartTrip" xml:space="preserve">
     <value>Depart Dock</value>
   </data>
+  <data name="TripHistory" xml:space="preserve">
+    <value>TRIP HISTORY</value>
+  </data>
   <data name="TrollAndPole" xml:space="preserve">
     <value>Troll and Pole</value>
   </data>
@@ -260,6 +269,12 @@
   </data>
   <data name="VesselName" xml:space="preserve">
     <value>Vessel Name : </value>
+  </data>
+  <data name="ViewCatchDetails" xml:space="preserve">
+    <value>View Catch Details</value>
+  </data>
+  <data name="ViewEffortDetails" xml:space="preserve">
+    <value>View Effort Details</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>YES</value>

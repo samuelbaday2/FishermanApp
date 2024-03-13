@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FishermanApp.Objects
 {
-    public class CatchObject
+    public class CatchObject2
     {
         public string VesId { get; set; }
         public string TripId { get; set; }

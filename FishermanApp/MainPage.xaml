@@ -63,16 +63,18 @@
                             Text="{x:Static res:AppResources.Captain}"/>
 
                             <Border 
-                    StrokeThickness="4"
-                    Stroke ="{StaticResource ButtonGreen}"
-                    StrokeShape="RoundRectangle 10,10,10,10"
-                    HeightRequest="80">
+                                Margin="0,0"
+                                StrokeThickness="4"
+                                Stroke ="{StaticResource ButtonGreen}"
+                                StrokeShape="RoundRectangle 10,10,10,10"
+                                HeightRequest="80">
 
                                 <Entry
-                            TextColor="Black"
-                            FontAttributes="Bold"
-                            FontSize="40"
-                            Text="{Binding CaptainName}"/>
+                                    Margin="16,0"
+                                    TextColor="Black"
+                                    FontAttributes="Bold"
+                                    FontSize="40"
+                                    Text="{Binding CaptainName}"/>
                             </Border>
                            
                         </VerticalStackLayout>

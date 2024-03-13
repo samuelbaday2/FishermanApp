@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FishermanApp.Views.Pages.TripHistoryPage"
+             Title="{x:Static res:AppResources.TripHistory}"
+             xmlns:res="clr-namespace:FishermanApp.Resources.Localization"  
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             BackgroundColor="White">
+
+    <Shell.TitleView>
+        <Grid>
+            <DatePicker 
+                MinimumDate="{Binding MinimumPickerDate}"
+                Date="{Binding SelectedDate}"
+                DateSelected="HistoryDatePicker_DateSelected"
+                FontSize="22"
+                Format="MMMM-dd-yyyy"
+                x:Name="HistoryDatePicker" 
+                Margin="16,0" 
+                HorizontalOptions="End"/>
+        </Grid>
+    </Shell.TitleView>
+
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <RefreshView IsRefreshing="{Binding IsRefreshing}"
+             Command="{Binding RefreshCommand}">
+
+            <CollectionView 
+                SelectionMode="None"
+                ItemsSource="{Binding TripCollection}"
+                SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}"
+     
+                >
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid 
+                        Padding="16,16" 
+                        >
+
+                            <Border StrokeShape="RoundRectangle 20,20,20,20" >
+                                <VerticalStackLayout
+                                Margin="8,0">
+                                    <Label 
+                                    Margin="0,9"
+                                    VerticalTextAlignment="Start"
+                                    FontAttributes="Bold"
+                                    FontSize="30" 
+                                    HorizontalOptions="Start" 
+                                    HorizontalTextAlignment="Center" 
+                                    Text="{Binding TripStartDate}" 
+                                    TextColor="{StaticResource Primary}"/>
+
+                                    <Label 
+                                    Margin="0,9"
+                                    VerticalTextAlignment="Start"
+                                    FontAttributes="Bold"
+                                    FontSize="30" 
+                                    HorizontalOptions="Start" 
+                                    HorizontalTextAlignment="Center" 
+                                    Text="{Binding TripStartTime}" 
+                                    TextColor="{StaticResource Primary}"/>
+
+                                    <Label 
+                                    Margin="0,9"
+                                    VerticalTextAlignment="Start"
+                                    FontAttributes="Bold"
+                                    FontSize="30" 
+                                    HorizontalOptions="Start" 
+                                    HorizontalTextAlignment="Center" 
+                                    Text="{Binding TripCaptain}" 
+                                    TextColor="{StaticResource Primary}"/>
+
+                                    <Label 
+                                    Margin="0,9"
+                                    VerticalTextAlignment="Start"
+                                    FontAttributes="Bold"
+                                    FontSize="30" 
+                                    HorizontalOptions="Start" 
+                                    HorizontalTextAlignment="Center" 
+                                    Text="{Binding NumberOfSets}" 
+                                    TextColor="{StaticResource Primary}"/>
+
+                                    <Button 
+                                    Clicked="Button_Clicked_1"
+                                    Margin="0,0,0,16"
+                                    CommandParameter ="{Binding .}"
+                                    TextColor="White" 
+                                    FontSize="22" 
+                                    Text="{x:Static res:AppResources.ViewEffortDetails}" 
+                                    BackgroundColor="{StaticResource ButtonDarkBlue}"/>
+                                    
+                                    <Button 
+                                    Clicked="Button_Clicked"
+                                    Margin="0,0,0,16"
+                                    CommandParameter ="{Binding .}"
+                                    TextColor="White" 
+                                    FontSize="22" 
+                                    Text="{x:Static res:AppResources.ViewCatchDetails}" 
+                                    BackgroundColor="{StaticResource ButtonGreen}"/>
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+       
+    </Grid>
+</ContentPage>

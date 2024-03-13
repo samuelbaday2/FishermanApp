@@ -124,6 +124,24 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CATCH SPECIES SELECTION.
+        /// </summary>
+        public static string CatchSpeciesSelection {
+            get {
+                return ResourceManager.GetString("CatchSpeciesSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DEAD.
         /// </summary>
         public static string Dead {
@@ -457,6 +475,15 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TRIP HISTORY.
+        /// </summary>
+        public static string TripHistory {
+            get {
+                return ResourceManager.GetString("TripHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Troll and Pole.
         /// </summary>
         public static string TrollAndPole {
@@ -489,6 +516,24 @@ namespace FishermanApp.Resources.Localization {
         public static string VesselName {
             get {
                 return ResourceManager.GetString("VesselName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Catch Details.
+        /// </summary>
+        public static string ViewCatchDetails {
+            get {
+                return ResourceManager.GetString("ViewCatchDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Effort Details.
+        /// </summary>
+        public static string ViewEffortDetails {
+            get {
+                return ResourceManager.GetString("ViewEffortDetails", resourceCulture);
             }
         }
         

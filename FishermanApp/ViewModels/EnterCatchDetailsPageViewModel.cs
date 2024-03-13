@@ -1,6 +1,7 @@
 ﻿using FishermanApp.Objects;
 using FishermanApp.Objects.DbObjects;
 using FishermanApp.Resources.Localization;
+using FishermanApp.ViewModels.Selection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,12 +29,29 @@ namespace FishermanApp.ViewModels
             AddCatchCommand = new Command(DoAddCatch);
 
             Initialize();
+            InitializeMessaging();
+        }
+        public void InitializeMessaging()
+        {
+           
+       
         }
         public async Task Initialize() {
             CatchDataCollection = new ObservableCollection<CatchObject>
             {
                 new CatchObject(),
             };
+        }
+        public async Task UpdateCatchRow(int itemIndex,string species) {
+            for(int x = 0;  x < CatchDataCollection.Count; x++)
+            {
+                if (CatchDataCollection[x].Index == itemIndex)
+                {
+                    CatchObject catchObject = CatchDataCollection[x];
+                    catchObject.Species = species;
+                    CatchDataCollection[x] = catchObject;
+                }
+            }
         }
 
         private async void DoAddCatch(object obj)
@@ -55,6 +73,7 @@ namespace FishermanApp.ViewModels
                             IsActive = true,
                             Quantity = catchObject.Quantity,
                             SetId = lastSet.Id,
+                            TripId = lastTripData.LastOrDefault().Id,
                             Species = catchObject.Species,
                             RecordedOn = DateTime.Now,
                         });
@@ -76,7 +95,7 @@ namespace FishermanApp.ViewModels
 
         private async void DoAddRow(object obj)
         {
-            CatchDataCollection.Add(new CatchObject());
+            CatchDataCollection.Add(new CatchObject { Index = CatchDataCollection.Count});
         }
     }
 }

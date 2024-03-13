@@ -102,6 +102,7 @@ namespace FishermanApp.ViewModels
                         await _enterSetDetailPageViewModel.AddLastSetAsync();
                     }
                     catch { }
+                    InitializeConfig.InitializeFunction = true;
                     Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchDetails)).FirstOrDefault();
                 }
             }
@@ -142,6 +143,7 @@ namespace FishermanApp.ViewModels
                     StartTripLongitude = gps == null ? AppResources.GpsOff : gps.Longitude.ToString(),
                     IsTripEnded = false,
                     IsActive = true,
+                    Captain = CaptainName,
                 });
 
                 var tripList = await _tripTable.GetItemsAsync();
@@ -188,6 +190,7 @@ namespace FishermanApp.ViewModels
                     IsTripEnded = true,
                     TripEndedOn = DateTime.Now,
                     IsActive = tripObject.IsActive,
+                    Captain = tripObject.Captain,
                 });
 
                 await InitializeAsync();

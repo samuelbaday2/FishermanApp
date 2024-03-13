@@ -26,14 +26,16 @@ namespace FishermanApp.ViewModels
         public TripSetTable _tripSetTable;
         public BaitSpeciesTable _baitSpeciesTable;
         public CatchTable _catchTable;
-
+        public CatchSpeciesTable _catchSpeciesTable;
         public BaseViewModel()
         {
             _tripTable = new TripTable();
             _tripSetTable = new TripSetTable();
             _baitSpeciesTable = new BaitSpeciesTable();
             _catchTable = new CatchTable();
+            _catchSpeciesTable = new CatchSpeciesTable();
 
+            _catchSpeciesTable.AddSpeciesAsync();
             _baitSpeciesTable.AddSpeciesAsync();
         }
       

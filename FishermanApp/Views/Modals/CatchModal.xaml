@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FishermanApp.Views.Modals.CatchModal"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:res="clr-namespace:FishermanApp.Resources.Localization"  
+             BackgroundColor="Transparent">
+
+    <Border 
+        StrokeThickness="5"
+        Margin="32"
+        Stroke="{StaticResource ButtonGreen}"
+        StrokeShape="RoundRectangle 10,10,10,10">
+        
+        <Grid        
+            BackgroundColor="White">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+
+            <CollectionView 
+                Grid.Row="0"
+                VerticalOptions="FillAndExpand"
+                SelectionMode="None"
+                Margin="16"
+                ItemsSource="{Binding CatchDataCollection}" 
+                SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout Margin="0,0,0,8">
+                            <Label
+                            TextColor="{StaticResource Primary}"
+                            FontAttributes="Bold"
+                            FontSize="30"
+                            Text="{x:Static res:AppResources.Species}"/>
+
+                            <Grid>
+                                <Label
+                                   
+                                    VerticalTextAlignment="Center"
+                                    Margin="8,0"
+                                  
+                                    TextColor="Black"
+                                    FontAttributes="Bold"
+                                    FontSize="40"
+                                  
+                                    Text="{Binding Species}"
+                                    />
+
+                            </Grid>
+                            
+                            <Label
+                            TextColor="{StaticResource Primary}"
+                            FontAttributes="Bold"
+                            FontSize="30"
+                            Text="{x:Static res:AppResources.Quanity}"/>
+
+                            <Label
+                       VerticalTextAlignment="Center"
+                        Margin="8,0"
+                       
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        FontSize="40"
+                        Text="{Binding Quantity}"
+                        />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button 
+                Grid.Row="1"
+                FontSize="30"
+                TextColor="White"
+                Command="{Binding CloseCommand}"
+                Margin="16,0,16,16"
+                VerticalOptions="End"
+                BackgroundColor="{StaticResource ButtonRed}"
+                Text="{x:Static res:AppResources.Close}"/>
+        </Grid>
+    </Border>
+    
+                
+</ContentPage>

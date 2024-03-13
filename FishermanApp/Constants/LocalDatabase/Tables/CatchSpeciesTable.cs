@@ -11,71 +11,42 @@ using System.Threading.Tasks;
 
 namespace FishermanApp.Constants.LocalDatabase.Tables
 {
-    public class BaitSpeciesTable
+    public class CatchSpeciesTable 
     {
         SQLiteAsyncConnection Database;
-
-        public BaitSpeciesTable()
+        public CatchSpeciesTable() { }
+        public async Task AddSpeciesAsync()
         {
-            
-        }
-        public async Task AddSpeciesAsync() {
             var SelectionCollection = new ObservableCollection<DBSpeciesObject>
             {
                 new DBSpeciesObject
                 {
-                    Species = "Bigeye Scad",
-                    ScientificName = " Selar crumenophthalmus",
+                    Species = "Albacore Tuna",
+                    ScientificName = "Thunnus alalunga",
                     IsActive = true,
                 },
                 new DBSpeciesObject
                 {
-                    Species = "Flying Fish",
-                    ScientificName = "Hirundichthys affinis",
+                    Species = "Bigeye Tuna",
+                    ScientificName = "Thunnus obesus",
                     IsActive = true,
 
                 },
                 new DBSpeciesObject
                 {
-                    Species = "Thread Herring",
-                    ScientificName = "Opisthonema oglinum",
+                    Species = "Northern Bluefin Tuna",
+                    ScientificName = "Thunnus thynnus",
                     IsActive = true,
 
                 },
                 new DBSpeciesObject
                 {
-                    Species = "Ballyhoo",
-                    ScientificName = "Hemiramphus brasiliensis",
+                    Species = "Yellowfin Tuna",
+                    ScientificName = "Thunnus albacares",
                     IsActive = true,
 
                 },
-                new DBSpeciesObject
-                {
-                    Species = "Round Scad",
-                    ScientificName = "Decapterus punctatus",
-                    IsActive = true,
-
-                },
-                 new DBSpeciesObject
-                {
-                    Species = "Mackerel scad",
-                    ScientificName = "Decapterus macarellus",
-                    IsActive = true,
-
-                },
-                new DBSpeciesObject
-                {
-                    Species = "Diamondback Squid",
-                    ScientificName = "Thysanoteuthis rhombus",
-                    IsActive = true,
-
-                },
-                new DBSpeciesObject
-                {
-                    Species = "Humboldt squid",
-                    ScientificName = "Dosidicus gigas",
-                    IsActive = true,
-                }
+                
             };
 
             foreach (DBSpeciesObject obj in SelectionCollection)
@@ -83,7 +54,7 @@ namespace FishermanApp.Constants.LocalDatabase.Tables
                 SaveItemAsync(obj);
             }
 
-            Preferences.Set(Pref.SPECIES_LIST, JsonConvert.SerializeObject(SelectionCollection));
+            Preferences.Set(Pref.CATCH_SPECIES_LIST, JsonConvert.SerializeObject(SelectionCollection));
         }
         async Task Init()
         {
@@ -92,7 +63,7 @@ namespace FishermanApp.Constants.LocalDatabase.Tables
 
             Database = new SQLiteAsyncConnection(DatabaseClass.DatabasePath, DatabaseClass.Flags);
             var result = await Database.CreateTableAsync<DBSpeciesObject>();
-            
+
         }
         public async Task<List<DBSpeciesObject>> GetItemsAsync()
         {

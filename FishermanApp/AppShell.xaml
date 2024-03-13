@@ -51,9 +51,14 @@
     </Shell.ItemTemplate>
 
     <ShellContent
-        Title="HOME"
+        Title="{x:Static res:AppResources.Home}"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+
+    <ShellContent
+        Title="{x:Static res:AppResources.TripHistory}"
+        ContentTemplate="{DataTemplate view:TripHistoryPage}"
+        Route="TripHistoryPage" />
 
     <ShellContent
         IsVisible="False"
@@ -102,6 +107,14 @@
         Title="{x:Static res:AppResources.BaitSpecie}" >
         <Tab>
             <ShellContent Route="SpeciesSelection" ContentTemplate="{DataTemplate selection:SpeciesSelection}"/>
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem
+        IsVisible="False"
+        Title="{x:Static res:AppResources.CatchSpeciesSelection}" >
+        <Tab>
+            <ShellContent Route="CatchSpeciesSelection" ContentTemplate="{DataTemplate selection:CatchSpeciesSelection}"/>
         </Tab>
     </FlyoutItem>
     <!--END OF SELECTIONS-->

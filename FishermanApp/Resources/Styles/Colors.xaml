@@ -19,7 +19,8 @@
     <Color x:Key="Gray950">#141414</Color>
     <Color x:Key="ButtonGreen">#007a5e</Color>
     <Color x:Key="ButtonRed">#99323e</Color>
-
+    <Color x:Key="ButtonDarkBlue">#163975</Color>
+    
     <Color x:Key="NetColor">#4c698c</Color>
     
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>

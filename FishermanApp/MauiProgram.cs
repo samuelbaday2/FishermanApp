@@ -5,7 +5,9 @@ using FishermanApp.Services.ConnectivityService;
 using FishermanApp.Services.GeoLocation;
 using FishermanApp.Services.LocationService;
 using FishermanApp.ViewModels;
+using FishermanApp.ViewModels.Modals;
 using FishermanApp.ViewModels.Selection;
+using FishermanApp.Views.Modals;
 using FishermanApp.Views.Pages;
 using FishermanApp.Views.Selection;
 using Microsoft.Extensions.Logging;
@@ -42,6 +44,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<HookTypeSelectionViewModel>();
         builder.Services.AddSingleton<SpeciesSelectionViewModel>();
         builder.Services.AddSingleton<EnterCatchDetailsPageViewModel>();
+        builder.Services.AddSingleton<TripHistoryPageViewModel>();
+        builder.Services.AddSingleton<CatchSpeciesSelectionViewModel>();
 
         //Views
         builder.Services.AddSingleton<MainPage>();
@@ -52,6 +56,15 @@ public static class MauiProgram
         builder.Services.AddSingleton<HookTypeSelection>();
         builder.Services.AddSingleton<SpeciesSelectionViewModel>();
         builder.Services.AddSingleton<EnterCatchDetailsPage>();
+        builder.Services.AddSingleton<TripHistoryPage>();
+        builder.Services.AddSingleton<CatchSpeciesSelection>();
+
+        //Modals
+        builder.Services.AddSingleton<CatchSpeciesSelectionViewModel>();
+        builder.Services.AddSingleton<CatchModal>();
+
+        builder.Services.AddSingleton<EffortModalViewModel>();
+        builder.Services.AddSingleton<EffortModal>();
 
 #if DEBUG
         builder.Logging.AddDebug();

@@ -15,6 +15,6 @@ namespace FishermanApp.Objects
 
         public static string LOGGED_USER = nameof(LOGGED_USER);
         public static string SPECIES_LIST = nameof(SPECIES_LIST);
-
+        public static string CATCH_SPECIES_LIST = nameof(CATCH_SPECIES_LIST);
     }
 }

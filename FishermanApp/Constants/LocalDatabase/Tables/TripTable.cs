@@ -29,7 +29,12 @@ namespace FishermanApp.Constants.LocalDatabase.Tables
             await Init();
             return await Database.Table<DbTripObject>().ToListAsync();
         }
-
+        public async Task<List<DbTripObject>> GetItemsAsync(DateTime dateTime)
+        {
+            await Init();
+            DateTime range = dateTime.AddHours(23).AddMinutes(59).AddSeconds(59);
+            return await Database.Table<DbTripObject>().Where(i => i.RecordedOn >= dateTime && i.RecordedOn <= range).ToListAsync();
+        }
         //public async Task<List<DbTripObject>> GetItemsNotDoneAsync()
         //{
         //    await Init();
@@ -38,7 +43,11 @@ namespace FishermanApp.Constants.LocalDatabase.Tables
         //    // SQL queries are also possible
         //    //return await Database.QueryAsync<TodoItem>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
         //}
-
+        public async Task<DbTripObject> GetFirstItemAsync()
+        {
+            await Init();
+            return await Database.Table<DbTripObject>().FirstOrDefaultAsync();
+        }
         public async Task<DbTripObject> GetItemAsync(int id)
         {
             await Init();

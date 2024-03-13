@@ -72,14 +72,16 @@
 
                             <Grid>
                                 <Entry
-                       ReturnType="Next"
-                        Margin="8,0"
-                        Keyboard="Default"
-                        TextColor="Black"
-                        FontAttributes="Bold"
-                        FontSize="40"
-                        Text="{Binding Species}"
-                        />
+                                    Focused="Entry_Focused"
+                                    ReturnType="Next"
+                                    Margin="8,0"
+                                    Keyboard="Default"
+                                    TextColor="Black"
+                                    FontAttributes="Bold"
+                                    FontSize="40"
+                                    ReturnCommandParameter="{Binding .}"
+                                    Text="{Binding Species}"
+                                    />
 
                                 <Image HorizontalOptions="End" HeightRequest="40" VerticalOptions="Center" Source="caret_down" Margin="0,0,16,0">
                                     <Image.Behaviors>
@@ -109,7 +111,7 @@
                         TextColor="Black"
                         FontAttributes="Bold"
                         FontSize="40"
-                        Text="{Binding CatchQuanity}"
+                        Text="{Binding Quantity}"
                         />
                         </Border>
                     </VerticalStackLayout>

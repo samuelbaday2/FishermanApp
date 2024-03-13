@@ -12,6 +12,7 @@ namespace FishermanApp.Objects.DbObjects
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public int SetId { get; set; }
+        public int TripId { get; set; }
         public bool IsActive { get; set; } = true;
         public string Species { get; set; }
         public string Quantity { get; set; }

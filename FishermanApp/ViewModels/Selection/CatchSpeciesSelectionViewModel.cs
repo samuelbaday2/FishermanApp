@@ -12,23 +12,20 @@ using System.Windows.Input;
 
 namespace FishermanApp.ViewModels.Selection
 {
-    public class SpeciesSelectionViewModel : SelectionBaseViewModel
+    public class CatchSpeciesSelectionViewModel : SelectionBaseViewModel
     {
         public ICommand OnSelectCommand { private set; get; }
-        public SpeciesSelectionViewModel()
-        {
+        public CatchSpeciesSelectionViewModel() {
             SelectionList = new List<SelectionObject>();
 
             OnSelectCommand = new Command(DoSelect);
 
-
             SelectionCollection = new ObservableCollection<SelectionObject>();
-                   
         }
         public async Task InitializeAsync()
         {
             SelectionCollection = new ObservableCollection<SelectionObject>();
-            var SpeciesList = JsonConvert.DeserializeObject<List<DBSpeciesObject>>(Preferences.Get(Pref.SPECIES_LIST, string.Empty));
+            var SpeciesList = JsonConvert.DeserializeObject<List<DBSpeciesObject>>(Preferences.Get(Pref.CATCH_SPECIES_LIST, string.Empty));
             foreach (var Species in SpeciesList)
             {
                 SelectionCollection.Add(new SelectionObject
@@ -43,9 +40,9 @@ namespace FishermanApp.ViewModels.Selection
             SelectionObject SelectedObject = obj as SelectionObject;
 
 
-            Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.SetDetails)).FirstOrDefault();
+            Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchDetails)).FirstOrDefault();
 
-            MessagingCenter.Send(this, AppResources.BaitSpecie, SelectedObject);
+            MessagingCenter.Send(this, AppResources.CatchSpeciesSelection, SelectedObject);
         }
     }
 }

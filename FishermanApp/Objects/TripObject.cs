@@ -22,6 +22,6 @@ namespace FishermanApp.Objects
         public string ProductDestination { get; set; }
         public string TripCaptain { get; set; }
         public string TripCrew { get; set; }
-        public List<CatchObject> Catches { get; set; }
+        public List<CatchObject2> Catches { get; set; }
     }
 }
