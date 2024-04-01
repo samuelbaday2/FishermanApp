@@ -12,12 +12,12 @@
             SelectionMode="Single"
             ItemsSource="{Binding SelectionCollection}" 
             SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}"
-            ItemsLayout="VerticalGrid, 2"
+            
             SelectionChangedCommand="{Binding OnSelectCommand}">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Padding="16,16" HeightRequest="260">
+                    <Grid Margin="16,8" HeightRequest="150">
                         <Border StrokeShape="RoundRectangle 20,20,20,20" BackgroundColor="{StaticResource NetColor}">
                             <VerticalStackLayout>
                                 <Label 
@@ -29,6 +29,16 @@
                                     HorizontalTextAlignment="Center" 
                                     Text="{Binding SelectionTitle}" 
                                     TextColor="White"/>
+
+                                <Label 
+     Margin="0,9"
+     VerticalTextAlignment="Center"
+     FontAttributes="Bold"
+     FontSize="Medium" 
+     HorizontalOptions="Center" 
+     HorizontalTextAlignment="Center" 
+     Text="{Binding SubTitle}" 
+     TextColor="White"/>
                             </VerticalStackLayout>
                         </Border>
                     </Grid>

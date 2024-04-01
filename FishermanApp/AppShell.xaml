@@ -61,6 +61,11 @@
         Route="TripHistoryPage" />
 
     <ShellContent
+        Title="{x:Static res:AppResources.UploadData}"
+        ContentTemplate="{DataTemplate view:UploadPage}"
+        Route="UploadPage" />
+
+    <ShellContent
         IsVisible="False"
         Title="{x:Static res:AppResources.FlyoutStartTrip}"
         ContentTemplate="{DataTemplate view:TripPage}"
@@ -129,7 +134,7 @@
         </Grid>
     </Shell.FlyoutHeader>
     
-    <Shell.FlyoutFooter>
+    <!--<Shell.FlyoutFooter>
         <Grid 
             HeightRequest="65"
             Padding="8" 
@@ -144,5 +149,5 @@
                 <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped"/>
             </Grid.GestureRecognizers>
         </Grid>
-    </Shell.FlyoutFooter>
+    </Shell.FlyoutFooter>-->
 </Shell>

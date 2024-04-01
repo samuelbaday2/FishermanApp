@@ -11,5 +11,6 @@ namespace FishermanApp.Services.LocationService
         bool IsConnected { get; set; }
         event EventHandler<bool> ConnectionStatusChanged;
         Task StartConnectionListenerAsync();
+        Task InstallApk(string path);
     }
 }

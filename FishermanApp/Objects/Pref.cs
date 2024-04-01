@@ -14,6 +14,7 @@ namespace FishermanApp.Objects
         public static string GEAR_LIST = nameof(GEAR_LIST);
 
         public static string LOGGED_USER = nameof(LOGGED_USER);
+        public static string LOGGED_USER_PASSWORD = nameof(LOGGED_USER_PASSWORD);
         public static string SPECIES_LIST = nameof(SPECIES_LIST);
         public static string CATCH_SPECIES_LIST = nameof(CATCH_SPECIES_LIST);
     }

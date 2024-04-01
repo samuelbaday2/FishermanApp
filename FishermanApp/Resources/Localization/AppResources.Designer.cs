@@ -115,6 +115,15 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to catch data cannot be empty.
+        /// </summary>
+        public static string CatchDataCannotBeEmpty {
+            get {
+                return ResourceManager.GetString("CatchDataCannotBeEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CATCH DETAILS :.
         /// </summary>
         public static string CatchDetails {
@@ -277,11 +286,38 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading....
+        /// </summary>
+        public static string IndicatorLoading {
+            get {
+                return ResourceManager.GetString("IndicatorLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to INTERNET STATUS : .
         /// </summary>
         public static string InternetStatus {
             get {
                 return ResourceManager.GetString("InternetStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your vessel identification.
+        /// </summary>
+        public static string LinkVesselTextHeader {
+            get {
+                return ResourceManager.GetString("LinkVesselTextHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Example: J1-1234-AA).
+        /// </summary>
+        public static string LinkVesselTextHeaderExample {
+            get {
+                return ResourceManager.GetString("LinkVesselTextHeaderExample", resourceCulture);
             }
         }
         
@@ -295,7 +331,7 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Login.
+        ///   Looks up a localized string similar to Link Your Vessel.
         /// </summary>
         public static string Login {
             get {
@@ -358,6 +394,33 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Pending Data To Upload.
+        /// </summary>
+        public static string NoDataToUpload {
+            get {
+                return ResourceManager.GetString("NoDataToUpload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Trip Recorded For The Date Selected.
+        /// </summary>
+        public static string NoTripsToDisplay {
+            get {
+                return ResourceManager.GetString("NoTripsToDisplay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot Find Vessel Record.
+        /// </summary>
+        public static string NoVesselRecord {
+            get {
+                return ResourceManager.GetString("NoVesselRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NUMBER OF BASKETS : .
         /// </summary>
         public static string NumberOfBaskets {
@@ -412,6 +475,15 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        public static string Register {
+            get {
+                return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remember me.
         /// </summary>
         public static string RememberMe {
@@ -426,6 +498,15 @@ namespace FishermanApp.Resources.Localization {
         public static string RemoteAppHostName {
             get {
                 return ResourceManager.GetString("RemoteAppHostName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to J1-1234-AA.
+        /// </summary>
+        public static string SampleId {
+            get {
+                return ResourceManager.GetString("SampleId", resourceCulture);
             }
         }
         
@@ -489,6 +570,24 @@ namespace FishermanApp.Resources.Localization {
         public static string TrollAndPole {
             get {
                 return ResourceManager.GetString("TrollAndPole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload Complete.
+        /// </summary>
+        public static string UploadComplete {
+            get {
+                return ResourceManager.GetString("UploadComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPLOAD DATA.
+        /// </summary>
+        public static string UploadData {
+            get {
+                return ResourceManager.GetString("UploadData", resourceCulture);
             }
         }
         

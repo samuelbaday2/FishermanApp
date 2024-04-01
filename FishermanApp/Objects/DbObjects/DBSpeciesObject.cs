@@ -15,5 +15,6 @@ namespace FishermanApp.Objects.DbObjects
         public string Species { get; set; }
         public string ScientificName { get; set; }
         public DateTime EditedOn { get; set; }
+        public bool IsUploaded { get; set; } = false;
     }
 }

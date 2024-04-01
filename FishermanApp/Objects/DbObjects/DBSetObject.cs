@@ -11,6 +11,7 @@ namespace FishermanApp.Objects.DbObjects
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        public int UploadedId { get; set; }
         public int TripId { get; set; }
         public string StartSetLatitude { get; set; }
         public string StartSetLongitude { get; set; }
@@ -29,5 +30,6 @@ namespace FishermanApp.Objects.DbObjects
         public string BaitSpecie { get; set; }
         public bool HasCatchData { get; set; }
         public DateTime EditedOn { get; set; }
+        public bool IsUploaded { get; set; } = false;
     }
 }

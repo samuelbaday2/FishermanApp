@@ -1,4 +1,6 @@
-﻿using FishermanApp.Objects;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using FishermanApp.Objects;
 using FishermanApp.Objects.DbObjects;
 using FishermanApp.Resources.Localization;
 using FishermanApp.ViewModels.Selection;
@@ -42,13 +44,14 @@ namespace FishermanApp.ViewModels
                 new CatchObject(),
             };
         }
-        public async Task UpdateCatchRow(int itemIndex,string species) {
+        public async Task UpdateCatchRow(int itemIndex,string species, string scientificName) {
             for(int x = 0;  x < CatchDataCollection.Count; x++)
             {
                 if (CatchDataCollection[x].Index == itemIndex)
                 {
                     CatchObject catchObject = CatchDataCollection[x];
                     catchObject.Species = species;
+                    catchObject.ScientificName = scientificName;
                     CatchDataCollection[x] = catchObject;
                 }
             }
@@ -56,41 +59,53 @@ namespace FishermanApp.ViewModels
 
         private async void DoAddCatch(object obj)
         {
-            var lastTripData = await _tripTable.GetItemsAsync();
-            var existingSets = await _tripSetTable.GetItemsAsync();
-
-
-            var lastSet = existingSets.Where(x => x.Id == (existingSets.LastOrDefault().Id)).LastOrDefault();
-
-            try
+            if (CatchDataCollection.Count == 1 && CatchDataCollection.FirstOrDefault().Species == null)
             {
-                foreach (CatchObject catchObject in CatchDataCollection)
+                await Toast.Make(AppResources.CatchDataCannotBeEmpty,ToastDuration.Long).Show();
+            }
+            else {
+                SetBusyStatusAsync(false);
+                var lastTripData = await _tripTable.GetItemsAsync();
+                var existingSets = await _tripSetTable.GetItemsAsync();
+
+
+                var lastSet = existingSets.Where(x => x.Id == (existingSets.LastOrDefault().Id)).LastOrDefault();
+
+                try
                 {
-                    if (catchObject.Species != null && catchObject.Species.Length > 0)
+                    foreach (CatchObject catchObject in CatchDataCollection)
                     {
-                        await _catchTable.SaveItemAsync(new DBCatchObject
+                        if (catchObject.Species != null && catchObject.Species.Length > 0)
                         {
-                            IsActive = true,
-                            Quantity = catchObject.Quantity,
-                            SetId = lastSet.Id,
-                            TripId = lastTripData.LastOrDefault().Id,
-                            Species = catchObject.Species,
-                            RecordedOn = DateTime.Now,
-                        });
+                            await _catchTable.SaveItemAsync(new DBCatchObject
+                            {
+                                IsActive = true,
+                                Quantity = catchObject.Quantity,
+                                SetId = lastSet.Id,
+                                TripId = lastTripData.LastOrDefault().Id,
+                                Species = catchObject.Species,
+                                RecordedOn = DateTime.Now,
+                                ScientificName = catchObject.ScientificName,
+                            });
+                        }
+
                     }
 
+                    lastSet.HasCatchData = true;
+                    await _tripSetTable.SaveItemAsync(lastSet);
+
+                    Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.Home)).FirstOrDefault();
                 }
+                catch (Exception ee)
+                {
 
-                lastSet.HasCatchData = true;
-                await _tripSetTable.SaveItemAsync(lastSet);
-
-                Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.Home)).FirstOrDefault();
+                }
+                finally
+                {
+                    SetBusyStatusAsync(true);
+                }
             }
-            catch (Exception ee)
-            { 
-            
-            }
-                       
+                               
         }
 
         private async void DoAddRow(object obj)

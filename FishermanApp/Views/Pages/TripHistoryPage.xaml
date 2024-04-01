@@ -28,15 +28,16 @@
             <CollectionView 
                 SelectionMode="None"
                 ItemsSource="{Binding TripCollection}"
-                SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}"
-     
-                >
-
+                SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}">
+                
+                <CollectionView.EmptyView>
+                    <Label Margin="16,32" TextColor="Black" FontSize="40" FontAttributes="Bold" VerticalOptions="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center" Text="{x:Static res:AppResources.NoTripsToDisplay}"/>
+                </CollectionView.EmptyView>
+                
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid 
-                        Padding="16,16" 
-                        >
+                            Padding="16,16">
 
                             <Border StrokeShape="RoundRectangle 20,20,20,20" >
                                 <VerticalStackLayout

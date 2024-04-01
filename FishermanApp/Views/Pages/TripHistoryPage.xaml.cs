@@ -21,11 +21,16 @@ public partial class TripHistoryPage : ContentPage
         base.OnAppearing();
 
         Thread.Sleep(500);
-        DbTripObject firstTripObject = await _viewModel._tripTable.GetFirstItemAsync();
-        HistoryDatePicker.MinimumDate = firstTripObject.RecordedOn;
+        try
+        {
+            DbTripObject firstTripObject = await _viewModel._tripTable.GetFirstItemAsync();
+            HistoryDatePicker.MinimumDate = firstTripObject.RecordedOn;
 
-        HistoryDatePicker.Date = DateTime.Today;
-        HistoryDatePicker.MaximumDate = DateTime.Today;
+            HistoryDatePicker.Date = DateTime.Today;
+            HistoryDatePicker.MaximumDate = DateTime.Today;
+        }
+        catch { }
+        
 
         if (InitialSetup) 
         {

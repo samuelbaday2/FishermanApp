@@ -29,6 +29,11 @@ namespace FishermanApp.Constants.LocalDatabase.Tables
             await Init();
             return await Database.Table<DBCatchObject>().ToListAsync();
         }
+        public async Task<List<DBCatchObject>> GetItemsBySetIdAsync(int setId)
+        {
+            await Init();
+            return await Database.Table<DBCatchObject>().Where(x => x.SetId == setId).ToListAsync();
+        }
         public async Task<DBCatchObject> GetItemAsync(int id)
         {
             await Init();

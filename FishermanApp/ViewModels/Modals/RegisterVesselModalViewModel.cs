@@ -3,89 +3,39 @@ using CommunityToolkit.Maui.Core;
 using FishermanApp.Objects;
 using FishermanApp.Resources.Localization;
 using FishermanApp.Services.AppUpdateService;
-using FishermanApp.Services.LocationService;
-using FishermanApp.Views.Pages;
-using Microsoft.Maui.Controls;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace FishermanApp.ViewModels
+namespace FishermanApp.ViewModels.Modals
 {
-    public class LoginPageViewModel : BaseViewModel
+    public class RegisterVesselModalViewModel : BaseViewModel
     {
         private readonly IUpdateService _updateService;
+        private readonly LoginPageViewModel _loginPageViewModel;
 
-        private string _versionString;
-        private string _username;
-        private bool _rememberMe;
-        private bool _isRemembered;
-
-        public string VersionString { get { return _versionString; } set { SetProperty(ref _versionString, value); } }
-        public string Username { get { return _username; } set { SetProperty(ref _username, value); } }
-        public bool RememberMe { get { return _rememberMe; } set { SetProperty(ref _rememberMe, value); } }
-        public bool IsRemembered { get { return _isRemembered; } set { SetProperty(ref _isRemembered, value); } }
-
-        public ICommand LoginCommand { private set; get; }
+        private string _vesselName;
+        private string _captainName;
+        public string VesselName { get { return _vesselName; } set { SetProperty(ref _vesselName, value); } }
+        public string CaptainName { get { return _captainName; } set { SetProperty(ref _captainName, value); } }
         public ICommand RegisterCommand { private set; get; }
-        public LoginPageViewModel()
+
+        public RegisterVesselModalViewModel(IUpdateService updateService, LoginPageViewModel loginPageViewModel) 
         {
-            VersionString = $"{AppResources.Version} {AppInfo.VersionString}";
-            LoginCommand = new Command(DoLoginAsync);
-            RegisterCommand = new Command(DoRegisterAsync);
-
-            Username = string.Empty;
-#if DEBUG
-            Username = $"J3-1656-PM";
-#else
-            Username = $"J3-1656-PM";
-#endif
-
-            try
-            {
-                IsRemembered = Preferences.Get(Pref.REMEMBER_ME, false);
-                if (Preferences.Get(Pref.REMEMBER_ME, false))
-                {
-                    Username = Preferences.Get(Pref.USERNAME, string.Empty);
-                }
-
-            }
-            catch { }
-          
-            //_updateService.DownloadPercentageChanged += _updateService_DownloadPercentageChanged;
+            RegisterCommand = new Command(DoRegister);
+            _updateService = updateService;
+            _loginPageViewModel = loginPageViewModel;
         }
 
-        public async Task UpdatePercent(string percent)
+        private async void DoRegister(object obj)
         {
-            try
-            {
-                Percentage = percent;
-            }
-            catch { }
-        }
-
-        private async void DoRegisterAsync(object obj)
-        {
-            //await Shell.Current.Navigation.PushModalAsync(new RegisterAccountPage());
-            //Application.Current.MainPage = new RegisterAccountPage();
-        }     
-
-        private async void DoLoginAsync(object obj)
-        {
-            if(!IsNotBusy) return;
-
-            if (Username.Length == 0) 
-            {
-                await Toast.Make(AppResources.LinkVesselTextHeader,ToastDuration.Long).Show();
-                return;
-            }
             SetBusyStatusAsync(false);
+
             try
             {
                 string json = "";
@@ -108,11 +58,11 @@ namespace FishermanApp.ViewModels
                 client2.AddDefaultHeader("Authorization", "Basic " + encoded);
 
                 var request2 = new RestRequest("nextt.asmx/{function}", Method.GET);
-                request2.AddParameter("vesselId", Username.Trim());
-                request2.AddParameter("idpassword", "");
+                request2.AddParameter("VesselName", VesselName.Trim());
+                request2.AddParameter("Captain", CaptainName.Trim());
 
 
-                request2.AddUrlSegment("function", "CatchAppLogin");
+                request2.AddUrlSegment("function", "InsertVesselRecord");
 
                 IRestResponse response2 = client2.Execute(request2);
 
@@ -124,7 +74,8 @@ namespace FishermanApp.ViewModels
 
                 var returnValue = JsonConvert.DeserializeObject<List<RegistrationObject>>(json);
 
-                if (returnValue.Count == 0) {
+                if (returnValue.Count == 0)
+                {
                     await Toast.Make(AppResources.NoVesselRecord, ToastDuration.Long).Show();
                     return;
                 }
@@ -146,11 +97,9 @@ namespace FishermanApp.ViewModels
                         //App.Current.Properties["Password"] = EntryPassword.Text.Trim();
 
                         //App.Current.SavePropertiesAsync();
-                         
+
                         Preferences.Set(Pref.LOGGED_USER, resposeString);
 
-                        Preferences.Set(Pref.REMEMBER_ME, IsRemembered);
-                        Preferences.Set(Pref.USERNAME, Username);
 
                         hostname = "http://" + AppResources.RemoteAppHostName;
                         client2 = new RestClient(hostname);
@@ -171,34 +120,28 @@ namespace FishermanApp.ViewModels
 
                         Preferences.Set(Pref.GEAR_LIST, json);
 
-                        Application.Current.MainPage = new AppShell(this, _updateService);
+                        Application.Current.MainPage = new AppShell(_loginPageViewModel, _updateService);
                     }
                     else
                     {
 
                     }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    //var toastConfig = new ToastConfig("An Error Occurred");
-                    //toastConfig.SetDuration(3000);
 
-                    //UserDialogs.Instance.Toast(toastConfig);
+
+                }
+                catch
+                {
+
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine(ex.Message);
+
             }
-            finally {
+            finally
+            {
                 SetBusyStatusAsync(true);
             }
-           
-        }
-        public async Task LoginWithoutId() 
-        { 
-            
         }
     }
 }

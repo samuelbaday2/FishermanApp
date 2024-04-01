@@ -29,6 +29,11 @@ namespace FishermanApp.Constants.LocalDatabase.Tables
             await Init();
             return await Database.Table<DbTripObject>().ToListAsync();
         }
+        public async Task<List<DbTripObject>> GetUnuploadedData()
+        {
+            await Init();
+            return await Database.Table<DbTripObject>().Where(x => x.IsTripEnded == true && x.IsUploaded == false && x.IsActive == true).ToListAsync();
+        }
         public async Task<List<DbTripObject>> GetItemsAsync(DateTime dateTime)
         {
             await Init();

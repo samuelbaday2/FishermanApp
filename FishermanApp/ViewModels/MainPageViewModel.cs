@@ -52,6 +52,11 @@ namespace FishermanApp.ViewModels
             HomePort = UserDataObject.UserObject.VesHomePort;
             CaptainName = $"{UserDataObject.UserObject.CapFName} {UserDataObject.UserObject.CapLName}";
 
+            if (CaptainName.Trim().Equals(string.Empty))
+            {
+                CaptainName = $"{UserDataObject.UserObject.CaptainName}";
+            }
+
             _permissionService = permissionService;
             _connectionHandlerService = connectionHandlerService;
 
@@ -63,6 +68,14 @@ namespace FishermanApp.ViewModels
           
             _enterSetDetailPageViewModel = enterSetDetailPageViewModel;
             GetGpsStatusAsync();
+        }
+        public async Task UpdatePercent(string percent)
+        {
+            try
+            {
+                Percentage = percent;
+            }
+            catch { }
         }
         public async Task InitializeAsync() 
         {
@@ -125,6 +138,7 @@ namespace FishermanApp.ViewModels
         }
         private async void DoStartTrip(object obj)
         {
+            SetBusyStatusAsync(false);
             if(sephamoreSlim.CurrentCount == 0)
             {
                 return;
@@ -158,12 +172,14 @@ namespace FishermanApp.ViewModels
             }
             finally {
                 sephamoreSlim.Release();
+                SetBusyStatusAsync(true);
             }
            
         }
 
         private async void DoEndTrip(object obj)
         {
+            SetBusyStatusAsync(false);
             if (sephamoreSlim.CurrentCount == 0)
             {
                 return;
@@ -202,11 +218,13 @@ namespace FishermanApp.ViewModels
             }
             finally {
                 sephamoreSlim.Release();
+                SetBusyStatusAsync(true);
             }
         }
 
         private async void DoStartSet(object obj)
         {
+            SetBusyStatusAsync(false);
             if (sephamoreSlim.CurrentCount == 0)
             {
                 return;
@@ -247,6 +265,7 @@ namespace FishermanApp.ViewModels
             finally
             {
                 sephamoreSlim.Release();
+                SetBusyStatusAsync(true);
             }         
         }
     }

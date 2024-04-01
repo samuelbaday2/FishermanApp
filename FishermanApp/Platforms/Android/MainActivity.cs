@@ -11,7 +11,7 @@ using FishermanApp.Resources.Localization;
 
 namespace FishermanApp;
 
-[Activity(Theme = "@style/Maui.SplashTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
+[Activity(Theme = "@style/Maui.SplashTheme", LaunchMode = LaunchMode.SingleTop, ScreenOrientation = ScreenOrientation.Portrait, MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
 public class MainActivity : MauiAppCompatActivity
 {
     public const int REQUEST_CHECK_SETTINGS = 0x1;
@@ -20,8 +20,47 @@ public class MainActivity : MauiAppCompatActivity
     {
         base.OnCreate(savedInstanceState);
 
-       
+        if (!Android.OS.Environment.IsExternalStorageManager)
+        {
+            Intent intent = new Intent();
+            intent.SetAction(Android.Provider.Settings.ActionManageAppAllFilesAccessPermission);
+            Android.Net.Uri uri = Android.Net.Uri.FromParts("package", this.PackageName, null);
+            intent.SetData(uri);
+            StartActivity(intent);
+        }
+
+        Preferences.Set("package_install", PackageManager.CanRequestPackageInstalls());
+
         DisplayLocationSettingsRequest();
+    }
+    protected override void OnNewIntent(Intent intent)
+    {      
+        Bundle extras = intent.Extras;
+        if (1.Equals(intent.Action))
+        {
+            var status = extras.GetInt(PackageInstaller.ExtraStatus);
+            var message = extras.GetString(PackageInstaller.ExtraStatusMessage);
+            switch (status)
+            {
+                case (int)PackageInstallStatus.PendingUserAction:
+                    // Ask user to confirm the installation
+                    var confirmIntent = (Intent)extras.Get(Intent.ExtraIntent);
+                    StartActivity(confirmIntent);
+                    break;
+                case (int)PackageInstallStatus.Success:
+                    //TODO: Handle success
+                    break;
+                case (int)PackageInstallStatus.Failure:
+                case (int)PackageInstallStatus.FailureAborted:
+                case (int)PackageInstallStatus.FailureBlocked:
+                case (int)PackageInstallStatus.FailureConflict:
+                case (int)PackageInstallStatus.FailureIncompatible:
+                case (int)PackageInstallStatus.FailureInvalid:
+                case (int)PackageInstallStatus.FailureStorage:
+                    //TODO: Handle failures
+                    break;
+            }
+        }
     }
 
     private void DisplayLocationSettingsRequest()

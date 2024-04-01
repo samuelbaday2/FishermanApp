@@ -55,18 +55,26 @@ namespace FishermanApp.ViewModels
 
             IsTaskRunning = true;
             TripCollection = new ObservableCollection<TripHistoryObject>();
-            List<DbTripObject> tripList = await _tripTable.GetItemsAsync(SelectedDate);
 
-            foreach (DbTripObject obj in tripList)
+            try
             {
-                TripHistoryObject newTripObject = obj;
+                List<DbTripObject> tripList = await _tripTable.GetItemsAsync(SelectedDate);
 
-                var sets = await _tripSetTable.GetItemsAsync();
-                newTripObject.NumberOfSets = $"Times Fished: {sets.Where(x => x.TripId == newTripObject.Id).Count()}";
+                if(tripList!= null)
+                foreach (DbTripObject obj in tripList)
+                {
+                    TripHistoryObject newTripObject = obj;
 
-                TripCollection.Add(newTripObject);
+                    var sets = await _tripSetTable.GetItemsAsync();
+                    newTripObject.NumberOfSets = $"Times Fished: {sets.Where(x => x.TripId == newTripObject.Id).Count()}";
+
+                    TripCollection.Add(newTripObject);
+                }
             }
-            IsTaskRunning = false;
+            catch { }
+            finally {
+                IsTaskRunning = false;
+            }       
         }
         public async Task InitializeAsync()
         {
@@ -77,9 +85,21 @@ namespace FishermanApp.ViewModels
 
         public async Task SetMinimumDateAsync()
         {
-            DbTripObject firstTripObject = await _tripTable.GetItemAsync(0);
-            MinimumPickerDate = firstTripObject.RecordedOn;
-
+            try
+            {
+                DbTripObject firstTripObject = await _tripTable.GetItemAsync(0);
+                if (firstTripObject != null)
+                {
+                    MinimumPickerDate = firstTripObject.RecordedOn;
+                }
+                else 
+                {
+                    MinimumPickerDate = DateTime.Now.Date;
+                }
+            }
+            catch {
+                MinimumPickerDate = DateTime.Now.Date;
+            }        
         }
     }
 }

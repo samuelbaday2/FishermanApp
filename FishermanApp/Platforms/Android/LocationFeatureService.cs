@@ -1,6 +1,9 @@
 ﻿using Android.Content;
+using Android.Content.PM;
 using Android.Locations;
 using Android.Runtime;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using FishermanApp.Services.LocationService;
 using Java.Interop;
 using System;
@@ -10,11 +13,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace FishermanApp
 {
     public class LocationFeatureService : ILocationFeatureService
     {
-        public bool IsConnected { get; set ; }
+        public bool IsConnected { get; set; }
 
         public event EventHandler<bool> ConnectionStatusChanged;
 
@@ -30,6 +34,36 @@ namespace FishermanApp
             return Task.CompletedTask;
         }
 
-       
+        public Task InstallApk(string path) 
+        {
+            if (Preferences.Get("package_install", false))
+            {
+                Toast.Make($"Launching Installer", ToastDuration.Short).Show();
+                Platform.CurrentActivity.StartActivity(new Android.Content.Intent(
+                    Android.Provider.Settings.ActionManageUnknownAppSources,
+                    Android.Net.Uri.Parse("package:" + path)));
+            }
+            else 
+            {
+                Toast.Make($"launching installer", ToastDuration.Short).Show();
+                var context = Android.App.Application.Context;
+                Java.IO.File apkFile = new Java.IO.File(path);
+                Intent intent = new Intent(Intent.ActionView);
+                var uri = Microsoft.Maui.Storage.FileProvider.GetUriForFile(context, context.ApplicationContext.PackageName + ".fileProvider", apkFile);
+
+                intent.SetDataAndType(uri, "application/vnd.android.package-archive");
+
+                intent.AddFlags(ActivityFlags.NewTask);
+                intent.AddFlags(ActivityFlags.GrantReadUriPermission);
+                intent.AddFlags(ActivityFlags.ClearTop);
+                intent.PutExtra(Intent.ExtraNotUnknownSource, true);
+
+                Platform.CurrentActivity.StartActivityForResult(intent, 1);
+            }
+            
+            return Task.CompletedTask;
+        }
+
+
     }
 }

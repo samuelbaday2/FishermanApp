@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FishermanApp.Views.Modals.RegisterVessel"
+             Title="RegisterVessel"
+             xmlns:contentView="clr-namespace:FishermanApp.Views.ContentViews"
+             xmlns:res="clr-namespace:FishermanApp.Resources.Localization"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             BackgroundColor="White">
+    
+    <Grid>
+        <VerticalStackLayout Margin="16" Padding="16">
+            <VerticalStackLayout Margin="0,0,0,8">
+                <Label
+                    TextColor="{StaticResource Primary}"
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    Text="{x:Static res:AppResources.VesselName}"/>
+
+                <Border 
+                    Margin="0,0"
+                    StrokeThickness="4"
+                    Stroke ="{StaticResource ButtonGreen}"
+                    StrokeShape="RoundRectangle 10,10,10,10"
+                    HeightRequest="80">
+
+                    <Entry
+                        HeightRequest="80"
+                        Margin="16,0"
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        FontSize="40"
+                        Text="{Binding VesselName}"/>
+                </Border>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Margin="0,0,0,8">
+                <Label
+                    TextColor="{StaticResource Primary}"
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    Text="{x:Static res:AppResources.Captain}"/>
+
+                <Border 
+                    Margin="0,0"
+                    StrokeThickness="4"
+                    Stroke ="{StaticResource ButtonGreen}"
+                    StrokeShape="RoundRectangle 10,10,10,10"
+                    HeightRequest="80">
+
+                    <Entry
+                        HeightRequest="80"
+                        Margin="16,0"
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        FontSize="40"
+                        Text="{Binding CaptainName}"/>
+                </Border>
+
+            </VerticalStackLayout>
+
+            <Button           
+                Margin="0,16"
+                IsEnabled="{Binding IsNotBusy}"
+                FontSize="30"
+                Command="{Binding RegisterCommand}"
+                Text="{x:Static res:AppResources.Register}"
+                TextColor="White"
+                BackgroundColor="{StaticResource ButtonGreen}"
+                HeightRequest="65"            
+                />
+        </VerticalStackLayout>
+
+        <Grid 
+            HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <contentView:LodingPrompt/>
+        </Grid>
+    </Grid>
+</ContentPage>

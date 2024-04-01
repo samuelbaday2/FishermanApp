@@ -47,6 +47,7 @@ namespace FishermanApp.Objects
 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        public int UploadedId { get; set; }
         public int VesselId { get; set; }
         public string StartTripLatitude { get; set; }
         public string StartTripLongitude { get; set; }
@@ -58,5 +59,6 @@ namespace FishermanApp.Objects
         public DateTime TripEndedOn { get; set; }
         public bool IsActive { get; set; } = true;
         public DateTime EditedOn { get; set; }
+        public bool IsUploaded { get; set; } = false;
     }
 }

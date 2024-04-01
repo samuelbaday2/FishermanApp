@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FishermanApp.Views.Pages.LoginPage"
-             Title="LoginPage"
+             Title=""
+             NavigationPage.HasNavigationBar="False"
              xmlns:res="clr-namespace:FishermanApp.Resources.Localization"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Background="{StaticResource BlueGradient}">
@@ -14,11 +15,12 @@
     <Grid 
         HorizontalOptions="FillAndExpand" 
         VerticalOptions="FillAndExpand" 
-        Padding="16">
+        >
              
         <Border 
+            Margin="16,0"
             StrokeShape="RoundRectangle 25"
-            HeightRequest="400" 
+            HeightRequest="550" 
             BackgroundColor="White">
             
             <Grid  
@@ -27,19 +29,53 @@
                 <VerticalStackLayout WidthRequest="300" HorizontalOptions="Center" VerticalOptions="Center">
                     <Image Source="insite_logo" WidthRequest="250"/>
 
-                    <Entry 
-                        TextColor="Black"
-                        Text="{Binding Username}"
-                        FontSize="30"
-                        HorizontalTextAlignment="Center"
-                        Placeholder="{x:Static res:AppResources.Username}"/>
-                    <Entry 
+                    <Label FontAttributes="Bold" FontSize="22" Margin="0,8" TextColor="Black">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static res:AppResources.LinkVesselTextHeader}"/>
+                                <Span Text="&#10;"/>
+                                <Span Text="{x:Static res:AppResources.LinkVesselTextHeaderExample}" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Border 
+                        StrokeThickness="4"
+                        Stroke ="{StaticResource ButtonGreen}"
+                        StrokeShape="RoundRectangle 10,10,10,10"
+                        HeightRequest="80"
+                        Padding="0">
+
+                        <Entry 
+                            HeightRequest="80"
+                            TextColor="Black"
+                            Text="{Binding Username}"
+                            FontSize="30"
+                            HorizontalTextAlignment="Center"
+                            Placeholder="{x:Static res:AppResources.SampleId}"/>
+                    </Border>
+
+                    <Border 
                         IsVisible="False"
-                        TextColor="Black"
-                        FontSize="Large"
-                        Placeholder="{x:Static res:AppResources.Password}"/>
+                        StrokeThickness="4"
+                        Stroke ="{StaticResource ButtonGreen}"
+                        StrokeShape="RoundRectangle 10,10,10,10"
+                        HeightRequest="80"
+                        Padding="0">
+
+                        <Entry 
+                            IsPassword="True"
+                            HeightRequest="80"
+                            IsVisible="True"
+                            TextColor="Black"
+                            HorizontalTextAlignment="Center"
+                            FontSize="30"
+                            Placeholder="{x:Static res:AppResources.Password}"/>
+                    </Border>
+                    
 
                     <HorizontalStackLayout 
+                        IsVisible="False"
                         HorizontalOptions="Start" 
                         Margin="0,8">
                         
@@ -55,13 +91,39 @@
                     </HorizontalStackLayout>
 
                     <Button 
+                        IsEnabled="{Binding IsNotBusy}"
+                        Margin="0,8"
                         HeightRequest="65"
                         FontSize="30"
                         TextColor="White"
                         BackgroundColor="{StaticResource Primary}"
                         Text="{x:Static res:AppResources.Login}"
                         Command="{Binding LoginCommand}"/>
-                    
+
+                    <Button 
+                        IsVisible="False"
+                        Margin="0,8"
+                        HeightRequest="65"
+                        FontSize="30"
+                        TextColor="White"
+                        BackgroundColor="{StaticResource Primary}"
+                        Text="{x:Static res:AppResources.Register}"
+                        Command="{Binding RegisterCommand}"/>
+
+                    <Label FontAttributes="Bold" FontSize="22" Margin="0,8" TextColor="Black">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Don't have the Vessel Identification?"/>
+                                <Span Text="&#10;"/>
+                                <Span Text="START USING THE APP" FontAttributes="Bold" TextDecorations="Underline" TextColor="{StaticResource Primary}">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                    </Span.GestureRecognizers>
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
                     <Label 
                         Text="{Binding VersionString}" 
                         HorizontalOptions="Center" 
@@ -69,6 +131,52 @@
                 </VerticalStackLayout>
             </Grid>
         </Border>
+
+        <Grid
+            Grid.RowSpan="4"
+            Grid.Row="0"
        
+            HorizontalOptions="FillAndExpand" 
+            VerticalOptions="FillAndExpand" 
+            BackgroundColor="#33333354">
+
+            <Border
+                Opacity="1"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                StrokeThickness="10"
+                BackgroundColor="White"
+                Stroke="{StaticResource ButtonDarkBlue}"
+                StrokeShape="RoundRectangle 10,10,10,10"
+                WidthRequest="150"
+                HeightRequest="150">
+
+                <VerticalStackLayout Margin="16" HorizontalOptions="Center" VerticalOptions="Center">
+                    <ActivityIndicator  IsRunning="True" IsEnabled="True" IsVisible="True" Color="{StaticResource ButtonDarkBlue}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Label HorizontalOptions="Center" Text="{Binding Percentage}" FontSize="Medium" TextColor="Black"/>
+                    <Label Text="{x:Static res:AppResources.IndicatorLoading}" FontSize="Medium" TextColor="Black"/>
+                </VerticalStackLayout>
+
+
+
+            </Border>
+
+            <Grid.Triggers>
+                <DataTrigger TargetType="Grid"
+Binding="{Binding IsNotBusy}"   
+Value="False">
+                    <Setter Property="IsVisible"
+Value="True" />
+
+                </DataTrigger>
+                <DataTrigger TargetType="Grid"
+Binding="{Binding IsNotBusy}"   
+Value="True">
+                    <Setter Property="IsVisible"
+Value="False" />
+
+                </DataTrigger>
+            </Grid.Triggers>
+        </Grid>
     </Grid>
 </ContentPage>

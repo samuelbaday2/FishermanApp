@@ -34,6 +34,7 @@ namespace FishermanApp.ViewModels.Selection
                 SelectionCollection.Add(new SelectionObject
                 {
                     SelectionTitle = Species.Species,
+                    SubTitle = $"({Species.ScientificName})",
                 });
             }
         }

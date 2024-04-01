@@ -31,6 +31,7 @@ namespace FishermanApp.ViewModels.Selection
                 SelectionCollection.Add(new SelectionObject
                 {
                     SelectionTitle = Species.Species,
+                    SubTitle = $"({Species.ScientificName})",
                 });
             }
         }
@@ -39,10 +40,10 @@ namespace FishermanApp.ViewModels.Selection
         {
             SelectionObject SelectedObject = obj as SelectionObject;
 
-
             Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchDetails)).FirstOrDefault();
 
             MessagingCenter.Send(this, AppResources.CatchSpeciesSelection, SelectedObject);
+
         }
     }
 }

@@ -13,5 +13,6 @@ namespace FishermanApp.Objects.DbObjects
         public int Index {  get; set; }
         public string Species { get; set; }
         public string Quantity { get; set; }
+        public string ScientificName { get; set; }
     }
 }

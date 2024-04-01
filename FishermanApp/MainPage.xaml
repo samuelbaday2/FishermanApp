@@ -4,14 +4,14 @@
              xmlns:res="clr-namespace:FishermanApp.Resources.Localization"
              x:Class="FishermanApp.MainPage"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:contentView="clr-namespace:FishermanApp.Views.ContentViews"
              Background="White">
     <ContentPage.Behaviors>
         <toolkit:StatusBarBehavior StatusBarColor="{StaticResource Primary}" StatusBarStyle="LightContent" />
     </ContentPage.Behaviors>
 
     <ScrollView>
-        <Grid    
-            Padding="16"
+        <Grid                
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand">
 
@@ -20,10 +20,10 @@
                 <RowDefinition Height="65"/>
             </Grid.RowDefinitions>
 
-            <Border
-                Margin="0,0,0,16"
+            <Border              
+                Margin="16"
                 Grid.Row="0">
-                
+
                 <ScrollView Orientation="Vertical">
                     <VerticalStackLayout Padding="16">
                         <VerticalStackLayout Margin="0,0,0,8">
@@ -48,13 +48,26 @@
                             Text="{x:Static res:AppResources.HomePort}"/>
 
                             <Label
-                            TextColor="Black"
-                            FontAttributes="Bold"
-                            FontSize="40"
-                            Text="{Binding HomePort}"/>
+                                x:Name="PortLabel"
+                                TextColor="Black"
+                                FontAttributes="Bold"
+                                FontSize="40"
+                                Text="{Binding HomePort}"/>
+
+                            <VerticalStackLayout.Triggers>
+                                <DataTrigger 
+                                    TargetType="VerticalStackLayout"
+                                    Binding="{Binding Source={x:Reference PortLabel},
+                                            Path=Text.Length}"
+                                    Value="0">
+                                    <Setter Property="IsVisible"
+                                    Value="False" />
+
+                                </DataTrigger>
+                            </VerticalStackLayout.Triggers>
                         </VerticalStackLayout>
 
-                        
+
                         <VerticalStackLayout Margin="0,0,0,8">
                             <Label
                             TextColor="{StaticResource Primary}"
@@ -76,7 +89,7 @@
                                     FontSize="40"
                                     Text="{Binding CaptainName}"/>
                             </Border>
-                           
+
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Margin="0,0,0,8">
@@ -208,6 +221,7 @@
                             </HorizontalStackLayout>
 
                             <Button 
+                                IsEnabled="{Binding IsNotBusy}"
                                 Command="{Binding StartSetCommand}"
                                 FontSize="30"
                                 Grid.Row="1"
@@ -223,10 +237,12 @@
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </ScrollView>
-                
+
             </Border>
 
             <Button           
+                Margin="16,0"
+                IsEnabled="{Binding IsNotBusy}"
                 FontSize="30"
                 Grid.Row="1"
                 Command="{Binding StartTripCommand}"
@@ -237,6 +253,8 @@
                 VerticalOptions="End"/>
 
             <Button 
+                Margin="16,0"
+                IsEnabled="{Binding IsNotBusy}"
                 Grid.Row="1"
                 Command="{Binding EndTripCommand}"
                 Text="{x:Static res:AppResources.EndTrip}"
@@ -246,6 +264,13 @@
                 FontSize="30"
                 IsVisible="{Binding HasPendingTrip}"
                 VerticalOptions="End"/>
+
+            <Grid 
+                Grid.RowSpan="2" 
+                Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <contentView:LodingPrompt/>
+            </Grid>
         </Grid>
     </ScrollView>
 

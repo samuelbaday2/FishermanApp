@@ -13,10 +13,13 @@ namespace FishermanApp.Objects.DbObjects
         public int Id { get; set; }
         public int SetId { get; set; }
         public int TripId { get; set; }
+        public int UploadedId { get; set; }
         public bool IsActive { get; set; } = true;
         public string Species { get; set; }
+        public string ScientificName { get; set; }
         public string Quantity { get; set; }
         public DateTime RecordedOn { get; set; }
         public DateTime EditedOn { get; set; }
+        public bool IsUploaded { get; set; } = false;
     }
 }

@@ -35,7 +35,7 @@ public partial class EnterCatchDetailsPage : ContentPage
         MessagingCenter.Subscribe<CatchSpeciesSelectionViewModel, SelectionObject>(this, AppResources.CatchSpeciesSelection, async (sender, arg) =>
         {
             CatchObject catchObject = CurrentObject as CatchObject;
-            viewModel.UpdateCatchRow(catchObject.Index,arg.SelectionTitle);
+            viewModel.UpdateCatchRow(catchObject.Index,arg.SelectionTitle, catchObject.ScientificName);
             MessagingCenter.Unsubscribe<CatchSpeciesSelectionViewModel, SelectionObject>(this, AppResources.CatchSpeciesSelection);
         });
 

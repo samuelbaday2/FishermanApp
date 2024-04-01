@@ -68,6 +68,7 @@ namespace FishermanApp.ViewModels
         }
         private async void DoEndSet(object obj)
         {
+            SetBusyStatusAsync(false);
             if (sephamoreSlim.CurrentCount == 0)
             {
                 return;
@@ -118,6 +119,7 @@ namespace FishermanApp.ViewModels
             finally
             {
                 sephamoreSlim.Release();
+                SetBusyStatusAsync(true);
             }
         }
 

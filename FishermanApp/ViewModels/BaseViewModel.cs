@@ -8,17 +8,29 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit;
+using System.Net;
+using CommunityToolkit.Maui.Storage;
+using System.IO;
+using System.Threading;
+using CommunityToolkit.Maui.Alerts;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls.PlatformConfiguration;
+using FishermanApp.Services.LocationService;
 
 namespace FishermanApp.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        ILocationFeatureService _locationFeatureService = DependencyService.Get<ILocationFeatureService>();
         private CancellationTokenSource _cancelTokenSource;
         private bool _isCheckingLocation;
 
-        private bool isBusy;
+        private bool isNotBusy;
         private bool isBusyReversed = true;
         private string title = string.Empty;
+        private string _percentage;
+
+        public string Percentage { get { return _percentage; } set { SetProperty(ref _percentage, value); } }
 
         public readonly SemaphoreSlim sephamoreSlim = new SemaphoreSlim(1,1);
 
@@ -37,6 +49,9 @@ namespace FishermanApp.ViewModels
 
             _catchSpeciesTable.AddSpeciesAsync();
             _baitSpeciesTable.AddSpeciesAsync();
+
+            IsNotBusy = true;
+            RequestPermissionAsync();
         }
       
         public async Task<Location> GetCurrentLocation()
@@ -70,19 +85,38 @@ namespace FishermanApp.ViewModels
                 _isCheckingLocation = false;
             }
         }
+          
+        public async Task RequestPermissionAsync()
+        {
+            var status = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
+            if (status != PermissionStatus.Granted)
+            {
+                status = await Permissions.RequestAsync<Permissions.StorageWrite>();
+            }
+
+            status = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
+            if (status != PermissionStatus.Granted)
+            {
+                status = await Permissions.RequestAsync<Permissions.StorageRead>();
+            }
+        }
 
         public void CancelRequest()
         {
             if (_isCheckingLocation && _cancelTokenSource != null && _cancelTokenSource.IsCancellationRequested == false)
                 _cancelTokenSource.Cancel();
         }
-
-        public bool IsBusy
+        public async Task SetBusyStatusAsync(bool status) 
         {
-            get { return isBusy; }
+            IsNotBusy = status;
+        }
+
+        public bool IsNotBusy
+        {
+            get { return isNotBusy; }
             set
             {
-                isBusy = value;
+                isNotBusy = value;
                 OnPropertyChanged();
             }
         }

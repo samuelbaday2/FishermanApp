@@ -40,6 +40,11 @@ namespace FishermanApp.Constants.LocalDatabase.Tables
             await Init();
             return await Database.Table<DBSetObject>().Where(i => i.TripId == id).FirstOrDefaultAsync();
         }
+        public async Task<List<DBSetObject>> GetItesmByTripIdAsync(int id)
+        {
+            await Init();
+            return await Database.Table<DBSetObject>().Where(i => i.TripId == id).ToListAsync();
+        }
 
         public async Task<int> SaveItemAsync(DBSetObject item)
         {

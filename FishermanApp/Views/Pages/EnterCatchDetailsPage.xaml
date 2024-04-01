@@ -129,5 +129,51 @@
                 HeightRequest="65"
                 FontSize="30"
                 VerticalOptions="End"/>
+
+        <Grid
+            Grid.RowSpan="4"
+            Grid.Row="0"
+            HorizontalOptions="FillAndExpand" 
+            VerticalOptions="FillAndExpand" 
+            BackgroundColor="#33333354">
+            
+            <Border
+                Opacity="1"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                StrokeThickness="10"
+                BackgroundColor="White"
+                Stroke="{StaticResource ButtonDarkBlue}"
+                StrokeShape="RoundRectangle 10,10,10,10"
+                WidthRequest="150"
+                HeightRequest="150">
+
+                <VerticalStackLayout Margin="16" HorizontalOptions="Center" VerticalOptions="Center">
+                    <ActivityIndicator  IsRunning="True" IsEnabled="True" IsVisible="True" Color="{StaticResource ButtonDarkBlue}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Label Text="{x:Static res:AppResources.IndicatorLoading}" FontSize="Medium" TextColor="Black"/>
+                </VerticalStackLayout>
+
+
+
+            </Border>
+
+            <Grid.Triggers>
+                <DataTrigger TargetType="Grid"
+Binding="{Binding IsNotBusy}"   
+Value="False">
+                    <Setter Property="IsVisible"
+Value="True" />
+
+                </DataTrigger>
+                <DataTrigger TargetType="Grid"
+Binding="{Binding IsNotBusy}"   
+Value="True">
+                    <Setter Property="IsVisible"
+Value="False" />
+
+                </DataTrigger>
+            </Grid.Triggers>
+        </Grid>
+       
     </Grid>
 </ContentPage>

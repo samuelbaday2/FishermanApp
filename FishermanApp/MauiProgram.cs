@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Core;
 using FishermanApp.Services;
+using FishermanApp.Services.AndroidEnvironmentService;
+using FishermanApp.Services.AppUpdateService;
 using FishermanApp.Services.ConnectivityService;
 using FishermanApp.Services.GeoLocation;
 using FishermanApp.Services.LocationService;
@@ -33,8 +35,10 @@ public static class MauiProgram
 
 		builder.Services.AddTransient<IPermissionService, PermissionService>();
         builder.Services.AddTransient<IConnectionHandlerService, ConnectionHandlerService>();
+        builder.Services.AddTransient<IUpdateService, UpdateService>();
+        builder.Services.AddTransient<IAndroidEnvironmentService, AndroidEnvironmentService>();
 
-		//Viewmodels
+        //Viewmodels
         builder.Services.AddSingleton<GearSelectionViewModel>();
         builder.Services.AddSingleton<MainPageViewModel>();
         builder.Services.AddSingleton<LoginPageViewModel>();
@@ -46,6 +50,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<EnterCatchDetailsPageViewModel>();
         builder.Services.AddSingleton<TripHistoryPageViewModel>();
         builder.Services.AddSingleton<CatchSpeciesSelectionViewModel>();
+        builder.Services.AddSingleton<UploadPageViewModel>();
 
         //Views
         builder.Services.AddSingleton<MainPage>();
@@ -58,10 +63,13 @@ public static class MauiProgram
         builder.Services.AddSingleton<EnterCatchDetailsPage>();
         builder.Services.AddSingleton<TripHistoryPage>();
         builder.Services.AddSingleton<CatchSpeciesSelection>();
+        builder.Services.AddSingleton<UploadPage>();      
 
         //Modals
         builder.Services.AddSingleton<CatchSpeciesSelectionViewModel>();
         builder.Services.AddSingleton<CatchModal>();
+        builder.Services.AddSingleton<RegisterVesselModalViewModel>();
+        builder.Services.AddSingleton<RegisterVessel>();
 
         builder.Services.AddSingleton<EffortModalViewModel>();
         builder.Services.AddSingleton<EffortModal>();

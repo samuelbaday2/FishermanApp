@@ -135,6 +135,9 @@
   <data name="Captain" xml:space="preserve">
     <value>Captain : </value>
   </data>
+  <data name="CatchDataCannotBeEmpty" xml:space="preserve">
+    <value>catch data cannot be empty</value>
+  </data>
   <data name="CatchDetails" xml:space="preserve">
     <value>CATCH DETAILS :</value>
   </data>
@@ -189,14 +192,23 @@
   <data name="Hostname" xml:space="preserve">
     <value>dev.norpacexport.com:8076/</value>
   </data>
+  <data name="IndicatorLoading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
   <data name="InternetStatus" xml:space="preserve">
     <value>INTERNET STATUS : </value>
+  </data>
+  <data name="LinkVesselTextHeader" xml:space="preserve">
+    <value>Enter your vessel identification</value>
+  </data>
+  <data name="LinkVesselTextHeaderExample" xml:space="preserve">
+    <value>(Example: J1-1234-AA)</value>
   </data>
   <data name="Live" xml:space="preserve">
     <value>LIVE</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Login</value>
+    <value>Link Your Vessel</value>
   </data>
   <data name="Logout" xml:space="preserve">
     <value>Logout</value>
@@ -216,6 +228,15 @@
   <data name="No" xml:space="preserve">
     <value>NO</value>
   </data>
+  <data name="NoDataToUpload" xml:space="preserve">
+    <value>No Pending Data To Upload</value>
+  </data>
+  <data name="NoTripsToDisplay" xml:space="preserve">
+    <value>No Trip Recorded For The Date Selected</value>
+  </data>
+  <data name="NoVesselRecord" xml:space="preserve">
+    <value>Cannot Find Vessel Record</value>
+  </data>
   <data name="NumberOfBaskets" xml:space="preserve">
     <value>NUMBER OF BASKETS : </value>
   </data>
@@ -234,11 +255,17 @@
   <data name="Quantity" xml:space="preserve">
     <value>QUANTITY : </value>
   </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember me</value>
   </data>
   <data name="RemoteAppHostName" xml:space="preserve">
     <value>dev.norpacexport.com:8086/</value>
+  </data>
+  <data name="SampleId" xml:space="preserve">
+    <value>J1-1234-AA</value>
   </data>
   <data name="SetDetails" xml:space="preserve">
     <value>SET DETAILS</value>
@@ -260,6 +287,12 @@
   </data>
   <data name="TrollAndPole" xml:space="preserve">
     <value>Troll and Pole</value>
+  </data>
+  <data name="UploadComplete" xml:space="preserve">
+    <value>Upload Complete</value>
+  </data>
+  <data name="UploadData" xml:space="preserve">
+    <value>UPLOAD DATA</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
