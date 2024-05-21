@@ -17,9 +17,11 @@ namespace FishermanApp.ViewModels
         private DateTime _minimumPickerDate;
         private bool IsTaskRunning = false;
         private bool _isRefreshing;
+        private bool _isOnline;
         public DateTime SelectedDate { get { return _selectedDate; } set { SetProperty(ref _selectedDate, value); } }
         public DateTime MinimumPickerDate { get { return _minimumPickerDate; } set { SetProperty(ref _minimumPickerDate, value); } }
         public bool IsRefreshing { get { return _isRefreshing; } set { SetProperty(ref _isRefreshing, value); } }
+        public bool IsOnline { get { return _isOnline; } set { SetProperty(ref _isOnline, value); } }
 
         public ICommand ViewCatchCommand { private set; get; }
         public ICommand ViewEffortCommand { private set; get; }
@@ -31,6 +33,8 @@ namespace FishermanApp.ViewModels
             ViewCatchCommand = new Command(DoViewCatch);
             ViewEffortCommand = new Command(DoViewEffort);
             RefreshCommand = new Command(DoRefresh);
+
+            IsOnline = Connectivity.Current.NetworkAccess == NetworkAccess.Internet;
         }
 
         private async void DoViewEffort(object obj)
@@ -53,6 +57,7 @@ namespace FishermanApp.ViewModels
         {
             if(IsTaskRunning) return;
 
+            IsOnline = Connectivity.Current.NetworkAccess == NetworkAccess.Internet;
             IsTaskRunning = true;
             TripCollection = new ObservableCollection<TripHistoryObject>();
 
@@ -68,6 +73,13 @@ namespace FishermanApp.ViewModels
                     var sets = await _tripSetTable.GetItemsAsync();
                     newTripObject.NumberOfSets = $"Times Fished: {sets.Where(x => x.TripId == newTripObject.Id).Count()}";
 
+                        newTripObject.IsOnline = IsOnline;
+                        if (newTripObject.StartTripLatitude.Equals("GPS OFF"))
+                        {
+                            newTripObject.IsOnline = false;
+                        }
+
+                    
                     TripCollection.Add(newTripObject);
                 }
             }

@@ -70,6 +70,15 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add More Catch Data.
+        /// </summary>
+        public static string AddMoreCatchData {
+            get {
+                return ResourceManager.GetString("AddMoreCatchData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Another Row.
         /// </summary>
         public static string AddRow {
@@ -529,6 +538,24 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send an SOS signal using your phone flashlight.
+        /// </summary>
+        public static string SosLabel {
+            get {
+                return ResourceManager.GetString("SosLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SIGNAL SOS.
+        /// </summary>
+        public static string SosSignal {
+            get {
+                return ResourceManager.GetString("SosSignal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Species : .
         /// </summary>
         public static string Species {
@@ -556,6 +583,42 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trip Start Coordinates.
+        /// </summary>
+        public static string TripCoordinates {
+            get {
+                return ResourceManager.GetString("TripCoordinates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trip Duration.
+        /// </summary>
+        public static string TripDuration {
+            get {
+                return ResourceManager.GetString("TripDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trip End Coordinates.
+        /// </summary>
+        public static string TripEndCoordinates {
+            get {
+                return ResourceManager.GetString("TripEndCoordinates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trip End Time.
+        /// </summary>
+        public static string TripEndTime {
+            get {
+                return ResourceManager.GetString("TripEndTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TRIP HISTORY.
         /// </summary>
         public static string TripHistory {
@@ -565,11 +628,47 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trip Start Time.
+        /// </summary>
+        public static string TripStartTime {
+            get {
+                return ResourceManager.GetString("TripStartTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trip Tracker.
+        /// </summary>
+        public static string TripTracker {
+            get {
+                return ResourceManager.GetString("TripTracker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Troll and Pole.
         /// </summary>
         public static string TrollAndPole {
             get {
                 return ResourceManager.GetString("TrollAndPole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turn Off SOS Signal.
+        /// </summary>
+        public static string TurnSosOff {
+            get {
+                return ResourceManager.GetString("TurnSosOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turn On SOS Signal.
+        /// </summary>
+        public static string TurnSosOn {
+            get {
+                return ResourceManager.GetString("TurnSosOn", resourceCulture);
             }
         }
         
@@ -633,6 +732,24 @@ namespace FishermanApp.Resources.Localization {
         public static string ViewEffortDetails {
             get {
                 return ResourceManager.GetString("ViewEffortDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View On Map.
+        /// </summary>
+        public static string ViewOnMap {
+            get {
+                return ResourceManager.GetString("ViewOnMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WEATHER.
+        /// </summary>
+        public static string WeatherForecast {
+            get {
+                return ResourceManager.GetString("WeatherForecast", resourceCulture);
             }
         }
         

@@ -14,8 +14,7 @@
     
     <Grid 
         HorizontalOptions="FillAndExpand" 
-        VerticalOptions="FillAndExpand" 
-        >
+        VerticalOptions="FillAndExpand">
              
         <Border 
             Margin="16,0"
@@ -72,7 +71,6 @@
                             FontSize="30"
                             Placeholder="{x:Static res:AppResources.Password}"/>
                     </Border>
-                    
 
                     <HorizontalStackLayout 
                         IsVisible="False"

@@ -6,12 +6,18 @@ using FishermanApp.Services.AppUpdateService;
 using FishermanApp.Services.ConnectivityService;
 using FishermanApp.Services.GeoLocation;
 using FishermanApp.Services.LocationService;
+using FishermanApp.Services.PopupMessageService;
+using FishermanApp.Services.SosFeature;
+using FishermanApp.Services.Weather;
 using FishermanApp.ViewModels;
 using FishermanApp.ViewModels.Modals;
 using FishermanApp.ViewModels.Selection;
 using FishermanApp.Views.Modals;
 using FishermanApp.Views.Pages;
 using FishermanApp.Views.Selection;
+#if ANDROID
+using Maui.Android.InAppUpdates;
+#endif
 using Microsoft.Extensions.Logging;
 
 namespace FishermanApp;
@@ -23,8 +29,12 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
-			.UseMauiCommunityToolkit()
-			.UseMauiCommunityToolkitCore()
+            .UseMauiMaps()
+#if ANDROID
+             .UseAndroidInAppUpdates()
+#endif
+            .UseMauiCommunityToolkit()
+            .UseMauiCommunityToolkitCore()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -37,6 +47,9 @@ public static class MauiProgram
         builder.Services.AddTransient<IConnectionHandlerService, ConnectionHandlerService>();
         builder.Services.AddTransient<IUpdateService, UpdateService>();
         builder.Services.AddTransient<IAndroidEnvironmentService, AndroidEnvironmentService>();
+        builder.Services.AddTransient<ISosService, SosService>();
+        builder.Services.AddTransient<IDisplayAlertService, DisplayAlertService>();
+        builder.Services.AddTransient<IWeatherDataService, WeatherDataService>();
 
         //Viewmodels
         builder.Services.AddSingleton<GearSelectionViewModel>();
@@ -51,6 +64,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<TripHistoryPageViewModel>();
         builder.Services.AddSingleton<CatchSpeciesSelectionViewModel>();
         builder.Services.AddSingleton<UploadPageViewModel>();
+        builder.Services.AddSingleton<SosPageViewModel>();
+        builder.Services.AddSingleton<WeatherForecastPageViewModel>();
 
         //Views
         builder.Services.AddSingleton<MainPage>();
@@ -63,7 +78,11 @@ public static class MauiProgram
         builder.Services.AddSingleton<EnterCatchDetailsPage>();
         builder.Services.AddSingleton<TripHistoryPage>();
         builder.Services.AddSingleton<CatchSpeciesSelection>();
-        builder.Services.AddSingleton<UploadPage>();      
+        builder.Services.AddSingleton<UploadPage>();
+        builder.Services.AddSingleton<SosPage>();
+        builder.Services.AddSingleton<MapPage>();
+        builder.Services.AddSingleton<WeatherForecastPage>();
+      
 
         //Modals
         builder.Services.AddSingleton<CatchSpeciesSelectionViewModel>();
@@ -73,6 +92,9 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<EffortModalViewModel>();
         builder.Services.AddSingleton<EffortModal>();
+
+        builder.Services.AddSingleton<TripTrackerViewModel>();
+        builder.Services.AddSingleton<TripTracker>();
 
 #if DEBUG
         builder.Logging.AddDebug();

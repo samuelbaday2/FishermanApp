@@ -299,7 +299,7 @@
                 </VerticalStackLayout>
 
                 <Button 
-        Margin="0,32,0,0"
+        Margin="0,32,0,32"
         Grid.Row="1"
         Command="{Binding EndSetCommand}"
         Text="{x:Static res:AppResources.EndSet}"

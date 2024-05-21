@@ -21,5 +21,6 @@ namespace FishermanApp.Objects.DbObjects
         public DateTime RecordedOn { get; set; }
         public DateTime EditedOn { get; set; }
         public bool IsUploaded { get; set; } = false;
+        public int SetNumber { get; set; }
     }
 }

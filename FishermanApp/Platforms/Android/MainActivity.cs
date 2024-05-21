@@ -20,16 +20,17 @@ public class MainActivity : MauiAppCompatActivity
     {
         base.OnCreate(savedInstanceState);
 
-        if (!Android.OS.Environment.IsExternalStorageManager)
-        {
-            Intent intent = new Intent();
-            intent.SetAction(Android.Provider.Settings.ActionManageAppAllFilesAccessPermission);
-            Android.Net.Uri uri = Android.Net.Uri.FromParts("package", this.PackageName, null);
-            intent.SetData(uri);
-            StartActivity(intent);
-        }
+        //if (!Android.OS.Environment.IsExternalStorageManager)
+        //{
+        //    Intent intent = new Intent();
+        //    intent.SetAction(Android.Provider.Settings.ActionManageAppAllFilesAccessPermission);
+        //    Android.Net.Uri uri = Android.Net.Uri.FromParts("package", this.PackageName, null);
+        //    intent.SetData(uri);
+        //    StartActivity(intent);
+        //}
 
-        Preferences.Set("package_install", PackageManager.CanRequestPackageInstalls());
+        //Preferences.Set("package_install", PackageManager.CanRequestPackageInstalls());
+
 
         DisplayLocationSettingsRequest();
     }

@@ -26,40 +26,50 @@ namespace FishermanApp
         {
             LocationManager locationManager = (LocationManager)Android.App.Application.Context.GetSystemService(Context.LocationService);
 
-
-            //locationManager.AddGpsStatusListener(new GpsListener());
-
             IsConnected = locationManager.IsProviderEnabled(LocationManager.GpsProvider);
+
 
             return Task.CompletedTask;
         }
 
         public Task InstallApk(string path) 
         {
-            if (Preferences.Get("package_install", false))
+            try
             {
-                Toast.Make($"Launching Installer", ToastDuration.Short).Show();
-                Platform.CurrentActivity.StartActivity(new Android.Content.Intent(
-                    Android.Provider.Settings.ActionManageUnknownAppSources,
-                    Android.Net.Uri.Parse("package:" + path)));
+                if (Preferences.Get("package_install", false))
+                {
+                    Toast.Make($"Launching Installer", ToastDuration.Short).Show();
+                    Platform.CurrentActivity.StartActivity(new Android.Content.Intent(
+                        Android.Provider.Settings.ActionManageUnknownAppSources,
+                        Android.Net.Uri.Parse("package:" + path)));
+                }
+                else
+                {
+                    Toast.Make($"launching installer", ToastDuration.Short).Show();
+
+#if ANDROID
+                    var context = Android.App.Application.Context;
+                    Java.IO.File apkFile = new Java.IO.File(path);
+                    Intent intent = new Intent(Intent.ActionView);
+                    var uri = Microsoft.Maui.Storage.FileProvider.GetUriForFile(context, "com.insitesolutions.fishermanapp" + ".fileprovider", apkFile);
+
+                    intent.SetDataAndType(uri, "application/vnd.android.package-archive");
+
+                    intent.AddFlags(ActivityFlags.NewTask);
+                    intent.AddFlags(ActivityFlags.GrantReadUriPermission);
+                    intent.AddFlags(ActivityFlags.ClearTop);
+                    intent.PutExtra(Intent.ExtraNotUnknownSource, true);
+
+                    Platform.CurrentActivity.StartActivityForResult(intent, 1);
+#endif
+                    Toast.Make($"opening launcher", ToastDuration.Short).Show();
+                }
             }
-            else 
+            catch (Exception ee)
             {
-                Toast.Make($"launching installer", ToastDuration.Short).Show();
-                var context = Android.App.Application.Context;
-                Java.IO.File apkFile = new Java.IO.File(path);
-                Intent intent = new Intent(Intent.ActionView);
-                var uri = Microsoft.Maui.Storage.FileProvider.GetUriForFile(context, context.ApplicationContext.PackageName + ".fileProvider", apkFile);
-
-                intent.SetDataAndType(uri, "application/vnd.android.package-archive");
-
-                intent.AddFlags(ActivityFlags.NewTask);
-                intent.AddFlags(ActivityFlags.GrantReadUriPermission);
-                intent.AddFlags(ActivityFlags.ClearTop);
-                intent.PutExtra(Intent.ExtraNotUnknownSource, true);
-
-                Platform.CurrentActivity.StartActivityForResult(intent, 1);
+                Toast.Make($"{ee.Message}", ToastDuration.Long).Show();
             }
+           
             
             return Task.CompletedTask;
         }

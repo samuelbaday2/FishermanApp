@@ -31,13 +31,18 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android34.0|AnyCPU'">
-	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+	  <AndroidPackageFormat>aab</AndroidPackageFormat>
 	  <AndroidKeyStore>False</AndroidKeyStore>
+	  <AndroidUseAapt2>True</AndroidUseAapt2>
+	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android34.0|AnyCPU'">
 	  <AndroidKeyStore>False</AndroidKeyStore>
 	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+	  <AndroidUseAapt2>True</AndroidUseAapt2>
+	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+	  <AndroidPackageFormat>aab</AndroidPackageFormat>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
@@ -75,7 +80,10 @@
 		<PackageReference Include="CommunityToolkit.Maui" Version="6.1.0" />
 		<PackageReference Include="CommunityToolkit.Maui.Core" Version="6.1.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="HorusStudio.Maui.Skeleton" Version="2.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="8.0.20" />
+		<PackageReference Include="Microsoft.Maui.Maps" Version="8.0.20" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="RestSharp" Version="106.6.10" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
@@ -98,6 +106,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Resources\Styles\Converters.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ContentViews\LodingPrompt.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -108,6 +119,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Modals\RegisterVessel.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Modals\TripTracker.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Pages\EnterCatchDetailsPage.xaml">
@@ -122,10 +136,19 @@
 	  <MauiXaml Update="Views\Pages\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Pages\MapPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Pages\SosPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Pages\TripHistoryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Pages\TripPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Pages\WeatherForecastPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Selection\CatchSpeciesSelection.xaml">
@@ -140,12 +163,20 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android34.0'">
+	  <PackageReference Include="Oscore.Maui.Android.InAppUpdates">
+	    <Version>1.1.0</Version>
+	  </PackageReference>
+	  <PackageReference Include="Xamarin.Google.Android.Play.App.Update.Ktx">
+	    <Version>2.1.0.6</Version>
+	  </PackageReference>
 	  <PackageReference Include="Xamarin.GooglePlayServices.Location">
 	    <Version>118.0.0.5</Version>
 	  </PackageReference>
-		<PackageReference Include="Oscore.Maui.Android.InAppUpdates" Version="1.0.0" />1
+
 	</ItemGroup>
 
-
+	<ItemGroup>
+	  <Folder Include="Views\Orientations\" />
+	</ItemGroup>
 
 </Project>

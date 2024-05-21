@@ -8,9 +8,10 @@
 
         <Label Margin="16,32" TextColor="Black" FontSize="40" FontAttributes="Bold" HorizontalTextAlignment="Center" HorizontalOptions="Center" Text="{Binding PendingString}"/>
 
-        <Button           
+        <Button         
+            
             IsEnabled="{Binding UploadEnabled}"
-            Margin="16,0"     
+            Margin="16,0,16,32"  
             FontSize="30"
             Grid.Row="1"
             Command="{Binding UploadCommand}"
@@ -26,6 +27,7 @@
             BackgroundColor="#33333354">
 
             <Border
+               
                 Opacity="1"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"

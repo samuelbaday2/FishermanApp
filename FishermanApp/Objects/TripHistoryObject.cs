@@ -60,5 +60,6 @@ namespace FishermanApp.Objects
         public bool IsActive { get; set; } = true;
         public DateTime EditedOn { get; set; }
         public bool IsUploaded { get; set; } = false;
+        public bool IsOnline { get; set; } = false;
     }
 }

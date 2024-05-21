@@ -83,6 +83,26 @@
                                     TextColor="{StaticResource Primary}"/>
 
                                     <Button 
+                                    IsVisible="{Binding IsOnline}"
+                                    Clicked="Button_Clicked_2"
+                                    Margin="0,0,0,16"
+                                    CommandParameter ="{Binding .}"
+                                    TextColor="White" 
+                                    FontSize="22" 
+                                    Text="{x:Static res:AppResources.ViewOnMap}" 
+                                    BackgroundColor="{StaticResource ButtonOrange}"/>
+
+                                    <Button 
+                                      Clicked="Button_Clicked_3"
+                                      Margin="0,0,0,16"
+                                      CommandParameter ="{Binding .}"
+                                      TextColor="White" 
+                                      FontSize="22" 
+                                      Text="{x:Static res:AppResources.TripTracker}" 
+                                      BackgroundColor="{StaticResource ButtonTripTracker}"/>
+
+
+                                    <Button 
                                     Clicked="Button_Clicked_1"
                                     Margin="0,0,0,16"
                                     CommandParameter ="{Binding .}"

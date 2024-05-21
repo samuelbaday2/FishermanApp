@@ -120,6 +120,9 @@
   <data name="AddCatchEvent" xml:space="preserve">
     <value>Record Catch</value>
   </data>
+  <data name="AddMoreCatchData" xml:space="preserve">
+    <value>Add More Catch Data</value>
+  </data>
   <data name="AddRow" xml:space="preserve">
     <value>Add Another Row</value>
   </data>
@@ -273,6 +276,12 @@
   <data name="SetNumber" xml:space="preserve">
     <value>SET NUMBER : </value>
   </data>
+  <data name="SosLabel" xml:space="preserve">
+    <value>Send an SOS signal using your phone flashlight</value>
+  </data>
+  <data name="SosSignal" xml:space="preserve">
+    <value>SIGNAL SOS</value>
+  </data>
   <data name="Species" xml:space="preserve">
     <value>Species : </value>
   </data>
@@ -282,11 +291,35 @@
   <data name="StartTrip" xml:space="preserve">
     <value>Depart Dock</value>
   </data>
+  <data name="TripCoordinates" xml:space="preserve">
+    <value>Trip Start Coordinates</value>
+  </data>
+  <data name="TripDuration" xml:space="preserve">
+    <value>Trip Duration</value>
+  </data>
+  <data name="TripEndCoordinates" xml:space="preserve">
+    <value>Trip End Coordinates</value>
+  </data>
+  <data name="TripEndTime" xml:space="preserve">
+    <value>Trip End Time</value>
+  </data>
   <data name="TripHistory" xml:space="preserve">
     <value>TRIP HISTORY</value>
   </data>
+  <data name="TripStartTime" xml:space="preserve">
+    <value>Trip Start Time</value>
+  </data>
+  <data name="TripTracker" xml:space="preserve">
+    <value>Trip Tracker</value>
+  </data>
   <data name="TrollAndPole" xml:space="preserve">
     <value>Troll and Pole</value>
+  </data>
+  <data name="TurnSosOff" xml:space="preserve">
+    <value>Turn Off SOS Signal</value>
+  </data>
+  <data name="TurnSosOn" xml:space="preserve">
+    <value>Turn On SOS Signal</value>
   </data>
   <data name="UploadComplete" xml:space="preserve">
     <value>Upload Complete</value>
@@ -308,6 +341,12 @@
   </data>
   <data name="ViewEffortDetails" xml:space="preserve">
     <value>View Effort Details</value>
+  </data>
+  <data name="ViewOnMap" xml:space="preserve">
+    <value>View On Map</value>
+  </data>
+  <data name="WeatherForecast" xml:space="preserve">
+    <value>WEATHER</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>YES</value>

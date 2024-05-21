@@ -24,19 +24,18 @@ public partial class TripHistoryPage : ContentPage
         try
         {
             DbTripObject firstTripObject = await _viewModel._tripTable.GetFirstItemAsync();
-            HistoryDatePicker.MinimumDate = firstTripObject.RecordedOn;
-
-            HistoryDatePicker.Date = DateTime.Today;
+            HistoryDatePicker.MinimumDate = firstTripObject.RecordedOn; 
             HistoryDatePicker.MaximumDate = DateTime.Today;
         }
         catch { }
-        
 
         if (InitialSetup) 
         {
+            HistoryDatePicker.Date = DateTime.Today;
             _viewModel.FilterTripsAsync();
             InitialSetup = false;
-        }       
+        }
+       
     }
 
     private async void HistoryDatePicker_DateSelected(object sender, DateChangedEventArgs e)
@@ -65,5 +64,25 @@ public partial class TripHistoryPage : ContentPage
         Console.WriteLine(tripObject);
 
         await Shell.Current.Navigation.PushModalAsync(new EffortModal(tripObject.Id));
+    }
+
+    private async void Button_Clicked_2(object sender, EventArgs e)
+    {
+        Button ViewEffortButton = (Button)sender;
+        DbTripObject tripObject = ViewEffortButton.CommandParameter as DbTripObject;
+
+        Console.WriteLine(tripObject);
+
+        await Shell.Current.Navigation.PushAsync(new MapPage(tripObject));
+    }
+
+    private async void Button_Clicked_3(object sender, EventArgs e)
+    {
+        Button TripTrackerButton = (Button)sender;
+        DbTripObject tripObject = TripTrackerButton.CommandParameter as DbTripObject;
+
+        Console.WriteLine(tripObject);
+
+        await Shell.Current.Navigation.PushModalAsync(new TripTracker(tripObject.Id));
     }
 }

@@ -20,8 +20,25 @@
     <Color x:Key="ButtonGreen">#007a5e</Color>
     <Color x:Key="ButtonRed">#99323e</Color>
     <Color x:Key="ButtonDarkBlue">#163975</Color>
-    
+    <Color x:Key="ButtonTripTracker">#1b5770</Color>
+
+    <Color x:Key="col_prim">#11b0fd</Color>
+    <Color x:Key="col_sec">#0f68f3</Color>
+    <Color x:Key="col_ter">#FFFFFFFF</Color>
+    <Color x:Key="col_quat">#FF10A5FE</Color>
+    <Color x:Key="col_qui">#FF118BFE</Color>
+    <Color x:Key="col_sext">#FF687B90</Color>
+    <Color x:Key="col_sept">#FF70A9F9</Color>
+    <Color x:Key="col_oct">#FF152234</Color>
+    <Color x:Key="col_non">#FF31BCF4</Color>
+    <Color x:Key="col_ten">#FF73CBF9</Color>
+    <Color x:Key="co_elev">#FF1E82F5</Color>
+    <Color x:Key="col_twel">#FF36A9F9</Color>
+    <Color x:Key="col_thirt">#FF063D8C</Color>
+    <Color x:Key="col_fourt">#FF000A18</Color>
+
     <Color x:Key="NetColor">#4c698c</Color>
+    <Color x:Key="ButtonOrange">#b37122</Color>
     
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>

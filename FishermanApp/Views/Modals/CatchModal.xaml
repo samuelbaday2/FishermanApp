@@ -21,12 +21,24 @@
             </Grid.RowDefinitions>
 
             <CollectionView 
+                IsGrouped="true"
                 Grid.Row="0"
                 VerticalOptions="FillAndExpand"
                 SelectionMode="None"
                 Margin="16"
                 ItemsSource="{Binding CatchDataCollection}" 
                 SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}">
+
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding Name}"
+                            Padding="4"
+                            BackgroundColor="LightGray"
+                            FontSize="25"
+                            FontAttributes="Bold" 
+                            TextColor="{StaticResource ButtonOrange}"/>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

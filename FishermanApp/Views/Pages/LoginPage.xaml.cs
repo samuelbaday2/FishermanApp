@@ -19,18 +19,24 @@ public partial class LoginPage : ContentPage
     protected async override void OnAppearing()
     {
         base.OnAppearing();
-       
-        if (await _updateService.CheckIfFileExistsOnServerAsync()) 
-        {
-            var result = await DisplayAlert("App Update","A new version of the app is available, would you like to download and update?","Download Update", "Cancel");
 
-            if (result) 
-            {
-                _viewModel.SetBusyStatusAsync(false);
-                _updateService.DownloadApk(default);
-                _updateService.DownloadPercentageChanged += downloadPercentChanged;
-            }
+        try
+        {
+            //if(_updateService != null)
+            //if (await _updateService.CheckIfFileExistsOnServerAsync())
+            //{
+            //    var result = await DisplayAlert("App Update", "A new version of the app is available, would you like to download and update?", "Download Update", "Cancel");
+
+            //    if (result)
+            //    {
+            //        _viewModel.SetBusyStatusAsync(false);
+            //        _updateService.DownloadApk(default);
+            //        _updateService.DownloadPercentageChanged += downloadPercentChanged;
+            //    }
+            //}
         }
+        catch { }
+        
     }
     public void downloadPercentChanged(object? sender, int percent)
     {
@@ -49,6 +55,10 @@ public partial class LoginPage : ContentPage
 
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
-        await Navigation.PushModalAsync(new RegisterVessel(default,default));
+        if (_viewModel == null) 
+        {
+            _viewModel = DependencyService.Get<LoginPageViewModel>();
+        }
+        await Navigation.PushModalAsync(new RegisterVessel(_updateService, _viewModel));
     }
 }

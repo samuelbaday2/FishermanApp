@@ -41,5 +41,17 @@ public partial class App : Application
         {
             status = await Permissions.RequestAsync<Permissions.StorageRead>();
         }
+
+        status = await Permissions.CheckStatusAsync<Permissions.Camera>();
+        if (status != PermissionStatus.Granted)
+        {
+            status = await Permissions.RequestAsync<Permissions.Camera>();
+        }
+
+        status = await Permissions.CheckStatusAsync<Permissions.Flashlight>();
+        if (status != PermissionStatus.Granted)
+        {
+            status = await Permissions.RequestAsync<Permissions.Flashlight>();
+        }
     }
 }

@@ -21,17 +21,17 @@ public partial class MainPage : ContentPage
         base.OnAppearing();
         await _viewModel.InitializeAsync();
 
-        if (await _updateService.CheckIfFileExistsOnServerAsync())
-        {
-            var result = await DisplayAlert("App Update", "A new version of the app is available, would you like to download and update?", "Download Update", "Cancel");
+        //if (await _updateService.CheckIfFileExistsOnServerAsync())
+        //{
+        //    var result = await DisplayAlert("App Update", "A new version of the app is available, would you like to download and update?", "Download Update", "Cancel");
 
-            if (result)
-            {
-                _viewModel.SetBusyStatusAsync(false);
-                _updateService.DownloadApk(default);
-                _updateService.DownloadPercentageChanged += downloadPercentChanged;
-            }
-        }
+        //    if (result)
+        //    {
+        //        _viewModel.SetBusyStatusAsync(false);
+        //        _updateService.DownloadApk(default);
+        //        _updateService.DownloadPercentageChanged += downloadPercentChanged;
+        //    }
+        //}
     }
     public void downloadPercentChanged(object? sender, int percent)
     {

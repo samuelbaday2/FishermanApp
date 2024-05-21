@@ -120,6 +120,14 @@ namespace FishermanApp.ViewModels.Modals
 
                         Preferences.Set(Pref.GEAR_LIST, json);
 
+                        if (Preferences.Get(Pref.LOGGED_USER, string.Empty) != string.Empty)
+                        {
+                            string jsonLogged = Preferences.Get(Pref.LOGGED_USER, string.Empty);
+                            var returnValueLogged = JsonConvert.DeserializeObject<List<RegistrationObject>>(jsonLogged);
+
+                            UserDataObject.UserObject = returnValueLogged[0];
+                        }
+
                         Application.Current.MainPage = new AppShell(_loginPageViewModel, _updateService);
                     }
                     else

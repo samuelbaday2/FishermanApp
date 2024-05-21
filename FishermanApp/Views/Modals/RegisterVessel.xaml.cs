@@ -8,7 +8,7 @@ namespace FishermanApp.Views.Modals;
 public partial class RegisterVessel : ContentPage
 {
     private RegisterVesselModalViewModel _viewModel;
-    public RegisterVessel([Optional] IUpdateService updateService,[Optional] LoginPageViewModel loginPageViewModel)
+    public RegisterVessel(IUpdateService updateService,LoginPageViewModel loginPageViewModel)
 	{
 		InitializeComponent();
 		BindingContext = _viewModel = new RegisterVesselModalViewModel(updateService, loginPageViewModel);

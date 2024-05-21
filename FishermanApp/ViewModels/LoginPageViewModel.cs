@@ -26,6 +26,7 @@ namespace FishermanApp.ViewModels
         private string _username;
         private bool _rememberMe;
         private bool _isRemembered;
+        private bool IsFlashLightOn = false;
 
         public string VersionString { get { return _versionString; } set { SetProperty(ref _versionString, value); } }
         public string Username { get { return _username; } set { SetProperty(ref _username, value); } }
@@ -42,9 +43,9 @@ namespace FishermanApp.ViewModels
 
             Username = string.Empty;
 #if DEBUG
-            Username = $"J3-1656-PM";
+            //Username = $"J3-1656-PM";
 #else
-            Username = $"J3-1656-PM";
+            //Username = $"J3-1656-PM";
 #endif
 
             try
@@ -73,7 +74,7 @@ namespace FishermanApp.ViewModels
         private async void DoRegisterAsync(object obj)
         {
             //await Shell.Current.Navigation.PushModalAsync(new RegisterAccountPage());
-            //Application.Current.MainPage = new RegisterAccountPage();
+            //Application.Current.MainPage = new RegisterAccountPage();          
         }     
 
         private async void DoLoginAsync(object obj)
@@ -170,6 +171,15 @@ namespace FishermanApp.ViewModels
                         json = response2.Content;
 
                         Preferences.Set(Pref.GEAR_LIST, json);
+
+
+                        if (Preferences.Get(Pref.LOGGED_USER, string.Empty) != string.Empty)
+                        {
+                            string jsonLogged = Preferences.Get(Pref.LOGGED_USER, string.Empty);
+                            var returnValueLogged = JsonConvert.DeserializeObject<List<RegistrationObject>>(jsonLogged);
+
+                            UserDataObject.UserObject = returnValueLogged[0];
+                        }
 
                         Application.Current.MainPage = new AppShell(this, _updateService);
                     }

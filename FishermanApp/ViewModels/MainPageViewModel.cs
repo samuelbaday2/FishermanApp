@@ -5,6 +5,7 @@ using FishermanApp.Resources.Localization;
 using FishermanApp.Services;
 using FishermanApp.Services.ConnectivityService;
 using FishermanApp.Services.LocationService;
+using FishermanApp.Services.PopupMessageService;
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using Newtonsoft.Json;
 using System;
@@ -21,9 +22,9 @@ namespace FishermanApp.ViewModels
     {
         EnterSetDetailPageViewModel _enterSetDetailPageViewModel;
 
-        IPermissionService _permissionService;
-        IConnectionHandlerService _connectionHandlerService;
-        ILocationFeatureService _locationFeatureService;
+        private IDisplayAlertService _displayAlertService;
+        private IConnectionHandlerService _connectionHandlerService;
+        private ILocationFeatureService _locationFeatureService;
 
         private string _vesselName;
         private string _homePort;
@@ -31,6 +32,7 @@ namespace FishermanApp.ViewModels
         private string _gpsStatus;
         private string _connectionStatus;
         private bool _hasPendingTrip;
+        private bool _isAddCatchVisible;
 
         public string VesselName { get { return _vesselName; } set { SetProperty(ref _vesselName, value); } }
         public string HomePort { get { return _homePort; } set { SetProperty(ref _homePort, value); } }
@@ -38,26 +40,22 @@ namespace FishermanApp.ViewModels
         public string GpsStatus { get { return _gpsStatus; } set { SetProperty(ref _gpsStatus, value); } }
         public string ConnectionStatus { get { return _connectionStatus; } set { SetProperty(ref _connectionStatus, value); } }
         public bool HasPendingTrip { get { return _hasPendingTrip; } set { SetProperty(ref _hasPendingTrip, value); } }
+        public bool IsAddCatchVisible { get { return _isAddCatchVisible; } set { SetProperty(ref _isAddCatchVisible, value); } }
 
         public ICommand StartTripCommand { private set; get; }
         public ICommand EndTripCommand { private set; get; }
         public ICommand StartSetCommand { private set; get; }
+        public ICommand AddCatchCommand { private set; get; }
 
-        public MainPageViewModel(IPermissionService permissionService, IConnectionHandlerService connectionHandlerService, ILocationFeatureService locationFeatureService, EnterSetDetailPageViewModel enterSetDetailPageViewModel) {
+        public MainPageViewModel(IDisplayAlertService displayAlertService, IConnectionHandlerService connectionHandlerService, ILocationFeatureService locationFeatureService, EnterSetDetailPageViewModel enterSetDetailPageViewModel) {
             StartTripCommand = new Command(DoStartTrip);
             EndTripCommand = new Command(DoEndTrip);
             StartSetCommand = new Command(DoStartSet);
+            AddCatchCommand = new Command(DoAddMoreCatch);
+       
 
-            VesselName = UserDataObject.UserObject.VesName;
-            HomePort = UserDataObject.UserObject.VesHomePort;
-            CaptainName = $"{UserDataObject.UserObject.CapFName} {UserDataObject.UserObject.CapLName}";
 
-            if (CaptainName.Trim().Equals(string.Empty))
-            {
-                CaptainName = $"{UserDataObject.UserObject.CaptainName}";
-            }
-
-            _permissionService = permissionService;
+            _displayAlertService = displayAlertService;
             _connectionHandlerService = connectionHandlerService;
 
             _connectionHandlerService.ConnectionStatusChanged += connectionStatusChanged;
@@ -69,6 +67,13 @@ namespace FishermanApp.ViewModels
             _enterSetDetailPageViewModel = enterSetDetailPageViewModel;
             GetGpsStatusAsync();
         }
+
+        private async void DoAddMoreCatch(object obj)
+        {
+            InitializeConfig.InitializeFunction = true;
+            Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchDetails)).FirstOrDefault();
+        }
+
         public async Task UpdatePercent(string percent)
         {
             try
@@ -81,6 +86,15 @@ namespace FishermanApp.ViewModels
         {
             try
             {
+                VesselName = UserDataObject.UserObject.VesName;
+                HomePort = UserDataObject.UserObject.VesHomePort;
+                CaptainName = $"{UserDataObject.UserObject.CapFName} {UserDataObject.UserObject.CapLName}";
+
+
+                if (CaptainName.Trim().Equals(string.Empty))
+                {
+                    CaptainName = $"{UserDataObject.UserObject.CaptainName}";
+                }
                 var tripList = await _tripTable.GetItemsAsync();
 
                 HasPendingTrip = !tripList.LastOrDefault().IsTripEnded;
@@ -117,6 +131,14 @@ namespace FishermanApp.ViewModels
                     catch { }
                     InitializeConfig.InitializeFunction = true;
                     Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchDetails)).FirstOrDefault();
+                }
+
+                if (!lastTripData.LastOrDefault().IsTripEnded && hasCatchData)
+                {
+                    IsAddCatchVisible = true;
+                }
+                else {
+                    IsAddCatchVisible = false;
                 }
             }
             catch (Exception ee)
@@ -179,51 +201,59 @@ namespace FishermanApp.ViewModels
 
         private async void DoEndTrip(object obj)
         {
-            SetBusyStatusAsync(false);
-            if (sephamoreSlim.CurrentCount == 0)
+            var result = await _displayAlertService.DisplayALertAsync("End Trip", "Are you sure you want to end the current trip?");
+
+            if (result) 
             {
-                return;
-            }
-
-            try
-            {
-                sephamoreSlim.Wait();
-                var gps = await GetCurrentLocation();
-
-                var tripList = await _tripTable.GetItemsAsync();
-
-                DbTripObject tripObject = tripList.LastOrDefault();
-
-                await _tripTable.SaveItemAsync(new DbTripObject
+                SetBusyStatusAsync(false);
+                if (sephamoreSlim.CurrentCount == 0)
                 {
-                    Id = tripObject.Id,
-                    RecordedOn = tripObject.RecordedOn,
-                    VesselId = tripObject.VesselId,
-                    StartTripLatitude = tripObject.StartTripLatitude,
-                    StartTripLongitude = tripObject.StartTripLongitude,
-                    EndTripLatitude = gps == null ? AppResources.GpsOff : gps.Latitude.ToString(),
-                    EndTripLongitude = gps == null ? AppResources.GpsOff : gps.Longitude.ToString(),
-                    IsTripEnded = true,
-                    TripEndedOn = DateTime.Now,
-                    IsActive = tripObject.IsActive,
-                    Captain = tripObject.Captain,
-                });
+                    return;
+                }
 
-                await InitializeAsync();
+                try
+                {
+                    sephamoreSlim.Wait();
+                    var gps = await GetCurrentLocation();
+
+                    var tripList = await _tripTable.GetItemsAsync();
+
+                    DbTripObject tripObject = tripList.LastOrDefault();
+
+                    await _tripTable.SaveItemAsync(new DbTripObject
+                    {
+                        Id = tripObject.Id,
+                        RecordedOn = tripObject.RecordedOn,
+                        VesselId = tripObject.VesselId,
+                        StartTripLatitude = tripObject.StartTripLatitude,
+                        StartTripLongitude = tripObject.StartTripLongitude,
+                        EndTripLatitude = gps == null ? AppResources.GpsOff : gps.Latitude.ToString(),
+                        EndTripLongitude = gps == null ? AppResources.GpsOff : gps.Longitude.ToString(),
+                        IsTripEnded = true,
+                        TripEndedOn = DateTime.Now,
+                        IsActive = tripObject.IsActive,
+                        Captain = tripObject.Captain,
+                    });
+
+                    await InitializeAsync();
+                }
+                catch (Exception ee)
+                {
+                    Console.WriteLine(ee.Message);
+
+                }
+                finally
+                {
+                    sephamoreSlim.Release();
+                    SetBusyStatusAsync(true);
+                }
             }
-            catch(Exception ee) 
-            {
-                Console.WriteLine(ee.Message);
-               
-            }
-            finally {
-                sephamoreSlim.Release();
-                SetBusyStatusAsync(true);
-            }
+           
         }
 
         private async void DoStartSet(object obj)
         {
+            
             SetBusyStatusAsync(false);
             if (sephamoreSlim.CurrentCount == 0)
             {

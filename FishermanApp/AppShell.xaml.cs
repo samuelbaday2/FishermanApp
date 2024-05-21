@@ -2,13 +2,15 @@
 using FishermanApp.Services.AppUpdateService;
 using FishermanApp.ViewModels;
 using FishermanApp.Views.Pages;
+using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace FishermanApp;
 
 public partial class AppShell : Shell
 {
     private LoginPageViewModel viewModel;
-    private readonly IUpdateService _updateService;
+    private IUpdateService _updateService;
 	public AppShell(LoginPageViewModel loginPageViewModel, IUpdateService updateService)
 	{
 		InitializeComponent();
@@ -24,8 +26,26 @@ public partial class AppShell : Shell
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
-        Preferences.Set(Pref.LOGGED_USER, string.Empty);
-        Preferences.Set(Pref.LOGGED_USER_PASSWORD, string.Empty);
-        Application.Current.MainPage = new LoginPage(viewModel, _updateService);
+        try
+        {
+            Preferences.Set(Pref.LOGGED_USER, string.Empty);
+            Preferences.Set(Pref.LOGGED_USER_PASSWORD, string.Empty);
+
+            Preferences.Clear();         
+        }
+        catch
+        {
+
+        }
+        finally 
+        {
+            if(_updateService == null) 
+            {
+                _updateService = DependencyService.Get<IUpdateService>();
+            }
+
+            Application.Current.MainPage = new NavigationPage(new LoginPage(viewModel, _updateService));
+        }
+       
     }
 }

@@ -17,11 +17,12 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="200"/>
                 <RowDefinition Height="65"/>
             </Grid.RowDefinitions>
 
             <Border              
-                Margin="16"
+                Margin="16,16,16,0"
                 Grid.Row="0">
 
                 <ScrollView Orientation="Vertical">
@@ -220,18 +221,7 @@
                                 </Label>
                             </HorizontalStackLayout>
 
-                            <Button 
-                                IsEnabled="{Binding IsNotBusy}"
-                                Command="{Binding StartSetCommand}"
-                                FontSize="30"
-                                Grid.Row="1"
-                                IsVisible="{Binding HasPendingTrip}"
-                                Text="{x:Static res:AppResources.StartSet}"
-                                TextColor="White"
-                                BackgroundColor="{StaticResource ButtonGreen}"
-                                HeightRequest="65"
-                                Margin="0,16"
-                                VerticalOptions="End"/>
+                            
 
 
                         </VerticalStackLayout>
@@ -240,30 +230,64 @@
 
             </Border>
 
-            <Button           
-                Margin="16,0"
-                IsEnabled="{Binding IsNotBusy}"
-                FontSize="30"
-                Grid.Row="1"
-                Command="{Binding StartTripCommand}"
-                Text="{x:Static res:AppResources.StartTrip}"
-                TextColor="White"
-                BackgroundColor="{StaticResource ButtonGreen}"
-                HeightRequest="65"            
-                VerticalOptions="End"/>
+            <Grid Grid.Row="1" VerticalOptions="Start" RowDefinitions="50*,50*" Margin="0,8,0,8">
+               
+                    <Button                        
+                        IsEnabled="{Binding IsNotBusy}"
+                        Command="{Binding StartSetCommand}"
+                        FontSize="30"
+                        Grid.Row="0"
+                        IsVisible="{Binding HasPendingTrip}"
+                        Text="{x:Static res:AppResources.StartSet}"
+                        TextColor="White"
+                        BackgroundColor="{StaticResource ButtonGreen}"
+                        HeightRequest="65"
+                        Margin="16,0"
+                        VerticalOptions="End"/>
 
-            <Button 
-                Margin="16,0"
-                IsEnabled="{Binding IsNotBusy}"
-                Grid.Row="1"
-                Command="{Binding EndTripCommand}"
-                Text="{x:Static res:AppResources.EndTrip}"
-                TextColor="White"
-                BackgroundColor="{StaticResource ButtonRed}"
-                HeightRequest="65"
-                FontSize="30"
-                IsVisible="{Binding HasPendingTrip}"
-                VerticalOptions="End"/>
+                <Button                        
+                    IsEnabled="{Binding IsNotBusy}"
+                    Command="{Binding AddCatchCommand}"
+                    FontSize="30"
+                    Grid.Row="1"
+                    IsVisible="{Binding IsAddCatchVisible}"
+                    Text="{x:Static res:AppResources.AddMoreCatchData}"
+                    TextColor="White"
+                    BackgroundColor="{StaticResource ButtonOrange}"
+                    HeightRequest="65"
+                    Margin="16,8"
+                    VerticalOptions="End"/>
+
+            </Grid>
+
+            <Grid Grid.Row="2" Margin="0,0,0,32">
+                <Button           
+                    Margin="16,0"
+                    IsEnabled="{Binding IsNotBusy}"
+                    FontSize="30"
+    
+                    Command="{Binding StartTripCommand}"
+                    Text="{x:Static res:AppResources.StartTrip}"
+                    TextColor="White"
+                    BackgroundColor="{StaticResource ButtonGreen}"
+                    HeightRequest="65"            
+                    VerticalOptions="End"/>
+
+                <Button 
+                    Margin="16,0"
+                    IsEnabled="{Binding IsNotBusy}"
+    
+                    Command="{Binding EndTripCommand}"
+                    Text="{x:Static res:AppResources.EndTrip}"
+                    TextColor="White"
+                    BackgroundColor="{StaticResource ButtonRed}"
+                    HeightRequest="65"
+                    FontSize="30"
+                    IsVisible="{Binding HasPendingTrip}"
+                    VerticalOptions="End"/>
+
+            </Grid>
+            
 
             <Grid 
                 Grid.RowSpan="2" 

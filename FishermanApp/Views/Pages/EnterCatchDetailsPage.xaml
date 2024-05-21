@@ -120,8 +120,9 @@
         </CollectionView>
 
         <Button 
+                
                 Grid.Row="3"
-                Margin="16,8"
+                Margin="16,8,16,32"
                 Command="{Binding AddCatchCommand}"
                 Text="{x:Static res:AppResources.AddCatchEvent}"
                 TextColor="White"

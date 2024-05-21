@@ -70,6 +70,7 @@ namespace FishermanApp.ViewModels
 
 
                 var lastSet = existingSets.Where(x => x.Id == (existingSets.LastOrDefault().Id)).LastOrDefault();
+                int currentSetCount = existingSets.Where(x => x.TripId == lastTripData.LastOrDefault().Id).Count();
 
                 try
                 {
@@ -86,6 +87,7 @@ namespace FishermanApp.ViewModels
                                 Species = catchObject.Species,
                                 RecordedOn = DateTime.Now,
                                 ScientificName = catchObject.ScientificName,
+                                SetNumber = currentSetCount,
                             });
                         }
 

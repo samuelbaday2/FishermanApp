@@ -29,6 +29,8 @@ namespace FishermanApp.Services.AppUpdateService
             var filepath = string.Empty;
 #if ANDROID
                 filepath =  global::Android.OS.Environment.GetExternalStoragePublicDirectory(global::Android.OS.Environment.DirectoryDownloads).Path;
+
+
 #endif
 
             _locationFeatureService.InstallApk(System.IO.Path.Combine(filepath, $"fishermanapp_{BuildNumber}.apk"));
@@ -76,6 +78,8 @@ namespace FishermanApp.Services.AppUpdateService
                 {
                     string completePath = System.IO.Path.Combine(filepath, $"fishermanapp_{BuildNumber}.apk");
                     //var filepath = System.IO.Path.Combine(filepath, "fish_app.apk");
+
+
                     wc.DownloadFileAsync(new Uri($"http://174.47.67.167:8081/Image/fishermanapp_{BuildNumber}.apk"), completePath); 
                     Toast.Make($"download started : {completePath}", ToastDuration.Long).Show();
                 }
