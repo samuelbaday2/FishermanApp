@@ -143,6 +143,7 @@
 	  <PackageReference Include="Xamarin.GooglePlayServices.Location">
 	    <Version>118.0.0.5</Version>
 	  </PackageReference>
+		<PackageReference Include="Oscore.Maui.Android.InAppUpdates" Version="1.0.0" />1
 	</ItemGroup>
 
 
