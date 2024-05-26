@@ -82,7 +82,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<SosPage>();
         builder.Services.AddSingleton<MapPage>();
         builder.Services.AddSingleton<WeatherForecastPage>();
-      
+        builder.Services.AddSingleton<SettingsPage>();
 
         //Modals
         builder.Services.AddSingleton<CatchSpeciesSelectionViewModel>();
@@ -95,11 +95,12 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<TripTrackerViewModel>();
         builder.Services.AddSingleton<TripTracker>();
+        builder.Services.AddSingleton<SettingsPageViewModel>();
 
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
 
-		return builder.Build();
+        return builder.Build();
 	}
 }

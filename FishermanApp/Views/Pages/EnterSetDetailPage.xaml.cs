@@ -39,4 +39,23 @@ public partial class EnterSetDetailPage : ContentPage
 
         Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.BaitSpecie)).FirstOrDefault();
     }
+
+    private void Entry_Completed(object sender, EventArgs e)
+    {
+        Entry entry = (Entry)sender;
+        string input = entry.Text;
+        int uom = Preferences.Get("UOM", 0);
+        if (uom == 0) 
+        {
+            entry.Text = $"{input} (m)";
+        }
+        else if (uom == 1)
+        {
+            entry.Text = $"{input} (ft)";
+        }
+        else if (uom == 2)
+        {
+            entry.Text = $"{input} (in)";
+        }
+    }
 }

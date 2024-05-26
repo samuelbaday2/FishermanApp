@@ -70,6 +70,12 @@
         ContentTemplate="{DataTemplate view:SosPage}"
         Route="SosPage" />
 
+
+    <ShellContent
+        Title="{x:Static res:AppResources.Settings}"
+        ContentTemplate="{DataTemplate view:SettingsPage}"
+        Route="SettingsPage" />
+
     <!--<ShellContent
      Title="{x:Static res:AppResources.WeatherForecast}"
      ContentTemplate="{DataTemplate view:WeatherForecastPage}"

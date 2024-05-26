@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.0.14.050324" android:versionCode="14" package="com.insitesolutions.fishermanapp">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.0.16.052224" android:versionCode="16" package="com.insitesolutions.fishermanapp">
 	<application legacyExternalStorage="true" android:allowBackup="true" android:icon="@mipmap/appicon" android:supportsRtl="true" android:label="Insite Fisherman App">
 		<provider android:requestLegacyExternalStorage="true" android:name="androidx.core.content.FileProvider" android:authorities="com.insitesolutions.fishermanapp.fileprovider" android:exported="false" android:grantUriPermissions="true">
 			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths" />

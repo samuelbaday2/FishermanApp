@@ -41,6 +41,7 @@
             HeightRequest="80">
 
                         <Entry    
+                            Completed="Entry_Completed"
                     ReturnType="Next"
                     Margin="8,0"
                     VerticalOptions="FillAndExpand"
@@ -159,14 +160,15 @@
             HeightRequest="80">
 
                         <Entry
-                Margin="8,0"
-                    ReturnType="Next"
-                    Keyboard="Numeric"
-                    TextColor="Black"
-                    FontAttributes="Bold"
-                    FontSize="40"
-                    Text="{Binding GangionLength}"
-                    />
+                             Completed="Entry_Completed"
+                            Margin="8,0"
+                            ReturnType="Next"
+                            Keyboard="Numeric"
+                            TextColor="Black"
+                            FontAttributes="Bold"
+                            FontSize="40"
+                            Text="{Binding GangionLength}"
+                            />
                     </Border>
 
                 </VerticalStackLayout>

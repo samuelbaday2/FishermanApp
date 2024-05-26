@@ -276,6 +276,9 @@
   <data name="SetNumber" xml:space="preserve">
     <value>SET NUMBER : </value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>SETTINGS</value>
+  </data>
   <data name="SosLabel" xml:space="preserve">
     <value>Send an SOS signal using your phone flashlight</value>
   </data>

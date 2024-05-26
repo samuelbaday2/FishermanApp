@@ -91,6 +91,7 @@ namespace FishermanApp.ViewModels
                 {
                     currentSet.BaitType = AppResources.Dead.ToLower();
                 }
+          
 
                 currentSet.EndSetLatitude = gps == null ? AppResources.GpsOff : gps.Latitude.ToString();
                 currentSet.EndSetpLongitude = gps == null ? AppResources.GpsOff : gps.Longitude.ToString();
@@ -149,11 +150,26 @@ namespace FishermanApp.ViewModels
                    
                     var lastSet = existingSets.Where(x => x.Id == (existingSets.LastOrDefault().Id - 1)).LastOrDefault();
 
+                    int uom = Preferences.Get("UOM", 0);
+                    string defaultUom = string.Empty;
+                    if (uom == 0)
+                    {
+                        defaultUom = $"(m)";
+                    }
+                    else if (uom == 1)
+                    {
+                        defaultUom = $"(ft)";
+                    }
+                    else if (uom == 2)
+                    {
+                        defaultUom = $"(in)";
+                    }
+
                     if (lastSet != null)
                     {
                         try
                         {
-                            LongLineLength = lastSet.LengthOfLongLine;
+                            LongLineLength = $"{lastSet.LengthOfLongLine}";
                         }
                         catch { }
 
@@ -171,7 +187,7 @@ namespace FishermanApp.ViewModels
 
                         try
                         {
-                            GangionLength = lastSet.GangionLength;
+                            GangionLength = $"{lastSet.GangionLength}";
                         }
                         catch { }
 

@@ -538,6 +538,15 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SETTINGS.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Send an SOS signal using your phone flashlight.
         /// </summary>
         public static string SosLabel {

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FishermanApp.Views.Pages.SettingsPage"
+             Title="SettingsPage"
+             BackgroundColor="White">
+    <Grid>
+        <VerticalStackLayout>
+            <Label Text="Unit of Measure" TextColor="Black" Margin="16,16,16,0" FontSize="20"/>
+
+            <Border 
+                 Margin="16,0"
+                 StrokeThickness="4"
+                 Stroke ="{StaticResource ButtonGreen}"
+                 StrokeShape="RoundRectangle 10,10,10,10"
+                 HeightRequest="80"
+                 Padding="4">   
+
+                <Picker x:Name="UoMPicker" Title="Unit of Measure" FontAttributes="Bold" FontSize="30" TextColor="Black" SelectedIndex="0" SelectedIndexChanged="Picker_SelectedIndexChanged">
+                    <Picker.Items>
+                        <x:String>Meter (m)</x:String>
+                        <x:String>Feet (ft)</x:String>
+                        <x:String>Inches (in)</x:String>
+                    </Picker.Items>
+                </Picker>
+            </Border>
+        </VerticalStackLayout>
+       
+       
+        
+    </Grid>
+</ContentPage>

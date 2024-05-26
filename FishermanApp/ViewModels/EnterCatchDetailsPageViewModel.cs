@@ -59,7 +59,7 @@ namespace FishermanApp.ViewModels
 
         private async void DoAddCatch(object obj)
         {
-            if (CatchDataCollection.Count == 1 && CatchDataCollection.FirstOrDefault().Species == null)
+            if (false)//(CatchDataCollection.Count == 1 && CatchDataCollection.FirstOrDefault().Species == null)
             {
                 await Toast.Make(AppResources.CatchDataCannotBeEmpty,ToastDuration.Long).Show();
             }

@@ -139,6 +139,9 @@
 	  <MauiXaml Update="Views\Pages\MapPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Pages\SettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Pages\SosPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
