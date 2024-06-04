@@ -49,25 +49,25 @@ namespace FishermanApp.ViewModels.Modals
                 var lastSet = await _tripSetTable.GetItemAsync(currentSetCount[index].Id);
 
                 int uom = Preferences.Get("UOM", 0);
-                string defaultUom = string.Empty;
-                if (uom == 0)
-                {
-                     defaultUom = $"(m)";
-                }
-                else if (uom == 1)
-                {
-                     defaultUom = $"(ft)";
-                }
-                else if (uom == 2)
-                {
-                     defaultUom = $"(in)";
-                }
+                //string defaultUom = string.Empty;
+                //if (uom == 0)
+                //{
+                //    defaultUom = $"(m)";
+                //}
+                //else if (uom == 1)
+                //{
+                //    defaultUom = $"(ft)";
+                //}
+                //else if (uom == 2)
+                //{
+                //    defaultUom = $"(in)";
+                //}
 
                 if (lastSet != null)
                 {
                     try
                     {
-                        LongLineLength = $"{lastSet.LengthOfLongLine} {defaultUom}";
+                        LongLineLength = $"{lastSet.LengthOfLongLine} {lastSet.UoM}";
                     }
                     catch { }
 
@@ -85,7 +85,7 @@ namespace FishermanApp.ViewModels.Modals
 
                     try
                     {
-                        GangionLength = $"{lastSet.GangionLength} {defaultUom}";
+                        GangionLength = $"{lastSet.GangionLength} {lastSet.UoM}";
                     }
                     catch { }
 

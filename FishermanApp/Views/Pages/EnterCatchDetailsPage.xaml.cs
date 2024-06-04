@@ -16,12 +16,13 @@ public partial class EnterCatchDetailsPage : ContentPage
 		BindingContext = viewModel = new EnterCatchDetailsPageViewModel();
 
     }
-    protected override void OnAppearing()
+    protected async override void OnAppearing()
     {
         base.OnAppearing();
         if (InitializeConfig.InitializeFunction)
         {
-            viewModel.Initialize();
+            await viewModel.Initialize();
+            SetPicker.ItemsSource = viewModel.PickerItems;
             InitializeConfig.InitializeFunction = false;
         }
         

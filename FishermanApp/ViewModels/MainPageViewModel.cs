@@ -6,6 +6,7 @@ using FishermanApp.Services;
 using FishermanApp.Services.ConnectivityService;
 using FishermanApp.Services.LocationService;
 using FishermanApp.Services.PopupMessageService;
+using FishermanApp.Views.Modals;
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using Newtonsoft.Json;
 using System;
@@ -33,6 +34,7 @@ namespace FishermanApp.ViewModels
         private string _connectionStatus;
         private bool _hasPendingTrip;
         private bool _isAddCatchVisible;
+        private bool _isLastSetEnded;
 
         public string VesselName { get { return _vesselName; } set { SetProperty(ref _vesselName, value); } }
         public string HomePort { get { return _homePort; } set { SetProperty(ref _homePort, value); } }
@@ -41,6 +43,7 @@ namespace FishermanApp.ViewModels
         public string ConnectionStatus { get { return _connectionStatus; } set { SetProperty(ref _connectionStatus, value); } }
         public bool HasPendingTrip { get { return _hasPendingTrip; } set { SetProperty(ref _hasPendingTrip, value); } }
         public bool IsAddCatchVisible { get { return _isAddCatchVisible; } set { SetProperty(ref _isAddCatchVisible, value); } }
+        public bool IsLastSetNotEnded { get { return _isLastSetEnded; } set { SetProperty(ref _isLastSetEnded, value); } }
 
         public ICommand StartTripCommand { private set; get; }
         public ICommand EndTripCommand { private set; get; }
@@ -71,7 +74,10 @@ namespace FishermanApp.ViewModels
         private async void DoAddMoreCatch(object obj)
         {
             InitializeConfig.InitializeFunction = true;
-            Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchDetails)).FirstOrDefault();
+
+            Shell.Current.Navigation.PushModalAsync(new SetSelect());
+
+            //Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchDetails)).FirstOrDefault();
         }
 
         public async Task UpdatePercent(string percent)
@@ -117,8 +123,13 @@ namespace FishermanApp.ViewModels
                         await _enterSetDetailPageViewModel.AddLastSetAsync();
                     }
                     catch { }
-                    Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.SetDetails)).FirstOrDefault();
+                    IsLastSetNotEnded = true;
+                    //Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.SetDetails)).FirstOrDefault();
                     return;
+                }
+                else 
+                {
+                    IsLastSetNotEnded = false;
                 }
 
                 bool hasCatchData = existingSets.Where(x => x.TripId == lastTripData.LastOrDefault().Id).LastOrDefault().HasCatchData;
@@ -130,10 +141,10 @@ namespace FishermanApp.ViewModels
                     }
                     catch { }
                     InitializeConfig.InitializeFunction = true;
-                    Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchDetails)).FirstOrDefault();
+                    //Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchDetails)).FirstOrDefault();
                 }
 
-                if (!lastTripData.LastOrDefault().IsTripEnded && hasCatchData)
+                if (!lastTripData.LastOrDefault().IsTripEnded )
                 {
                     IsAddCatchVisible = true;
                 }
@@ -206,14 +217,11 @@ namespace FishermanApp.ViewModels
             if (result) 
             {
                 SetBusyStatusAsync(false);
-                if (sephamoreSlim.CurrentCount == 0)
-                {
-                    return;
-                }
+               
 
                 try
                 {
-                    sephamoreSlim.Wait();
+                    //sephamoreSlim.Wait();
                     var gps = await GetCurrentLocation();
 
                     var tripList = await _tripTable.GetItemsAsync();
@@ -244,7 +252,7 @@ namespace FishermanApp.ViewModels
                 }
                 finally
                 {
-                    sephamoreSlim.Release();
+                    //sephamoreSlim.Release();
                     SetBusyStatusAsync(true);
                 }
             }
@@ -253,50 +261,80 @@ namespace FishermanApp.ViewModels
 
         private async void DoStartSet(object obj)
         {
-            
-            SetBusyStatusAsync(false);
-            if (sephamoreSlim.CurrentCount == 0)
+            if (IsLastSetNotEnded)
             {
-                return;
-            }
-
-            try
-            {
-                sephamoreSlim.Wait();
-                var gps = await GetCurrentLocation();
-
-                var tripList = await _tripTable.GetItemsAsync();
-
-                await _tripSetTable.SaveItemAsync(new DBSetObject
-                {
-                    TripId = tripList.LastOrDefault().Id,
-                    RecordedOn = DateTime.Now,
-
-                    StartSetLatitude = gps == null ? AppResources.GpsOff : gps.Latitude.ToString(),
-                    StartSetLongitude = gps == null ? AppResources.GpsOff : gps.Longitude.ToString(),
-                    
-                    IsActive = true,
-                });
+                SetBusyStatusAsync(false);
+                
 
                 try
                 {
-                    _enterSetDetailPageViewModel.AddLastSetAsync();
+                    var lastTripData = await _tripTable.GetItemsAsync();
+                    var existingSets = await _tripSetTable.GetItemsAsync();
+                    DBSetObject currentSet = existingSets.Where(x => x.TripId == lastTripData.LastOrDefault().Id).LastOrDefault();
+
+                   
+                    currentSet.SetEnded = true;
+          
+                    currentSet.SetEndedOn = DateTime.Now;
+                  
+                    await _tripSetTable.SaveItemAsync(currentSet);
+                    IsLastSetNotEnded = false;
+                    InitializeAsync();
                 }
-                catch { }
-                
-                Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.SetDetails)).FirstOrDefault();
-                
+                catch (Exception ee)
+                {
+                    Console.WriteLine(ee.Message);
+                }
+                finally 
+                {
+                   // sephamoreSlim.Release();
+                    SetBusyStatusAsync(true);
+                }
             }
-            catch (Exception ee)
-            {
-                Console.WriteLine(ee.Message);
-             
+            else {
+                SetBusyStatusAsync(false);
+               
+
+                try
+                {
+                    //sephamoreSlim.Wait();
+                    var gps = await GetCurrentLocation();
+
+                    var tripList = await _tripTable.GetItemsAsync();
+
+                    await _tripSetTable.SaveItemAsync(new DBSetObject
+                    {
+                        TripId = tripList.LastOrDefault().Id,
+                        RecordedOn = DateTime.Now,
+
+                        StartSetLatitude = gps == null ? AppResources.GpsOff : gps.Latitude.ToString(),
+                        StartSetLongitude = gps == null ? AppResources.GpsOff : gps.Longitude.ToString(),
+
+                        IsActive = true,
+                    });
+
+                    try
+                    {
+                        _enterSetDetailPageViewModel.AddLastSetAsync();
+                    }
+                    catch { }
+
+                    Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.SetDetails)).FirstOrDefault();
+
+                }
+                catch (Exception ee)
+                {
+                    Console.WriteLine(ee.Message);
+
+                }
+                finally
+                {
+                    //sephamoreSlim.Release();
+                    SetBusyStatusAsync(true);
+                }
             }
-            finally
-            {
-                sephamoreSlim.Release();
-                SetBusyStatusAsync(true);
-            }         
+            
+            
         }
     }
 }

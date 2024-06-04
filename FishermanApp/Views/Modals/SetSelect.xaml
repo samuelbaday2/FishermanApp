@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FishermanApp.Views.Modals.SetSelect"
+             Title="SetSelect"
+             BackgroundColor="#33333354">
+    
+    <Border 
+         StrokeThickness="5"
+         Margin="32"
+         HeightRequest="700"
+         Stroke="{StaticResource ButtonGreen}"
+         StrokeShape="RoundRectangle 10,10,10,10">
+
+        <Grid     
+            Padding="16"
+            BackgroundColor="White">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="80*"/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+
+            <Label FontSize="32" Grid.Row="0" Text="Select Set Number" TextColor="Black"/>
+
+            <CollectionView
+                Grid.Row="1"
+                ItemsSource="{Binding SetCollection}"
+                SelectionMode="None"
+                >
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Button CommandParameter="{Binding .}" Clicked="Button_Clicked_1" BackgroundColor="{StaticResource ButtonGreen}"  FontSize="40" Text="{Binding SetNumber}" TextColor="White" HorizontalOptions="FillAndExpand" />
+                        </Grid>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Grid.Row="2" Text="Close" BackgroundColor="{StaticResource ButtonRed}" TextColor="White" FontSize="24" Clicked="Button_Clicked"/>
+        </Grid>
+    </Border>
+</ContentPage>

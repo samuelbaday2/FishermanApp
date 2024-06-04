@@ -121,10 +121,13 @@
     <value>Record Catch</value>
   </data>
   <data name="AddMoreCatchData" xml:space="preserve">
-    <value>Add More Catch Data</value>
+    <value>Add Catch</value>
   </data>
   <data name="AddRow" xml:space="preserve">
     <value>Add Another Row</value>
+  </data>
+  <data name="BackToHome" xml:space="preserve">
+    <value>Back To Home</value>
   </data>
   <data name="BaitSpecie" xml:space="preserve">
     <value>SPECIES OF BAIT :</value>
@@ -157,7 +160,7 @@
     <value>⮟</value>
   </data>
   <data name="EndSet" xml:space="preserve">
-    <value>Stop Fishing</value>
+    <value>End Set</value>
   </data>
   <data name="EndTrip" xml:space="preserve">
     <value>Dock Ship</value>
@@ -271,7 +274,7 @@
     <value>J1-1234-AA</value>
   </data>
   <data name="SetDetails" xml:space="preserve">
-    <value>SET DETAILS</value>
+    <value>GEAR DETAILS</value>
   </data>
   <data name="SetNumber" xml:space="preserve">
     <value>SET NUMBER : </value>
@@ -289,7 +292,7 @@
     <value>Species : </value>
   </data>
   <data name="StartSet" xml:space="preserve">
-    <value> Begin Fishing</value>
+    <value>Begin Set</value>
   </data>
   <data name="StartTrip" xml:space="preserve">
     <value>Depart Dock</value>

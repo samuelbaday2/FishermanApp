@@ -232,12 +232,11 @@
 
             <Grid Grid.Row="1" VerticalOptions="Start" RowDefinitions="50*,50*" Margin="0,8,0,8">
                
-                    <Button                        
-                        IsEnabled="{Binding IsNotBusy}"
+                 <Button                                       
                         Command="{Binding StartSetCommand}"
                         FontSize="30"
                         Grid.Row="0"
-                        IsVisible="{Binding HasPendingTrip}"
+                        IsEnabled="{Binding HasPendingTrip}"
                         Text="{x:Static res:AppResources.StartSet}"
                         TextColor="White"
                         BackgroundColor="{StaticResource ButtonGreen}"
@@ -245,12 +244,25 @@
                         Margin="16,0"
                         VerticalOptions="End"/>
 
+                <Button                                       
+                     Command="{Binding StartSetCommand}"
+                     FontSize="30"
+                     Grid.Row="0"
+                     IsVisible="{Binding IsLastSetNotEnded}"
+                     IsEnabled="{Binding HasPendingTrip}"
+                     Text="{x:Static res:AppResources.EndSet}"
+                     TextColor="White"
+                     BackgroundColor="{StaticResource ButtonRed}"
+                     HeightRequest="65"
+                     Margin="16,0"
+                     VerticalOptions="End"/>    
+
                 <Button                        
-                    IsEnabled="{Binding IsNotBusy}"
+                   
                     Command="{Binding AddCatchCommand}"
                     FontSize="30"
                     Grid.Row="1"
-                    IsVisible="{Binding IsAddCatchVisible}"
+                    IsEnabled="{Binding IsAddCatchVisible}"
                     Text="{x:Static res:AppResources.AddMoreCatchData}"
                     TextColor="White"
                     BackgroundColor="{StaticResource ButtonOrange}"

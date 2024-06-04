@@ -31,5 +31,6 @@ namespace FishermanApp.Objects.DbObjects
         public bool HasCatchData { get; set; }
         public DateTime EditedOn { get; set; }
         public bool IsUploaded { get; set; } = false;
+        public string UoM { get; set; }
     }
 }

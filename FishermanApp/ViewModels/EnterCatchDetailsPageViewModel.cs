@@ -19,9 +19,11 @@ namespace FishermanApp.ViewModels
     {
         private ObservableCollection<CatchObject> _catchDataCollection;
         private string _catchQuanity;
+        private List<string> _pickerItems;
 
         public ObservableCollection<CatchObject> CatchDataCollection { get { return _catchDataCollection; } set { SetProperty(ref _catchDataCollection, value); } }
         public string CatchQuanity { get { return _catchQuanity; } set { SetProperty(ref _catchQuanity, value); } }
+        public List<string> PickerItems { get { return _pickerItems; } set { SetProperty(ref _pickerItems, value); } }
 
         public ICommand AddRowCommand { private set; get; }
         public ICommand AddCatchCommand { private set; get; }
@@ -43,6 +45,19 @@ namespace FishermanApp.ViewModels
             {
                 new CatchObject(),
             };
+
+            PickerItems = new List<string>();
+
+            var lastTripData = await _tripTable.GetItemsAsync();
+            var existingSets = await _tripSetTable.GetItemsAsync();
+
+            var lastSet = existingSets.Where(x => x.Id == (existingSets.LastOrDefault().Id)).LastOrDefault();
+            int currentSetCount = existingSets.Where(x => x.TripId == lastTripData.LastOrDefault().Id).Count();
+
+            for (int x = 0; x < currentSetCount; x++) 
+            {
+                PickerItems.Add($"Set {x + 1}");
+            }
         }
         public async Task UpdateCatchRow(int itemIndex,string species, string scientificName) {
             for(int x = 0;  x < CatchDataCollection.Count; x++)
@@ -82,7 +97,7 @@ namespace FishermanApp.ViewModels
                             {
                                 IsActive = true,
                                 Quantity = catchObject.Quantity,
-                                SetId = lastSet.Id,
+                                SetId =  CurrentSetObjectStatic.SetNumberObject.SetId,//lastSet.Id,
                                 TripId = lastTripData.LastOrDefault().Id,
                                 Species = catchObject.Species,
                                 RecordedOn = DateTime.Now,

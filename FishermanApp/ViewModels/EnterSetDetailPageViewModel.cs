@@ -24,7 +24,7 @@ namespace FishermanApp.ViewModels
         private string _hookType;
         private bool _liveBait;
         private bool _deadBait;
-
+        private string _uom;
         public bool LiveBait { get { return _liveBait; } set { SetProperty(ref _liveBait, value); } }
         public bool DeadBait { get { return _deadBait; } set { SetProperty(ref _deadBait, value); } }
         public string GangionLength { get { return _gangionLength; } set { SetProperty(ref _gangionLength, value); } }
@@ -34,10 +34,13 @@ namespace FishermanApp.ViewModels
         public string SetNumber { get { return _setNumber; } set { SetProperty(ref _setNumber, value); } }
         public string BasketCount { get { return _basketCount; } set { SetProperty(ref _basketCount, value); } } 
         public string HooksPerBasket { get { return _hooksPerBasket; } set { SetProperty(ref _hooksPerBasket, value); } }
+        public string UoM { get { return _uom; } set { SetProperty(ref _uom, value); } }
 
         public ICommand LiveButtonCommand { private set; get; }
         public ICommand DeadButtonCommand { private set; get; }
         public ICommand EndSetCommand { private set; get; }
+        public ICommand BackToHomeCommand { private set; get; }
+
         private bool AddRecentSet = false;
 
         public EnterSetDetailPageViewModel() 
@@ -45,6 +48,7 @@ namespace FishermanApp.ViewModels
             LiveButtonCommand = new Command(LiveButtonClicked);
             DeadButtonCommand = new Command(DeadButtonClicked);
             EndSetCommand = new Command(DoEndSet);
+            BackToHomeCommand = new Command(DoBackToHome);
 
             InitializeWeakReferences();
 
@@ -65,6 +69,63 @@ namespace FishermanApp.ViewModels
             {
                 BaitSpecie = arg.SelectionTitle;
             });
+        }
+        private async void DoBackToHome(object obj)
+        {
+            SetBusyStatusAsync(false);
+            if (sephamoreSlim.CurrentCount == 0)
+            {
+                return;
+            }
+
+            try
+            {
+                sephamoreSlim.Wait();
+                var gps = await GetCurrentLocation();
+
+                var lastTripData = await _tripTable.GetItemsAsync();
+                var existingSets = await _tripSetTable.GetItemsAsync();
+                DBSetObject currentSet = existingSets.Where(x => x.TripId == lastTripData.LastOrDefault().Id).LastOrDefault();
+
+                if (LiveBait)
+                {
+                    currentSet.BaitType = AppResources.Live.ToLower();
+                }
+                if (DeadBait)
+                {
+                    currentSet.BaitType = AppResources.Dead.ToLower();
+                }
+
+
+                currentSet.EndSetLatitude = gps == null ? AppResources.GpsOff : gps.Latitude.ToString();
+                currentSet.EndSetpLongitude = gps == null ? AppResources.GpsOff : gps.Longitude.ToString();
+                //currentSet.SetEnded = true;
+                currentSet.BaitSpecie = BaitSpecie;
+
+                currentSet.LengthOfLongLine = $"{LongLineLength}";
+                currentSet.GangionLength = $"{GangionLength}"; ;
+                //currentSet.SetEndedOn = DateTime.Now;
+                currentSet.TypeOfHook = HookType;
+                currentSet.HooksPerBasket = HooksPerBasket;
+                currentSet.NumberOfBaskets = BasketCount;
+                currentSet.UoM = UoM;
+
+                await _tripSetTable.SaveItemAsync(currentSet);
+
+                InitializeConfig.InitializeFunction = true;
+                Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.Home)).FirstOrDefault();
+
+            }
+            catch (Exception ee)
+            {
+                Console.WriteLine(ee.Message);
+
+            }
+            finally
+            {
+                sephamoreSlim.Release();
+                SetBusyStatusAsync(true);
+            }
         }
         private async void DoEndSet(object obj)
         {
@@ -98,18 +159,18 @@ namespace FishermanApp.ViewModels
                 currentSet.SetEnded = true;
                 currentSet.BaitSpecie = BaitSpecie;
                 
-                currentSet.LengthOfLongLine = LongLineLength;
-                currentSet.GangionLength = GangionLength;
+                currentSet.LengthOfLongLine = $"{LongLineLength}";
+                currentSet.GangionLength = $"{GangionLength}"; ;
                 currentSet.SetEndedOn = DateTime.Now;
                 currentSet.TypeOfHook = HookType;
                 currentSet.HooksPerBasket = HooksPerBasket;
                 currentSet.NumberOfBaskets = BasketCount;
-
+                currentSet.UoM = UoM;
 
                 await _tripSetTable.SaveItemAsync(currentSet);
 
                 InitializeConfig.InitializeFunction = true;
-                Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchDetails)).FirstOrDefault();
+                Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.Home)).FirstOrDefault();
 
             }
             catch (Exception ee)
@@ -154,15 +215,15 @@ namespace FishermanApp.ViewModels
                     string defaultUom = string.Empty;
                     if (uom == 0)
                     {
-                        defaultUom = $"(m)";
+                        UoM = $"(m)";
                     }
                     else if (uom == 1)
                     {
-                        defaultUom = $"(ft)";
+                        UoM = $"(ft)";
                     }
                     else if (uom == 2)
                     {
-                        defaultUom = $"(in)";
+                        UoM = $"(in)";
                     }
 
                     if (lastSet != null)

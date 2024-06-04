@@ -70,7 +70,7 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add More Catch Data.
+        ///   Looks up a localized string similar to Add Catch.
         /// </summary>
         public static string AddMoreCatchData {
             get {
@@ -84,6 +84,15 @@ namespace FishermanApp.Resources.Localization {
         public static string AddRow {
             get {
                 return ResourceManager.GetString("AddRow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back To Home.
+        /// </summary>
+        public static string BackToHome {
+            get {
+                return ResourceManager.GetString("BackToHome", resourceCulture);
             }
         }
         
@@ -178,7 +187,7 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stop Fishing.
+        ///   Looks up a localized string similar to End Set.
         /// </summary>
         public static string EndSet {
             get {
@@ -520,7 +529,7 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SET DETAILS.
+        ///   Looks up a localized string similar to GEAR DETAILS.
         /// </summary>
         public static string SetDetails {
             get {
@@ -574,7 +583,7 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  Begin Fishing.
+        ///   Looks up a localized string similar to Begin Set.
         /// </summary>
         public static string StartSet {
             get {

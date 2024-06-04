@@ -10,6 +10,7 @@
     xmlns:res="clr-namespace:FishermanApp.Resources.Localization"
     Navigating="Shell_Navigating"
     BackgroundColor="{StaticResource Primary}"
+    
     FlyoutBackgroundColor="White">
 
    

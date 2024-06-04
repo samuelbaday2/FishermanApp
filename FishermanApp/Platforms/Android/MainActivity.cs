@@ -31,7 +31,6 @@ public class MainActivity : MauiAppCompatActivity
 
         //Preferences.Set("package_install", PackageManager.CanRequestPackageInstalls());
 
-
         DisplayLocationSettingsRequest();
     }
     protected override void OnNewIntent(Intent intent)

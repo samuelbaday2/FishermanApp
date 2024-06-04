@@ -121,6 +121,9 @@
 	  <MauiXaml Update="Views\Modals\RegisterVessel.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Modals\SetSelect.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Modals\TripTracker.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
