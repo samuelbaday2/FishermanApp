@@ -1,5 +1,6 @@
 using FishermanApp.Constants.LocalDatabase.Tables;
 using FishermanApp.Objects.DbObjects;
+using FishermanApp.Views.Modals;
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
 using Map = Microsoft.Maui.Controls.Maps.Map;
@@ -14,6 +15,7 @@ public partial class MapPage : ContentPage
     public const double MinLonValue = -180;
     public const double MaxLonValue = 180;
     public const double MaxWorldLength = 360;
+    private DbTripObject DbTripObject;
     public MapPage(DbTripObject tripObject)
 	{
 		InitializeComponent();
@@ -27,7 +29,7 @@ public partial class MapPage : ContentPage
 
         };
 
-        
+        DbTripObject = tripObject;
     }
 
     public async Task MoveMap(DbTripObject tripObject) 
@@ -140,5 +142,15 @@ public partial class MapPage : ContentPage
         }
 
         return degree;
+    }
+
+    private async void Button_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.Navigation.PushModalAsync(new TripTracker(DbTripObject.Id));
+    }
+
+    private async void Button_Clicked_1(object sender, EventArgs e)
+    {
+        await Shell.Current.Navigation.PopAsync();
     }
 }

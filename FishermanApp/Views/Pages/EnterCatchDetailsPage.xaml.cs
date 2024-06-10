@@ -40,9 +40,29 @@ public partial class EnterCatchDetailsPage : ContentPage
             MessagingCenter.Unsubscribe<CatchSpeciesSelectionViewModel, SelectionObject>(this, AppResources.CatchSpeciesSelection);
         });
 
+        MessagingCenter.Subscribe<CatchSpeciesSelectionViewModel, SelectionObject>(this, "custom_species", async (sender, arg) =>
+        {
+            CatchObject catchObject = CurrentObject as CatchObject;
+            //MessagingCenter.Send(this, AppResources.CatchSpeciesSelection, arg);
+            viewModel.UpdateCatchRow(catchObject.Index, arg.SelectionTitle, arg.SubTitle);
+            MessagingCenter.Unsubscribe<CatchSpeciesSelectionViewModel, SelectionObject>(this, "custom_species");
+        });
+
         Entry.IsEnabled = false;
         Entry.IsEnabled = true;
 
         Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchSpeciesSelection)).FirstOrDefault();
+    }
+
+    private async void Button_Clicked(object sender, EventArgs e)
+    {
+        Button btn = sender as Button;
+        CatchObject catchObject = btn.CommandParameter as CatchObject;
+        await viewModel.UpdateCatchRowDelete(catchObject.Index);
+    }
+
+    private void Button_Clicked_1(object sender, EventArgs e)
+    {
+        Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.Home)).FirstOrDefault();
     }
 }

@@ -14,5 +14,6 @@ namespace FishermanApp.Objects.DbObjects
         public string Species { get; set; }
         public string Quantity { get; set; }
         public string ScientificName { get; set; }
+        public int? Id { get; set; }
     }
 }

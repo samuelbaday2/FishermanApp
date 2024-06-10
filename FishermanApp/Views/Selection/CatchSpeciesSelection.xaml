@@ -17,7 +17,7 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="16,8" HeightRequest="150">
+                    <Grid Margin="16,8" HeightRequest="120">
                         <Border 
                             StrokeShape="RoundRectangle 20,20,20,20" 
                             BackgroundColor="{StaticResource NetColor}" 
@@ -49,5 +49,31 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <Grid VerticalOptions="End" Margin="16,8" HeightRequest="120" IsVisible="False">
+            <Border 
+                        StrokeShape="RoundRectangle 20,20,20,20" 
+                        BackgroundColor="{StaticResource NetColor}" 
+                        HorizontalOptions="FillAndExpand">
+
+                <VerticalStackLayout>
+                    <Label 
+                                Margin="0,9"
+                                VerticalTextAlignment="Center"
+                                FontAttributes="Bold"
+                                FontSize="30" 
+                                HorizontalOptions="Center" 
+                                HorizontalTextAlignment="Center" 
+                                Text="Custom" 
+                                TextColor="White"/>
+
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+            </Grid.GestureRecognizers>
+        </Grid>
     </Grid>
 </ContentPage>

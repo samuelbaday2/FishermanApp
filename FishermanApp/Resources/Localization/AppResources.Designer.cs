@@ -187,7 +187,7 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to End Set.
+        ///   Looks up a localized string similar to Finish Set.
         /// </summary>
         public static string EndSet {
             get {
@@ -196,7 +196,7 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dock Ship.
+        ///   Looks up a localized string similar to End Fishing.
         /// </summary>
         public static string EndTrip {
             get {
@@ -592,7 +592,7 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Depart Dock.
+        ///   Looks up a localized string similar to Start Fishing.
         /// </summary>
         public static string StartTrip {
             get {

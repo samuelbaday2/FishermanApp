@@ -20,6 +20,7 @@ namespace FishermanApp.ViewModels
         private ObservableCollection<CatchObject> _catchDataCollection;
         private string _catchQuanity;
         private List<string> _pickerItems;
+        private int counter = 0;
 
         public ObservableCollection<CatchObject> CatchDataCollection { get { return _catchDataCollection; } set { SetProperty(ref _catchDataCollection, value); } }
         public string CatchQuanity { get { return _catchQuanity; } set { SetProperty(ref _catchQuanity, value); } }
@@ -41,15 +42,14 @@ namespace FishermanApp.ViewModels
        
         }
         public async Task Initialize() {
-            CatchDataCollection = new ObservableCollection<CatchObject>
-            {
-                new CatchObject(),
-            };
+            counter = 0;
+            CatchDataCollection = new ObservableCollection<CatchObject>();
 
             PickerItems = new List<string>();
 
             var lastTripData = await _tripTable.GetItemsAsync();
             var existingSets = await _tripSetTable.GetItemsAsync();
+            var catchData = await _catchTable.GetItemsBySetIdAsync(CurrentSetObjectStatic.SetNumberObject.SetId);
 
             var lastSet = existingSets.Where(x => x.Id == (existingSets.LastOrDefault().Id)).LastOrDefault();
             int currentSetCount = existingSets.Where(x => x.TripId == lastTripData.LastOrDefault().Id).Count();
@@ -58,6 +58,20 @@ namespace FishermanApp.ViewModels
             {
                 PickerItems.Add($"Set {x + 1}");
             }
+
+            foreach (DBCatchObject obj in catchData) 
+            {
+                CatchDataCollection.Add(new CatchObject
+                {
+                    Index = counter++,
+                    Quantity = obj.Quantity,
+                    ScientificName = obj.ScientificName,
+                    Species = obj.Species,
+                    Id = obj.Id,
+                });
+            }
+
+            CatchDataCollection.Add(new CatchObject { Index = counter++ });
         }
         public async Task UpdateCatchRow(int itemIndex,string species, string scientificName) {
             for(int x = 0;  x < CatchDataCollection.Count; x++)
@@ -70,6 +84,37 @@ namespace FishermanApp.ViewModels
                     CatchDataCollection[x] = catchObject;
                 }
             }
+
+            if (CatchDataCollection[CatchDataCollection.Count - 1].Species != null) 
+            {
+                CatchDataCollection.Add(new CatchObject { Index = counter++ });
+            }
+         
+        }
+
+        public async Task UpdateCatchRowDelete(int itemIndex)
+        {
+            for (int x = 0; x < CatchDataCollection.Count; x++)
+            {
+                if (CatchDataCollection[x].Index == itemIndex)
+                {
+                    CatchObject catchObject = CatchDataCollection[x];
+                    if (catchObject.Id != null) 
+                    {
+                        await _catchTable.DeleteItemAsync(await _catchTable.GetItemAsync((int)catchObject.Id));
+                    }
+
+                    CatchDataCollection.Remove(CatchDataCollection.Where(o => o.Index == itemIndex).FirstOrDefault());
+
+                    return;
+                }
+            }
+
+            if (CatchDataCollection[CatchDataCollection.Count - 1].Species != null)
+            {
+                CatchDataCollection.Add(new CatchObject { Index = counter++ });
+            }
+
         }
 
         private async void DoAddCatch(object obj)
@@ -93,17 +138,24 @@ namespace FishermanApp.ViewModels
                     {
                         if (catchObject.Species != null && catchObject.Species.Length > 0)
                         {
-                            await _catchTable.SaveItemAsync(new DBCatchObject
+                            DBCatchObject dbCatchObject = new DBCatchObject
                             {
                                 IsActive = true,
                                 Quantity = catchObject.Quantity,
-                                SetId =  CurrentSetObjectStatic.SetNumberObject.SetId,//lastSet.Id,
+                                SetId = CurrentSetObjectStatic.SetNumberObject.SetId,//lastSet.Id,
                                 TripId = lastTripData.LastOrDefault().Id,
                                 Species = catchObject.Species,
                                 RecordedOn = DateTime.Now,
                                 ScientificName = catchObject.ScientificName,
                                 SetNumber = currentSetCount,
-                            });
+                            };
+
+                            if (catchObject.Id != null) 
+                            {
+                                dbCatchObject.Id = (int)catchObject.Id;
+                            }
+
+                            await _catchTable.SaveItemAsync(dbCatchObject);
                         }
 
                     }
@@ -127,7 +179,7 @@ namespace FishermanApp.ViewModels
 
         private async void DoAddRow(object obj)
         {
-            CatchDataCollection.Add(new CatchObject { Index = CatchDataCollection.Count});
+            CatchDataCollection.Add(new CatchObject { Index = counter++ });
         }
     }
 }

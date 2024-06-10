@@ -115,6 +115,9 @@
 	  <MauiXaml Update="Views\Modals\CatchModal.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Modals\CustomSpecie.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Modals\EffortModal.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

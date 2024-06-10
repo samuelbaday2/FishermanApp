@@ -21,6 +21,8 @@ namespace FishermanApp.ViewModels.Selection
             OnSelectCommand = new Command(DoSelect);
 
             SelectionCollection = new ObservableCollection<SelectionObject>();
+
+          
         }
         public async Task InitializeAsync()
         {

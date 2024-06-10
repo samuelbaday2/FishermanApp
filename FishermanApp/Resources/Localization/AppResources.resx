@@ -160,10 +160,10 @@
     <value>⮟</value>
   </data>
   <data name="EndSet" xml:space="preserve">
-    <value>End Set</value>
+    <value>Finish Set</value>
   </data>
   <data name="EndTrip" xml:space="preserve">
-    <value>Dock Ship</value>
+    <value>End Fishing</value>
   </data>
   <data name="FlyoutStartTrip" xml:space="preserve">
     <value>START TRIP</value>
@@ -295,7 +295,7 @@
     <value>Begin Set</value>
   </data>
   <data name="StartTrip" xml:space="preserve">
-    <value>Depart Dock</value>
+    <value>Start Fishing</value>
   </data>
   <data name="TripCoordinates" xml:space="preserve">
     <value>Trip Start Coordinates</value>

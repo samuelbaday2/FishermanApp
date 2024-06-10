@@ -32,7 +32,7 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
+                        <Grid Margin="0,0,0,8">
                             <Button CommandParameter="{Binding .}" Clicked="Button_Clicked_1" BackgroundColor="{StaticResource ButtonGreen}"  FontSize="40" Text="{Binding SetNumber}" TextColor="White" HorizontalOptions="FillAndExpand" />
                         </Grid>
 

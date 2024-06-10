@@ -1,4 +1,8 @@
 using FishermanApp.ViewModels.Selection;
+using FishermanApp.Views.Modals;
+using FishermanApp.Objects;
+using FishermanApp.Objects.DbObjects;
+using FishermanApp.Resources.Localization;
 
 namespace FishermanApp.Views.Selection;
 
@@ -9,11 +13,19 @@ public partial class CatchSpeciesSelection : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = _viewModel = catchSpeciesSelectionViewModel;
-	}
+
+   
+    }
     protected async override void OnAppearing()
     {
         base.OnAppearing();
         Thread.Sleep(500);
         _viewModel.InitializeAsync();
+    }
+
+    private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+        Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchDetails)).FirstOrDefault();
+        await Shell.Current.Navigation.PushModalAsync(new CustomSpecie());
     }
 }

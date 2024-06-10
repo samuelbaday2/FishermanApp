@@ -30,6 +30,7 @@ public class MainActivity : MauiAppCompatActivity
         //}
 
         //Preferences.Set("package_install", PackageManager.CanRequestPackageInstalls());
+         
 
         DisplayLocationSettingsRequest();
     }

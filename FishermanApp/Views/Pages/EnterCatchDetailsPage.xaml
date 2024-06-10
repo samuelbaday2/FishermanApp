@@ -28,7 +28,8 @@
             <RowDefinition Height="80"/>
             <RowDefinition Height="8"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
 
         <Grid 
@@ -79,10 +80,11 @@
                             Text="{x:Static res:AppResources.Species}"/>
 
                         <Border 
-                    StrokeThickness="4"
-                    Stroke ="{StaticResource ButtonGreen}"
-                    StrokeShape="RoundRectangle 10,10,10,10"
-                    HeightRequest="80">
+                          
+                            StrokeThickness="4"
+                            Stroke ="{StaticResource ButtonGreen}"
+                            StrokeShape="RoundRectangle 10,10,10,10"
+                            HeightRequest="80">
 
                             <Grid>
                                 <Entry
@@ -105,6 +107,9 @@
                             </Grid>
 
                         </Border>
+                        
+                       
+                       
 
                         <Label
                             TextColor="{StaticResource Primary}"
@@ -112,22 +117,27 @@
                             FontSize="30"
                             Text="{x:Static res:AppResources.Quanity}"/>
 
-                        <Border 
-                    StrokeThickness="4"
-                    Stroke ="{StaticResource ButtonGreen}"
-                    StrokeShape="RoundRectangle 10,10,10,10"
-                    HeightRequest="80">
+                        <Grid ColumnDefinitions="80*,20*">
+                            <Border 
+                                StrokeThickness="4"
+                                Stroke ="{StaticResource ButtonGreen}"
+                                StrokeShape="RoundRectangle 10,10,10,10"
+                                HeightRequest="80">
 
-                            <Entry
-                       ReturnType="Done"
-                        Margin="8,0"
-                        Keyboard="Numeric"
-                        TextColor="Black"
-                        FontAttributes="Bold"
-                        FontSize="40"
-                        Text="{Binding Quantity}"
-                        />
-                        </Border>
+                                <Entry
+                                    ReturnType="Done"
+                                    Margin="8,0"
+                                    Keyboard="Numeric"
+                                    TextColor="Black"
+                                    FontAttributes="Bold"
+                                    FontSize="40"
+                                    Text="{Binding Quantity}"
+                                    />  
+                            </Border>
+
+                            <Button Clicked="Button_Clicked" CommandParameter="{Binding .}" FontSize="28" Grid.Column="1" Text="DEL" BackgroundColor="{StaticResource ButtonRed}" TextColor="White"/>
+                        </Grid>
+                      
                     </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
@@ -144,6 +154,18 @@
                 HeightRequest="65"
                 FontSize="30"
                 VerticalOptions="End"/>
+
+        <Button 
+          
+              Grid.Row="4"
+              Margin="16,8,16,32"
+              Clicked="Button_Clicked_1"
+              Text="{x:Static res:AppResources.BackToHome}"
+              TextColor="White"
+              BackgroundColor="{StaticResource ButtonOrange}"
+              HeightRequest="65"
+              FontSize="30"
+              VerticalOptions="End"/>
 
         <Grid
             Grid.RowSpan="4"

@@ -96,6 +96,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<TripTrackerViewModel>();
         builder.Services.AddSingleton<TripTracker>();
         builder.Services.AddSingleton<SettingsPageViewModel>();
+        builder.Services.AddSingleton<CustomSpecie>();
 
 #if DEBUG
         builder.Logging.AddDebug();

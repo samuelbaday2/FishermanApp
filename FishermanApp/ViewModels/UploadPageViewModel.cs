@@ -36,7 +36,7 @@ namespace FishermanApp.ViewModels
 
             if (pendingTrips.Count > 0)
             {
-                PendingString = $"You have {pendingTrips.Count} pending data";
+                PendingString = $"You have {pendingTrips.Count} pending data\n\nYou will be uploading your data to GNeXTT server. Press the Upload Data button below to start.";
             }
             else {
                 PendingString = $"{AppResources.NoDataToUpload}";

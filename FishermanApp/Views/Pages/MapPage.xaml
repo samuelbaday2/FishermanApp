@@ -2,9 +2,29 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FishermanApp.Views.Pages.MapPage"
+             xmlns:res="clr-namespace:FishermanApp.Resources.Localization"  
              xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
              Title="Map View of Trip">
-    <Grid>
-        <maps:Map x:Name="FishingMap"/>
+    <Grid RowDefinitions="60*,18*,18*">
+        <maps:Map x:Name="FishingMap" Grid.Row="0"/>
+
+        <Button 
+            Grid.Row="1"
+            Clicked="Button_Clicked"
+            Margin="16,8,16,16"
+           
+            TextColor="White" 
+            FontSize="22" 
+            Text="{x:Static res:AppResources.TripTracker}" 
+            BackgroundColor="{StaticResource ButtonTripTracker}"/>
+
+        <Button 
+            Grid.Row="2"
+            Clicked="Button_Clicked_1"
+            Margin="16,0,16,16"
+            TextColor="White" 
+            FontSize="22" 
+            Text="Back" 
+            BackgroundColor="{StaticResource ButtonOrange}"/>
     </Grid>
 </ContentPage>
