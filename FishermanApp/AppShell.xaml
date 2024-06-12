@@ -7,6 +7,7 @@
     Shell.FlyoutBehavior="Flyout"
     xmlns:view="clr-namespace:FishermanApp.Views.Pages"
     xmlns:selection="clr-namespace:FishermanApp.Views.Selection"
+    xmlns:modals="clr-namespace:FishermanApp.Views.Modals"
     xmlns:res="clr-namespace:FishermanApp.Resources.Localization"
     Navigating="Shell_Navigating"
     BackgroundColor="{StaticResource Primary}"
@@ -121,6 +122,14 @@
         Title="{x:Static res:AppResources.HookType}" >
         <Tab>
             <ShellContent Route="HookTypeSelection" ContentTemplate="{DataTemplate selection:HookTypeSelection}"/>
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem
+        IsVisible="False"
+        Title="CustomSpecie" >
+        <Tab>
+            <ShellContent Route="HookTypeSelection" ContentTemplate="{DataTemplate modals:CustomSpecie}"/>
         </Tab>
     </FlyoutItem>
 

@@ -1,6 +1,7 @@
 ﻿using FishermanApp.Objects;
 using FishermanApp.Services.AppUpdateService;
 using FishermanApp.ViewModels;
+using FishermanApp.Views.Modals;
 using FishermanApp.Views.Pages;
 using Newtonsoft.Json;
 using System.Diagnostics;
@@ -17,6 +18,7 @@ public partial class AppShell : Shell
         viewModel = loginPageViewModel;
         _updateService = updateService;
 
+        Routing.RegisterRoute(nameof(CustomSpecie), typeof(CustomSpecie));
     }
 
     private async void Shell_Navigating(object sender, ShellNavigatingEventArgs e)

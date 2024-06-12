@@ -40,7 +40,7 @@ public partial class EnterCatchDetailsPage : ContentPage
             MessagingCenter.Unsubscribe<CatchSpeciesSelectionViewModel, SelectionObject>(this, AppResources.CatchSpeciesSelection);
         });
 
-        MessagingCenter.Subscribe<CatchSpeciesSelectionViewModel, SelectionObject>(this, "custom_species", async (sender, arg) =>
+        MessagingCenter.Subscribe<string, SelectionObject>("custom_species", "custom_species", async (sender, arg) =>
         {
             CatchObject catchObject = CurrentObject as CatchObject;
             //MessagingCenter.Send(this, AppResources.CatchSpeciesSelection, arg);

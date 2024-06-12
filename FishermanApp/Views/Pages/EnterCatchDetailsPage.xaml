@@ -117,7 +117,7 @@
                             FontSize="30"
                             Text="{x:Static res:AppResources.Quanity}"/>
 
-                        <Grid ColumnDefinitions="80*,20*">
+                        <Grid ColumnDefinitions="60*,40*">
                             <Border 
                                 StrokeThickness="4"
                                 Stroke ="{StaticResource ButtonGreen}"
