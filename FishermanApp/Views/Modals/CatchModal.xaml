@@ -16,13 +16,16 @@
             BackgroundColor="White">
 
             <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
 
+            <Label Text="Catch Summary" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center" FontSize="30" FontAttributes="Bold"/>
+
             <CollectionView 
                 IsGrouped="true"
-                Grid.Row="0"
+                Grid.Row="1"
                 VerticalOptions="FillAndExpand"
                 SelectionMode="None"
                 Margin="16"
@@ -85,14 +88,14 @@
             </CollectionView>
 
             <Button 
-                Grid.Row="1"
+                Grid.Row="2"
                 FontSize="30"
                 TextColor="White"
                 Command="{Binding CloseCommand}"
                 Margin="16,0,16,16"
                 VerticalOptions="End"
-                BackgroundColor="{StaticResource ButtonRed}"
-                Text="{x:Static res:AppResources.Close}"/>
+                BackgroundColor="{StaticResource ButtonGreen}"
+                Text="Confirm"/>
         </Grid>
     </Border>
     

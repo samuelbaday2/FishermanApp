@@ -19,6 +19,7 @@ namespace FishermanApp.ViewModels
     {
         private ObservableCollection<CatchObject> _catchDataCollection;
         private string _catchQuanity;
+
         private List<string> _pickerItems;
         private int counter = 0;
 
@@ -68,12 +69,14 @@ namespace FishermanApp.ViewModels
                     ScientificName = obj.ScientificName,
                     Species = obj.Species,
                     Id = obj.Id,
+                    Weight = obj.Weight, 
+                    ProcessingType = obj.ProcessingType,
                 });
             }
 
             CatchDataCollection.Add(new CatchObject { Index = counter++ });
         }
-        public async Task UpdateCatchRow(int itemIndex,string species, string scientificName) {
+        public async Task UpdateCatchRow(int itemIndex,string species, string scientificName, string weight, string processgingType) {
             for(int x = 0;  x < CatchDataCollection.Count; x++)
             {
                 if (CatchDataCollection[x].Index == itemIndex)
@@ -81,6 +84,8 @@ namespace FishermanApp.ViewModels
                     CatchObject catchObject = CatchDataCollection[x];
                     catchObject.Species = species;
                     catchObject.ScientificName = scientificName;
+                    catchObject.Weight = weight;
+                    catchObject.ProcessingType = processgingType;
                     CatchDataCollection[x] = catchObject;
                 }
             }
@@ -148,6 +153,8 @@ namespace FishermanApp.ViewModels
                                 RecordedOn = DateTime.Now,
                                 ScientificName = catchObject.ScientificName,
                                 SetNumber = currentSetCount,
+                                Weight = catchObject.Weight,
+                                ProcessingType = catchObject.ProcessingType,
                             };
 
                             if (catchObject.Id != null) 

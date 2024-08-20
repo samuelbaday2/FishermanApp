@@ -35,7 +35,13 @@ namespace FishermanApp.ViewModels
         private bool _hasPendingTrip;
         private bool _isAddCatchVisible;
         private bool _isLastSetEnded;
+        private string _fuelCost;
+        private string _foodCost;
+        private string _fuelAmount;
 
+        public string FuelCost { get { return _fuelCost; } set { SetProperty(ref _fuelCost, value); } }
+        public string FoodCost { get { return _foodCost; } set { SetProperty(ref _foodCost, value); } }
+        public string FuelAmount { get { return _fuelAmount; } set { SetProperty(ref _fuelAmount, value); } }
         public string VesselName { get { return _vesselName; } set { SetProperty(ref _vesselName, value); } }
         public string HomePort { get { return _homePort; } set { SetProperty(ref _homePort, value); } }
         public string CaptainName { get { return _captainName; } set { SetProperty(ref _captainName, value); } }
@@ -48,7 +54,7 @@ namespace FishermanApp.ViewModels
         public ICommand StartTripCommand { private set; get; }
         public ICommand EndTripCommand { private set; get; }
         public ICommand StartSetCommand { private set; get; }
-        public ICommand AddCatchCommand { private set; get; }
+        public ICommand AddCatchCommand { private set; get; }   
 
         public MainPageViewModel(IDisplayAlertService displayAlertService, IConnectionHandlerService connectionHandlerService, ILocationFeatureService locationFeatureService, EnterSetDetailPageViewModel enterSetDetailPageViewModel) {
             StartTripCommand = new Command(DoStartTrip);
@@ -227,7 +233,7 @@ namespace FishermanApp.ViewModels
                     var tripList = await _tripTable.GetItemsAsync();
 
                     DbTripObject tripObject = tripList.LastOrDefault();
-
+               
                     await _tripTable.SaveItemAsync(new DbTripObject
                     {
                         Id = tripObject.Id,
@@ -241,8 +247,21 @@ namespace FishermanApp.ViewModels
                         TripEndedOn = DateTime.Now,
                         IsActive = tripObject.IsActive,
                         Captain = tripObject.Captain,
+                        FuelAmount = FuelAmount,
+                        FoodCost = FoodCost,
+                        FuelCost = FuelCost,
                     });
 
+                    try
+                    {
+                        var setList = await _tripSetTable.GetItemsAsync();
+                        DBSetObject lastSetObject = setList.LastOrDefault();
+                        lastSetObject.SetEnded = true;
+                        await _tripSetTable.SaveItemAsync(lastSetObject);
+                    }
+                    catch { }
+
+                    await Shell.Current.Navigation.PushModalAsync(new CatchModal(tripObject.Id));
                     await InitializeAsync();
                 }
                 catch (Exception ee)
@@ -261,6 +280,7 @@ namespace FishermanApp.ViewModels
 
         private async void DoStartSet(object obj)
         {
+        
             if (IsLastSetNotEnded)
             {
                 SetBusyStatusAsync(false);
@@ -273,6 +293,7 @@ namespace FishermanApp.ViewModels
                     DBSetObject currentSet = existingSets.Where(x => x.TripId == lastTripData.LastOrDefault().Id).LastOrDefault();
 
                    
+
                     currentSet.SetEnded = true;
           
                     currentSet.SetEndedOn = DateTime.Now;

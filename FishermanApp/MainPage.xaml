@@ -39,9 +39,28 @@
                             FontAttributes="Bold"
                             FontSize="40"
                             Text="{Binding VesselName}"/>
+
+                            <VerticalStackLayout.Triggers>
+                                <DataTrigger 
+                                    TargetType="VerticalStackLayout"
+                                    Binding="{Binding HasPendingTrip}"
+                                    Value="True">
+                                                                        <Setter Property="IsVisible"
+                                    Value="False" />
+
+                                                                    </DataTrigger>
+                                                                    <DataTrigger 
+                                    TargetType="VerticalStackLayout"
+                                    Binding="{Binding HasPendingTrip}"
+                                    Value="False">
+                                                                        <Setter Property="IsVisible"
+                                    Value="True" />
+
+                                </DataTrigger>
+                            </VerticalStackLayout.Triggers>
                         </VerticalStackLayout>
 
-                        <VerticalStackLayout Margin="0,0,0,8">
+                        <!--<VerticalStackLayout Margin="0,0,0,8">
                             <Label
                             TextColor="{StaticResource Primary}"
                             FontAttributes="Bold"
@@ -66,7 +85,7 @@
 
                                 </DataTrigger>
                             </VerticalStackLayout.Triggers>
-                        </VerticalStackLayout>
+                        </VerticalStackLayout>-->
 
 
                         <VerticalStackLayout Margin="0,0,0,8">
@@ -91,140 +110,221 @@
                                     Text="{Binding CaptainName}"/>
                             </Border>
 
+                            <VerticalStackLayout.Triggers>
+                                <DataTrigger 
+         TargetType="VerticalStackLayout"
+         Binding="{Binding HasPendingTrip}"
+         Value="True">
+                                    <Setter Property="IsVisible"
+         Value="False" />
+
+                                </DataTrigger>
+                                <DataTrigger 
+         TargetType="VerticalStackLayout"
+         Binding="{Binding HasPendingTrip}"
+         Value="False">
+                                    <Setter Property="IsVisible"
+         Value="True" />
+
+                                </DataTrigger>
+                            </VerticalStackLayout.Triggers>
                         </VerticalStackLayout>
+                   
 
-                        <VerticalStackLayout Margin="0,0,0,8">
-                            <Label
-                            TextColor="{StaticResource Primary}"
-                            FontAttributes="Bold"
-                            FontSize="Large"
-                            Text="{x:Static res:AppResources.GpsStatus}"/>
+                        <Button 
+                            Clicked="Button_Clicked"
+                             Margin="0,8"
+                             HeightRequest="65"
+                             BackgroundColor="{StaticResource ButtonBlue}" 
+                             FontSize="30" 
+                             TextColor="White" 
+                             Text="Manage Crew">
+                            <Button.Triggers>
+                                <DataTrigger 
+                                     TargetType="Button"
+                                     Binding="{Binding HasPendingTrip}"
+                                     Value="True">
+                                     <Setter Property="IsVisible"
+                                     Value="False" />
 
-                            <HorizontalStackLayout>
-                                <Ellipse 
-                                Margin="0,0,8,0"
-                                Fill="DarkBlue"
-                                Stroke="{StaticResource Tertiary}"
-                                StrokeThickness="4"
-                                WidthRequest="30"
-                                HeightRequest="30"
-                                HorizontalOptions="Start" >
+                                </DataTrigger>
+                                <DataTrigger 
+                                     TargetType="Button"
+                                     Binding="{Binding HasPendingTrip}"
+                                     Value="False">
+                                                                <Setter Property="IsVisible"
+                                     Value="True" />
 
-                                    <Ellipse.Triggers>
-                                        <DataTrigger TargetType="Ellipse"
-                                        Binding="{Binding Source={x:Reference GpsnStatusLabel},
-                                            Path=Text}" 
-                                        
-                                        Value="{x:Static res:AppResources.Online}">
-                                            <Setter Property="Fill"
-                                        Value="{StaticResource ButtonGreen}" />
+                                                            </DataTrigger>  
+                            </Button.Triggers>
+                        </Button>
 
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Ellipse"
-                                         Binding="{Binding Source={x:Reference GpsnStatusLabel},
-                                            Path=Text}" 
-                                        Value="{x:Static res:AppResources.Offline}">
-                                            <Setter Property="Fill"
-                                        Value="{StaticResource ButtonRed}" />
-
-                                        </DataTrigger>
-                                    </Ellipse.Triggers>
-                                </Ellipse>
-
+                        <Grid ColumnDefinitions="50*,50*">
+                            <VerticalStackLayout Grid.Column="0" Margin="0,0,0,8">
                                 <Label
-                            x:Name="GpsnStatusLabel"
-                            TextColor="Black"
-                            FontAttributes="Bold"
-                            FontSize="40"
-                            Text="{Binding GpsStatus}">
-                                    <Label.Triggers>
-                                        <Trigger TargetType="Label"
-                                    Property="Text"
-                                    Value="{x:Static res:AppResources.Online}">
-                                            <Setter Property="TextColor"
-                                        Value="{StaticResource ButtonGreen}" />
+    TextColor="{StaticResource Primary}"
+    FontAttributes="Bold"
+    FontSize="Large"
+    Text="{x:Static res:AppResources.GpsStatus}"/>
 
-                                        </Trigger>
-                                        <Trigger TargetType="Label"
-                                    Property="Text"
-                                    Value="{x:Static res:AppResources.Offline}">
-                                            <Setter Property="TextColor"
-                                        Value="{StaticResource ButtonRed}" />
+                                <HorizontalStackLayout>
+                                    <Ellipse 
+        Margin="0,0,8,0"
+        Fill="DarkBlue"
+        Stroke="{StaticResource Tertiary}"
+        StrokeThickness="4"
+        WidthRequest="20"
+        HeightRequest="20"
+        HorizontalOptions="Start" >
 
-                                        </Trigger>
-                                    </Label.Triggers>
-                                </Label>
-                            </HorizontalStackLayout>
+                                        <Ellipse.Triggers>
+                                            <DataTrigger TargetType="Ellipse"
+                Binding="{Binding Source={x:Reference GpsnStatusLabel},
+                    Path=Text}" 
+                
+                Value="{x:Static res:AppResources.Online}">
+                                                <Setter Property="Fill"
+                Value="{StaticResource ButtonGreen}" />
 
-                        </VerticalStackLayout>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Ellipse"
+                 Binding="{Binding Source={x:Reference GpsnStatusLabel},
+                    Path=Text}" 
+                Value="{x:Static res:AppResources.Offline}">
+                                                <Setter Property="Fill"
+                Value="{StaticResource ButtonRed}" />
 
-                        <VerticalStackLayout Margin="0,0,0,8">
-                            <Label
-                            TextColor="{StaticResource Primary}"
-                            FontAttributes="Bold"
-                            FontSize="Large"
-                            Text="{x:Static res:AppResources.InternetStatus}"/>
+                                            </DataTrigger>
+                                        </Ellipse.Triggers>
+                                    </Ellipse>
 
-                            <HorizontalStackLayout>
-                                <Ellipse 
-                                Margin="0,0,8,0"
-                                Fill="DarkBlue"
-                                Stroke="{StaticResource Tertiary}"
-                                StrokeThickness="4"
-                                WidthRequest="30"
-                                HeightRequest="30"
-                                HorizontalOptions="Start" >
+                                    <Label
+    x:Name="GpsnStatusLabel"
+    TextColor="Black"
+    FontAttributes="Bold"
+    FontSize="20"
+    Text="{Binding GpsStatus}">
+                                        <Label.Triggers>
+                                            <Trigger TargetType="Label"
+            Property="Text"
+            Value="{x:Static res:AppResources.Online}">
+                                                <Setter Property="TextColor"
+                Value="{StaticResource ButtonGreen}" />
 
-                                    <Ellipse.Triggers>
-                                        <DataTrigger TargetType="Ellipse"
-                                        Binding="{Binding Source={x:Reference ConnectionStatusLabel},
-                                            Path=Text}" 
-                                        
-                                        Value="{x:Static res:AppResources.Online}">
-                                            <Setter Property="Fill"
-                                        Value="{StaticResource ButtonGreen}" />
+                                            </Trigger>
+                                            <Trigger TargetType="Label"
+            Property="Text"
+            Value="{x:Static res:AppResources.Offline}">
+                                                <Setter Property="TextColor"
+                Value="{StaticResource ButtonRed}" />
 
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Ellipse"
-                                         Binding="{Binding Source={x:Reference ConnectionStatusLabel},
-                                            Path=Text}" 
-                                        Value="{x:Static res:AppResources.Offline}">
-                                            <Setter Property="Fill"
-                                        Value="{StaticResource ButtonRed}" />
+                                            </Trigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                </HorizontalStackLayout>
 
-                                        </DataTrigger>
-                                    </Ellipse.Triggers>
-                                </Ellipse>
+                            </VerticalStackLayout>
 
+                            <VerticalStackLayout Grid.Column="1" Margin="0,0,0,8">
                                 <Label
-                                x:Name="ConnectionStatusLabel"
-                                TextColor="Black"
-                                FontAttributes="Bold"
-                                FontSize="40"
-                                Text="{Binding ConnectionStatus}">
-                                    <Label.Triggers>
-                                        <Trigger TargetType="Label"
-                                    Property="Text"
-                                    Value="{x:Static res:AppResources.Online}">
-                                            <Setter Property="TextColor"
-                                        Value="{StaticResource ButtonGreen}" />
+    TextColor="{StaticResource Primary}"
+    FontAttributes="Bold"
+    FontSize="Large"
+    Text="{x:Static res:AppResources.InternetStatus}"/>
 
-                                        </Trigger>
-                                        <Trigger TargetType="Label"
-                                    Property="Text"
-                                    Value="{x:Static res:AppResources.Offline}">
-                                            <Setter Property="TextColor"
-                                        Value="{StaticResource ButtonRed}" />
+                                <HorizontalStackLayout>
+                                    <Ellipse 
+        Margin="0,0,8,0"
+        Fill="DarkBlue"
+        Stroke="{StaticResource Tertiary}"
+        StrokeThickness="4"
+        WidthRequest="20"
+        HeightRequest="20"
+        HorizontalOptions="Start" >
 
-                                        </Trigger>
-                                    </Label.Triggers>
-                                </Label>
-                            </HorizontalStackLayout>
+                                        <Ellipse.Triggers>
+                                            <DataTrigger TargetType="Ellipse"
+                Binding="{Binding Source={x:Reference ConnectionStatusLabel},
+                    Path=Text}" 
+                
+                Value="{x:Static res:AppResources.Online}">
+                                                <Setter Property="Fill"
+                Value="{StaticResource ButtonGreen}" />
 
-                            
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Ellipse"
+                 Binding="{Binding Source={x:Reference ConnectionStatusLabel},
+                    Path=Text}" 
+                Value="{x:Static res:AppResources.Offline}">
+                                                <Setter Property="Fill"
+                Value="{StaticResource ButtonRed}" />
 
+                                            </DataTrigger>
+                                        </Ellipse.Triggers>
+                                    </Ellipse>
 
+                                    <Label
+        x:Name="ConnectionStatusLabel"
+        TextColor="Black"
+        FontAttributes="Bold"
+        FontSize="20"
+        Text="{Binding ConnectionStatus}">
+                                        <Label.Triggers>
+                                            <Trigger TargetType="Label"
+            Property="Text"
+            Value="{x:Static res:AppResources.Online}">
+                                                <Setter Property="TextColor"
+                Value="{StaticResource ButtonGreen}" />
+
+                                            </Trigger>
+                                            <Trigger TargetType="Label"
+            Property="Text"
+            Value="{x:Static res:AppResources.Offline}">
+                                                <Setter Property="TextColor"
+                Value="{StaticResource ButtonRed}" />
+
+                                            </Trigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                </HorizontalStackLayout>
+
+                            </VerticalStackLayout>
+                        </Grid>
+                        
+                        
+                       <!--Landing Form info-->
+                        <VerticalStackLayout>
+                            <Label />
+                            <Border Margin="0,16,0,8" StrokeThickness="3" Stroke="{StaticResource ButtonGreen}">
+                                <Entry Text="{Binding FoodCost}" Keyboard="Numeric" TextColor="Black" FontSize="25" Placeholder="Food Cost ($)"/>
+                            </Border>
+                            <Border Margin="0,0,0,8" StrokeThickness="3" Stroke="{StaticResource ButtonGreen}">
+                                <Entry Text="{Binding FuelCost}" Keyboard="Numeric" TextColor="Black" FontSize="25" Placeholder="Fuel Cost ($)"/>
+                            </Border>
+                            <Border StrokeThickness="3" Stroke="{StaticResource ButtonGreen}">
+                                <Entry Text="{Binding FuelAmount}" Keyboard="Numeric" TextColor="Black" FontSize="25" Placeholder="Food Amount (Gallon)"/>
+                            </Border>
+
+                            <VerticalStackLayout.Triggers>
+                                <DataTrigger 
+         TargetType="VerticalStackLayout"
+         Binding="{Binding HasPendingTrip}"
+         Value="True">
+                                    <Setter Property="IsVisible"
+         Value="True" />
+
+                                </DataTrigger>
+                                <DataTrigger 
+         TargetType="VerticalStackLayout"
+         Binding="{Binding HasPendingTrip}"
+         Value="False">
+                                    <Setter Property="IsVisible"
+         Value="False" />
+
+                                </DataTrigger>
+                            </VerticalStackLayout.Triggers>
                         </VerticalStackLayout>
+                        
                     </VerticalStackLayout>
                 </ScrollView>
 

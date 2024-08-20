@@ -70,6 +70,15 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Crew.
+        /// </summary>
+        public static string AddCrew {
+            get {
+                return ResourceManager.GetString("AddCrew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Catch.
         /// </summary>
         public static string AddMoreCatchData {
@@ -124,7 +133,7 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Captain : .
+        ///   Looks up a localized string similar to Captain / Skipper: .
         /// </summary>
         public static string Captain {
             get {
@@ -165,6 +174,24 @@ namespace FishermanApp.Resources.Localization {
         public static string Close {
             get {
                 return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Firstname :.
+        /// </summary>
+        public static string CrewFirstname {
+            get {
+                return ResourceManager.GetString("CrewFirstname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lastname :.
+        /// </summary>
+        public static string CrewLastname {
+            get {
+                return ResourceManager.GetString("CrewLastname", resourceCulture);
             }
         }
         
@@ -250,7 +277,7 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GPS STATUS : .
+        ///   Looks up a localized string similar to GPS : .
         /// </summary>
         public static string GpsStatus {
             get {
@@ -313,7 +340,7 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to INTERNET STATUS : .
+        ///   Looks up a localized string similar to INTERNET : .
         /// </summary>
         public static string InternetStatus {
             get {
@@ -525,6 +552,15 @@ namespace FishermanApp.Resources.Localization {
         public static string SampleId {
             get {
                 return ResourceManager.GetString("SampleId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
         
@@ -768,6 +804,15 @@ namespace FishermanApp.Resources.Localization {
         public static string WeatherForecast {
             get {
                 return ResourceManager.GetString("WeatherForecast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weight :.
+        /// </summary>
+        public static string Weight {
+            get {
+                return ResourceManager.GetString("Weight", resourceCulture);
             }
         }
         

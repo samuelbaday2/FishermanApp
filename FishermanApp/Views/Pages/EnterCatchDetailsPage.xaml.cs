@@ -36,7 +36,7 @@ public partial class EnterCatchDetailsPage : ContentPage
         MessagingCenter.Subscribe<CatchSpeciesSelectionViewModel, SelectionObject>(this, AppResources.CatchSpeciesSelection, async (sender, arg) =>
         {
             CatchObject catchObject = CurrentObject as CatchObject;
-            viewModel.UpdateCatchRow(catchObject.Index,arg.SelectionTitle, catchObject.ScientificName);
+            viewModel.UpdateCatchRow(catchObject.Index,arg.SelectionTitle, catchObject.ScientificName, catchObject.Weight, catchObject.ProcessingType);
             MessagingCenter.Unsubscribe<CatchSpeciesSelectionViewModel, SelectionObject>(this, AppResources.CatchSpeciesSelection);
         });
 
@@ -44,7 +44,7 @@ public partial class EnterCatchDetailsPage : ContentPage
         {
             CatchObject catchObject = CurrentObject as CatchObject;
             //MessagingCenter.Send(this, AppResources.CatchSpeciesSelection, arg);
-            viewModel.UpdateCatchRow(catchObject.Index, arg.SelectionTitle, arg.SubTitle);
+            viewModel.UpdateCatchRow(catchObject.Index, arg.SelectionTitle, arg.SubTitle, catchObject.Weight, catchObject.ProcessingType);
             MessagingCenter.Unsubscribe<CatchSpeciesSelectionViewModel, SelectionObject>(this, "custom_species");
         });
 
@@ -52,6 +52,13 @@ public partial class EnterCatchDetailsPage : ContentPage
         Entry.IsEnabled = true;
 
         Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchSpeciesSelection)).FirstOrDefault();
+    }
+    private void Entry_Focused1(object sender, FocusEventArgs e)
+    {
+        Entry Entry = (Entry)sender;
+
+        CurrentObject = Entry.ReturnCommandParameter;
+      
     }
 
     private async void Button_Clicked(object sender, EventArgs e)

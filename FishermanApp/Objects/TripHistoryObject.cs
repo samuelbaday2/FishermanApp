@@ -61,5 +61,8 @@ namespace FishermanApp.Objects
         public DateTime EditedOn { get; set; }
         public bool IsUploaded { get; set; } = false;
         public bool IsOnline { get; set; } = false;
+        public string FuelCost { get; set; }
+        public string FuelAmount { get; set; }
+        public string FoodCost { get; set; }
     }
 }

@@ -120,6 +120,9 @@
   <data name="AddCatchEvent" xml:space="preserve">
     <value>Record Catch</value>
   </data>
+  <data name="AddCrew" xml:space="preserve">
+    <value>Add Crew</value>
+  </data>
   <data name="AddMoreCatchData" xml:space="preserve">
     <value>Add Catch</value>
   </data>
@@ -139,7 +142,7 @@
     <value>BYCATCH : </value>
   </data>
   <data name="Captain" xml:space="preserve">
-    <value>Captain : </value>
+    <value>Captain / Skipper: </value>
   </data>
   <data name="CatchDataCannotBeEmpty" xml:space="preserve">
     <value>catch data cannot be empty</value>
@@ -152,6 +155,12 @@
   </data>
   <data name="Close" xml:space="preserve">
     <value>Close</value>
+  </data>
+  <data name="CrewFirstname" xml:space="preserve">
+    <value>Firstname :</value>
+  </data>
+  <data name="CrewLastname" xml:space="preserve">
+    <value>Lastname :</value>
   </data>
   <data name="Dead" xml:space="preserve">
     <value>DEAD</value>
@@ -181,7 +190,7 @@
     <value>GPS OFF</value>
   </data>
   <data name="GpsStatus" xml:space="preserve">
-    <value>GPS STATUS : </value>
+    <value>GPS : </value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>HOME</value>
@@ -202,7 +211,7 @@
     <value>Loading...</value>
   </data>
   <data name="InternetStatus" xml:space="preserve">
-    <value>INTERNET STATUS : </value>
+    <value>INTERNET : </value>
   </data>
   <data name="LinkVesselTextHeader" xml:space="preserve">
     <value>Enter your vessel identification</value>
@@ -272,6 +281,9 @@
   </data>
   <data name="SampleId" xml:space="preserve">
     <value>J1-1234-AA</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
   </data>
   <data name="SetDetails" xml:space="preserve">
     <value>GEAR DETAILS</value>
@@ -353,6 +365,9 @@
   </data>
   <data name="WeatherForecast" xml:space="preserve">
     <value>WEATHER</value>
+  </data>
+  <data name="Weight" xml:space="preserve">
+    <value>Weight :</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>YES</value>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FishermanApp.Views.Pages.AddCrewPage"
+             Title="Add Crew"
+              xmlns:res="clr-namespace:FishermanApp.Resources.Localization"
+                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             BackgroundColor="White">
+    <Grid>
+        <VerticalStackLayout Margin="16" Padding="16">
+            <VerticalStackLayout Margin="0,0,0,8">
+                <Label
+            TextColor="{StaticResource Primary}"
+            FontAttributes="Bold"
+            FontSize="Large"
+            Text="{x:Static res:AppResources.CrewFirstname}"/>
+
+                <Border 
+            Margin="0,0"
+            StrokeThickness="4"
+            Stroke ="{StaticResource ButtonGreen}"
+            StrokeShape="RoundRectangle 10,10,10,10"
+            HeightRequest="80">
+
+                    <Entry
+                HeightRequest="80"
+                Margin="16,0"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="40"
+                Text="{Binding Firstname}"/>
+                </Border>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Margin="0,0,0,8">
+                <Label
+            TextColor="{StaticResource Primary}"
+            FontAttributes="Bold"
+            FontSize="Large"
+            Text="{x:Static res:AppResources.CrewLastname}"/>
+
+                <Border 
+            Margin="0,0"
+            StrokeThickness="4"
+            Stroke ="{StaticResource ButtonGreen}"
+            StrokeShape="RoundRectangle 10,10,10,10"
+            HeightRequest="80">
+
+                    <Entry
+                HeightRequest="80"
+                Margin="16,0"
+                TextColor="Black"
+                FontAttributes="Bold"
+                FontSize="40"
+                Text="{Binding Lastname}"/>
+                </Border>
+
+            </VerticalStackLayout>
+
+            <Button           
+                Margin="0,16"
+                IsEnabled="{Binding IsNotBusy}"
+                FontSize="30"
+                Command="{Binding AddCrewCommand}"
+                Text="{x:Static res:AppResources.Save}"
+                TextColor="White"
+                BackgroundColor="{StaticResource ButtonBlue}"
+                HeightRequest="65"            
+                />
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

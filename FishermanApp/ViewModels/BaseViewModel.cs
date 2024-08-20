@@ -39,6 +39,7 @@ namespace FishermanApp.ViewModels
         public BaitSpeciesTable _baitSpeciesTable;
         public CatchTable _catchTable;
         public CatchSpeciesTable _catchSpeciesTable;
+        public CrewTable _crewTable;
         public BaseViewModel()
         {
             _tripTable = new TripTable();
@@ -46,6 +47,7 @@ namespace FishermanApp.ViewModels
             _baitSpeciesTable = new BaitSpeciesTable();
             _catchTable = new CatchTable();
             _catchSpeciesTable = new CatchSpeciesTable();
+            _crewTable = new CrewTable();
 
             _catchSpeciesTable.AddSpeciesAsync();
             _baitSpeciesTable.AddSpeciesAsync();

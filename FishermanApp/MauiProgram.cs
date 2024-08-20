@@ -66,6 +66,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<UploadPageViewModel>();
         builder.Services.AddSingleton<SosPageViewModel>();
         builder.Services.AddSingleton<WeatherForecastPageViewModel>();
+        builder.Services.AddSingleton<ManageCrewViewModel>();
 
         //Views
         builder.Services.AddSingleton<MainPage>();
@@ -83,6 +84,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<MapPage>();
         builder.Services.AddSingleton<WeatherForecastPage>();
         builder.Services.AddSingleton<SettingsPage>();
+        builder.Services.AddSingleton<ManageCrewPage>();
 
         //Modals
         builder.Services.AddSingleton<CatchSpeciesSelectionViewModel>();

@@ -1,5 +1,6 @@
 ﻿using FishermanApp.Services.AppUpdateService;
 using FishermanApp.ViewModels;
+using FishermanApp.Views.Pages;
 
 namespace FishermanApp;
 
@@ -41,6 +42,11 @@ public partial class MainPage : ContentPage
             _viewModel.UpdatePercent(string.Empty);
             _viewModel.SetBusyStatusAsync(true);
         }
+    }
+
+    private async void Button_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.Navigation.PushAsync(new ManageCrewPage());
     }
 }
 

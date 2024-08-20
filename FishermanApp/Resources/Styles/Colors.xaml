@@ -21,6 +21,7 @@
     <Color x:Key="ButtonRed">#99323e</Color>
     <Color x:Key="ButtonDarkBlue">#163975</Color>
     <Color x:Key="ButtonTripTracker">#1b5770</Color>
+    <Color x:Key="ButtonBlue">#3a50a1</Color>
 
     <Color x:Key="col_prim">#11b0fd</Color>
     <Color x:Key="col_sec">#0f68f3</Color>

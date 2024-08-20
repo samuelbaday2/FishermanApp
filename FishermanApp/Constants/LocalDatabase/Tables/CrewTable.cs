@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace FishermanApp.Constants.LocalDatabase.Tables
 {
-    public class TripSetTable
+    public class CrewTable
     {
         SQLiteAsyncConnection Database;
 
-        public TripSetTable()
+        public CrewTable()
         {
         }
 
@@ -22,32 +22,25 @@ namespace FishermanApp.Constants.LocalDatabase.Tables
                 return;
 
             Database = new SQLiteAsyncConnection(DatabaseClass.DatabasePath, DatabaseClass.Flags);
-            var result = await Database.CreateTableAsync<DBSetObject>();
+            var result = await Database.CreateTableAsync<DBCrewObject>();
         }
-        public async Task<List<DBSetObject>> GetItemsAsync()
+        public async Task<List<DBCrewObject>> GetItemsAsync()
         {
             await Init();
-            return await Database.Table<DBSetObject>().ToListAsync();
+            return await Database.Table<DBCrewObject>().ToListAsync();
         }
-        public async Task<DBSetObject> GetItemAsync(int id)
+        public async Task<List<DBCrewObject>> GetItemsBySetIdAsync(int setId)
         {
             await Init();
-            return await Database.Table<DBSetObject>().Where(i => i.Id == id).FirstOrDefaultAsync();
+            return await Database.Table<DBCrewObject>().Where(x => x.Id == setId).ToListAsync();
+        }
+        public async Task<DBCrewObject> GetItemAsync(int id)
+        {
+            await Init();
+            return await Database.Table<DBCrewObject>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<DBSetObject> GetItemByTripIdAsync(int id)
-        {
-            await Init();
-            return await Database.Table<DBSetObject>().Where(i => i.TripId == id).FirstOrDefaultAsync();
-        }
-
-        public async Task<List<DBSetObject>> GetItesmByTripIdAsync(int id)
-        {
-            await Init();
-            return await Database.Table<DBSetObject>().Where(i => i.TripId == id).ToListAsync();
-        }
-
-        public async Task<int> SaveItemAsync(DBSetObject item)
+        public async Task<int> SaveItemAsync(DBCrewObject item)
         {
             await Init();
             if (item.Id != 0)
@@ -56,7 +49,7 @@ namespace FishermanApp.Constants.LocalDatabase.Tables
                 return await Database.InsertAsync(item);
         }
 
-        public async Task<int> DeleteItemAsync(DBSetObject item)
+        public async Task<int> DeleteItemAsync(DBCrewObject item)
         {
             await Init();
             return await Database.DeleteAsync(item);

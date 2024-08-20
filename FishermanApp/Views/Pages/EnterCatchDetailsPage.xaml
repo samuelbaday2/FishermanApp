@@ -6,6 +6,7 @@
              xmlns:res="clr-namespace:FishermanApp.Resources.Localization"  
              Title="{x:Static res:AppResources.CatchDetails}"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Shell.NavBarIsVisible="False"
              BackgroundColor="White">
 
     <Shell.TitleView>
@@ -107,15 +108,73 @@
                             </Grid>
 
                         </Border>
-                        
-                       
-                       
+
+                        <Label
+     TextColor="{StaticResource Primary}"
+     FontAttributes="Bold"
+     FontSize="30"
+     Text="Processing Type :"/>
+
+                        <Border 
+   
+     StrokeThickness="4"
+     Stroke ="{StaticResource ButtonGreen}"
+     StrokeShape="RoundRectangle 10,10,10,10"
+     HeightRequest="80">
+
+                            <Grid>
+                                <Entry
+             Focused="Entry_Focused1"
+             ReturnType="Next"
+             Margin="8,0"
+             Keyboard="Default"
+             TextColor="Black"
+             FontAttributes="Bold"
+             FontSize="40"
+             ReturnCommandParameter="{Binding .}"
+             Text="{Binding ProcessingType}"
+             />
+
+                                <Image IsVisible="False" HorizontalOptions="End" HeightRequest="40" VerticalOptions="Center" Source="caret_down" Margin="0,0,16,0">
+                                    <Image.Behaviors>
+                                        <toolkit:IconTintColorBehavior TintColor="{StaticResource ButtonGreen}"/>
+                                    </Image.Behaviors>
+                                </Image>
+                            </Grid>
+
+                        </Border>
+
+                        <Label
+                             TextColor="{StaticResource Primary}"
+                             FontAttributes="Bold"
+                             FontSize="30"
+                             Text="{x:Static res:AppResources.Weight}"/>
+
+                        <Border 
+                              Margin="0,0,0,8"
+                              StrokeThickness="4"
+                              Stroke ="{StaticResource ButtonGreen}"
+                              StrokeShape="RoundRectangle 10,10,10,10"
+                              HeightRequest="80">
+
+                              <Entry
+                                  ReturnType="Done"
+                                  Margin="8,0"
+                                  Keyboard="Numeric"
+                                  TextColor="Black"
+                                  FontAttributes="Bold"
+                                  FontSize="40"
+                                  Text="{Binding Weight}"
+                                  />
+                              </Border>
 
                         <Label
                             TextColor="{StaticResource Primary}"
                             FontAttributes="Bold"
                             FontSize="30"
                             Text="{x:Static res:AppResources.Quanity}"/>
+
+                      
 
                         <Grid ColumnDefinitions="60*,40*">
                             <Border 
