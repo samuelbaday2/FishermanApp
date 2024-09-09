@@ -46,7 +46,11 @@
                                         <Label FontSize="30" TextColor="Black" Text="{Binding Lastname}"/>
                                     </HorizontalStackLayout>
 
-
+                                    <HorizontalStackLayout>
+                                        <Label FontSize="30" FontAttributes="Bold" TextColor="Black" Text="Is Present : "/>
+                                        <CheckBox Color="{StaticResource ButtonGreen}" IsChecked="{Binding IsChecked}"/>
+                                    </HorizontalStackLayout>
+                                    
                                     <Button Clicked="Button_Clicked_1" CommandParameter="{Binding .}" Margin="0,16" Text="Delete" TextColor="White" FontSize="20" BackgroundColor="{StaticResource ButtonRed}"/>
                                 </VerticalStackLayout>
                             </Border>

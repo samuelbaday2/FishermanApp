@@ -15,6 +15,7 @@ public partial class SettingsPage : ContentPage
     {
         base.OnAppearing();
         UoMPicker.SelectedIndex = Preferences.Get("UOM", 0);
+        GpsPicker.SelectedIndex = Preferences.Get("GpsTracking", 0);
     }
 
     private void Picker_SelectedIndexChanged(object sender, EventArgs e)
@@ -22,5 +23,11 @@ public partial class SettingsPage : ContentPage
 		Picker UoMPicker = (Picker)sender;
 
 		Preferences.Set("UOM", UoMPicker.SelectedIndex);
+    }
+    private void Picker_SelectedIndexChanged1(object sender, EventArgs e)
+    {
+        Picker GpsPicker = (Picker)sender;
+
+        Preferences.Set("GpsTracking", GpsPicker.SelectedIndex);
     }
 }

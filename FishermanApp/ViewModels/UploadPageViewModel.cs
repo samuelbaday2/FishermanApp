@@ -102,9 +102,10 @@ namespace FishermanApp.ViewModels
 
                             //UPLOAD TRIP EFFORT CONNECTED TO TRIP UPLOADED
                             UploadTripEffort(tripObject.Id, tripObject.UploadedId, client2);
-
+                            await UploadTracking(tripObject.Id, tripObject.UploadedId, client2);
                         }
 
+                        
                         Device.BeginInvokeOnMainThread(() =>
                         {
                             Toast.Make(AppResources.UploadComplete, ToastDuration.Long).Show();
@@ -206,6 +207,35 @@ namespace FishermanApp.ViewModels
                 catchObject.IsUploaded = true;
                 catchObject.UploadedId = returnValue.FirstOrDefault().Id;
                 await _catchTable.SaveItemAsync(catchObject);
+            }
+
+           
+        }
+
+        private async Task UploadTracking(int dbTripId, int dbTripIdUploaded, RestClient client2)
+        {
+            var trackingData = await _trackingTable.GetItemsAsync();
+            var tripData = await _tripTable.GetItemAsync(dbTripId);
+
+            foreach (DBTrackingTable trackingObj in trackingData.Where(x => x.TripId == dbTripId))
+            {
+                var request2 = new RestRequest("nextt.asmx/{function}", Method.GET);
+                request2.AddParameter("TripId", dbTripIdUploaded);
+                request2.AddParameter("Lat", trackingObj.Lat);
+                request2.AddParameter("Lng", trackingObj.Long);
+                request2.AddParameter("VesselName", UserDataObject.UserObject.VesName);
+                request2.AddParameter("TripDate", tripData.RecordedOn);
+                request2.AddParameter("RecordedOn", trackingObj.RecordedOn);
+              
+
+                request2.AddUrlSegment("function", "InsertTrackingRecord");
+
+                IRestResponse response2 = client2.Execute(request2);
+                string resposeString = response2.Content;
+                string json = response2.Content;
+
+  
+                await _trackingTable.DeleteItemAsync(trackingObj);
             }
         }
     }

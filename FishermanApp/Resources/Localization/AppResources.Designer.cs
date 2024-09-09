@@ -637,6 +637,15 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TRANSFER.
+        /// </summary>
+        public static string Transhipment {
+            get {
+                return ResourceManager.GetString("Transhipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trip Start Coordinates.
         /// </summary>
         public static string TripCoordinates {
@@ -736,7 +745,7 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to UPLOAD DATA.
+        ///   Looks up a localized string similar to UPLOAD.
         /// </summary>
         public static string UploadData {
             get {

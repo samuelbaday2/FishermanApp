@@ -1,4 +1,5 @@
-﻿using FishermanApp.Constants.LocalDatabase.Tables;
+﻿
+using FishermanApp.Constants.LocalDatabase.Tables;
 using FishermanApp.Objects;
 using FishermanApp.Objects.DbObjects;
 using FishermanApp.Resources.Localization;
@@ -75,6 +76,7 @@ namespace FishermanApp.ViewModels
           
             _enterSetDetailPageViewModel = enterSetDetailPageViewModel;
             GetGpsStatusAsync();
+           
         }
 
         private async void DoAddMoreCatch(object obj)
@@ -96,6 +98,7 @@ namespace FishermanApp.ViewModels
         }
         public async Task InitializeAsync() 
         {
+            _tripTable.RunQuery();
             try
             {
                 VesselName = UserDataObject.UserObject.VesName;
@@ -110,6 +113,10 @@ namespace FishermanApp.ViewModels
                 var tripList = await _tripTable.GetItemsAsync();
 
                 HasPendingTrip = !tripList.LastOrDefault().IsTripEnded;
+                if (HasPendingTrip) 
+                {
+                    GPSTracker();
+                }
             }
             catch { }
 
@@ -175,6 +182,44 @@ namespace FishermanApp.ViewModels
             await Task.Delay(10000);
             GetGpsStatusAsync();
         }
+        public async Task GPSTracker() 
+        {
+            if (HasPendingTrip) 
+            {
+                var gps = await GetCurrentLocation();
+                var TripLatitude = gps == null ? AppResources.GpsOff : gps.Latitude.ToString();
+                var TripLongitude = gps == null ? AppResources.GpsOff : gps.Longitude.ToString();
+                var tripList = await _tripTable.GetItemsAsync();
+                DbTripObject tripObject = tripList.LastOrDefault();
+                await _trackingTable.SaveItemAsync(new DBTrackingTable
+                {
+                    Lat = TripLatitude,
+                    Long = TripLongitude,
+                    RecordedOn = DateTime.Now,
+                    TripId = tripObject.Id,
+                });
+
+                Console.WriteLine($"Location Saved : {_trackingTable.GetItemsBySetIdAsync(tripObject.Id)}" );
+                if (Preferences.Get("GpsTracking", 0) == 0)
+                {
+                    await Task.Delay(300000);
+                    if(HasPendingTrip)
+                        GPSTracker();
+                }
+                else if (Preferences.Get("GpsTracking", 0) == 1) 
+                {
+                    await Task.Delay(600000);
+                    if (HasPendingTrip)
+                        GPSTracker();
+                }
+                else if (Preferences.Get("GpsTracking", 0) == 2)
+                {
+                    await Task.Delay(900000);
+                    if (HasPendingTrip)
+                        GPSTracker();
+                }
+            }
+        }
         private async void DoStartTrip(object obj)
         {
             SetBusyStatusAsync(false);
@@ -187,7 +232,7 @@ namespace FishermanApp.ViewModels
             {
                 sephamoreSlim.Wait();
                 var gps = await GetCurrentLocation();
-
+                var crew = await _crewTable.GetItemsAsync();
                 await _tripTable.SaveItemAsync(new DbTripObject
                 {
                     RecordedOn = DateTime.Now,
@@ -197,12 +242,14 @@ namespace FishermanApp.ViewModels
                     IsTripEnded = false,
                     IsActive = true,
                     Captain = CaptainName,
+                    CrewNumber = crew.Where(x => x.IsChecked).Count().ToString(),
                 });
 
+               
                 var tripList = await _tripTable.GetItemsAsync();
 
                 HasPendingTrip = !tripList.LastOrDefault().IsTripEnded;
-             
+                GPSTracker();
             }
             catch(Exception ee) 
             {
@@ -229,6 +276,7 @@ namespace FishermanApp.ViewModels
                 {
                     //sephamoreSlim.Wait();
                     var gps = await GetCurrentLocation();
+                    var crew = await _crewTable.GetItemsAsync();
 
                     var tripList = await _tripTable.GetItemsAsync();
 
@@ -250,6 +298,7 @@ namespace FishermanApp.ViewModels
                         FuelAmount = FuelAmount,
                         FoodCost = FoodCost,
                         FuelCost = FuelCost,
+                        CrewNumber = crew.Where(x => x.IsChecked).Count().ToString(),
                     });
 
                     try

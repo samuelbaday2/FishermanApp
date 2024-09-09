@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FishermanApp.Views.Pages.TranshipmentPage"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             BackgroundColor="White"
+             Title="TranshipmentPage">
+
+    <VerticalStackLayout>
+        <Button BackgroundColor="{StaticResource ButtonGreen}" Text="Transfer" Margin="32,32" HeightRequest="200" FontSize="25" TextColor="White" Clicked="Button_Clicked"/>
+        <Button BackgroundColor="{StaticResource ButtonBlue}" Text="Receive" Margin="32,32" HeightRequest="200" FontSize="25" TextColor="White" Clicked="Button_Clicked_1"/>
+    </VerticalStackLayout>
+    <!--<VerticalStackLayout>
+        <zxing:CameraBarcodeReaderView
+            x:Name="cameraBarcodeReaderView"
+            BarcodesDetected="BarcodesDetected" />
+    </VerticalStackLayout>-->
+</ContentPage>

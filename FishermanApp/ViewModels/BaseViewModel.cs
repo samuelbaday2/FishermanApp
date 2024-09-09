@@ -40,6 +40,7 @@ namespace FishermanApp.ViewModels
         public CatchTable _catchTable;
         public CatchSpeciesTable _catchSpeciesTable;
         public CrewTable _crewTable;
+        public TrackingTable _trackingTable;
         public BaseViewModel()
         {
             _tripTable = new TripTable();
@@ -48,6 +49,7 @@ namespace FishermanApp.ViewModels
             _catchTable = new CatchTable();
             _catchSpeciesTable = new CatchSpeciesTable();
             _crewTable = new CrewTable();
+            _trackingTable = new TrackingTable();
 
             _catchSpeciesTable.AddSpeciesAsync();
             _baitSpeciesTable.AddSpeciesAsync();
@@ -62,7 +64,7 @@ namespace FishermanApp.ViewModels
             {
                 _isCheckingLocation = true;
 
-                GeolocationRequest request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+                GeolocationRequest request = new GeolocationRequest(GeolocationAccuracy.Lowest, TimeSpan.FromSeconds(15));
 
                 _cancelTokenSource = new CancellationTokenSource();
 

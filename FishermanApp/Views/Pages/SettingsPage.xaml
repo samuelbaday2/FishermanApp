@@ -24,6 +24,25 @@
                     </Picker.Items>
                 </Picker>
             </Border>
+
+            <Label Text="GPS Tracking Interval" TextColor="Black" Margin="16,16,16,0" FontSize="20"/>
+
+            <Border 
+                  Margin="16,0"
+                  StrokeThickness="4"
+                  Stroke ="{StaticResource ButtonGreen}"
+                  StrokeShape="RoundRectangle 10,10,10,10"
+                  HeightRequest="80"
+                  Padding="4">
+
+                <Picker x:Name="GpsPicker" Title="Tracking Interval" FontAttributes="Bold" FontSize="30" TextColor="Black" SelectedIndex="0" SelectedIndexChanged="Picker_SelectedIndexChanged1">
+                    <Picker.Items>
+                        <x:String>5 Minutes</x:String>
+                        <x:String>10Minutes</x:String>
+                        <x:String>15 Minutes</x:String>
+                    </Picker.Items>
+                </Picker>
+            </Border>
         </VerticalStackLayout>
        
        

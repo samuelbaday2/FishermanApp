@@ -72,6 +72,12 @@
         ContentTemplate="{DataTemplate view:SosPage}"
         Route="SosPage" />
 
+    <ShellContent
+        IsVisible="False"
+        Title="{x:Static res:AppResources.Transhipment}"
+        ContentTemplate="{DataTemplate view:TranshipmentPage}"
+        Route="TranshipmentPage" />
+
 
     <ShellContent
         Title="{x:Static res:AppResources.Settings}"

@@ -15,6 +15,9 @@ using FishermanApp.ViewModels.Selection;
 using FishermanApp.Views.Modals;
 using FishermanApp.Views.Pages;
 using FishermanApp.Views.Selection;
+using ZXing.Net.Maui;
+using ZXing.Net.Maui.Controls;
+
 #if ANDROID
 using Maui.Android.InAppUpdates;
 #endif
@@ -33,6 +36,7 @@ public static class MauiProgram
 #if ANDROID
              .UseAndroidInAppUpdates()
 #endif
+            .UseBarcodeReader()
             .UseMauiCommunityToolkit()
             .UseMauiCommunityToolkitCore()
 			.ConfigureFonts(fonts =>

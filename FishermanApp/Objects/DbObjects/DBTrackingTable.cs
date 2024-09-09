@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FishermanApp.Objects.DbObjects
 {
-    public class DBCatchObject
+    public class DBTrackingTable
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -15,16 +15,10 @@ namespace FishermanApp.Objects.DbObjects
         public int TripId { get; set; }
         public int UploadedId { get; set; }
         public bool IsActive { get; set; } = true;
-        public string Species { get; set; }
-        public string Weight { get; set; }
-        public string ScientificName { get; set; }
-        public string Quantity { get; set; }
-        public string ProcessingType { get; set; }
+        public string Lat { get; set; }
+        public string Long { get; set; }
         public DateTime RecordedOn { get; set; }
-        public DateTime EditedOn { get; set; }
         public bool IsUploaded { get; set; } = false;
-        public int SetNumber { get; set; }
-        public int VesselId { get; set; }
-        public string VesselName { get; set; }
+   
     }
 }

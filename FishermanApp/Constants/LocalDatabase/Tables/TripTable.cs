@@ -1,4 +1,5 @@
 ﻿using FishermanApp.Objects.DbObjects;
+using Newtonsoft.Json;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,19 @@ namespace FishermanApp.Constants.LocalDatabase.Tables
 
         public TripTable()
         {
+        }
+        public async Task RunQuery() {
+            await Init();
+            try
+            {
+                var query = await Database.QueryAsync<DbTripObject>("select * from DbTripObject");
+                DbTripObject dbTripObject = query.FirstOrDefault();
+                Console.WriteLine($"QUERY RESULT : {JsonConvert.SerializeObject(dbTripObject)}");
+            }
+            catch (Exception e)
+            {
+            }
+          
         }
 
         async Task Init()

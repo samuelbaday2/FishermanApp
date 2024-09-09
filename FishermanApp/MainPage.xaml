@@ -139,7 +139,7 @@
                              FontSize="30" 
                              TextColor="White" 
                              Text="Manage Crew">
-                            <Button.Triggers>
+                            <!--<Button.Triggers>
                                 <DataTrigger 
                                      TargetType="Button"
                                      Binding="{Binding HasPendingTrip}"
@@ -156,7 +156,7 @@
                                      Value="True" />
 
                                                             </DataTrigger>  
-                            </Button.Triggers>
+                            </Button.Triggers>-->
                         </Button>
 
                         <Grid ColumnDefinitions="50*,50*">
@@ -294,16 +294,39 @@
                         
                        <!--Landing Form info-->
                         <VerticalStackLayout>
-                            <Label />
-                            <Border Margin="0,16,0,8" StrokeThickness="3" Stroke="{StaticResource ButtonGreen}">
-                                <Entry Text="{Binding FoodCost}" Keyboard="Numeric" TextColor="Black" FontSize="25" Placeholder="Food Cost ($)"/>
-                            </Border>
-                            <Border Margin="0,0,0,8" StrokeThickness="3" Stroke="{StaticResource ButtonGreen}">
-                                <Entry Text="{Binding FuelCost}" Keyboard="Numeric" TextColor="Black" FontSize="25" Placeholder="Fuel Cost ($)"/>
-                            </Border>
-                            <Border StrokeThickness="3" Stroke="{StaticResource ButtonGreen}">
-                                <Entry Text="{Binding FuelAmount}" Keyboard="Numeric" TextColor="Black" FontSize="25" Placeholder="Food Amount (Gallon)"/>
-                            </Border>
+                            <Grid ColumnDefinitions="60*,40*">
+                                <VerticalStackLayout>
+                                    <Label VerticalOptions="Center" FontSize="20" Text="Food Cost" TextColor="Black"/>
+                                    <Label VerticalOptions="Center" FontSize="20" Text="($)" TextColor="Black"/>
+                                </VerticalStackLayout>
+                              
+                                <Border Grid.Column="1" Margin="0,0,0,8" StrokeThickness="3" Stroke="{StaticResource ButtonGreen}">
+                                    <Entry Text="{Binding FoodCost}" Keyboard="Numeric" TextColor="Black" FontSize="25" Placeholder="($)"/>
+                                </Border>
+                            </Grid>
+
+                            <Grid ColumnDefinitions="60*,40*">
+                                <VerticalStackLayout>
+                                    <Label VerticalOptions="Center" FontSize="20" Text="Fuel Cost" TextColor="Black"/>
+                                    <Label VerticalOptions="Center" FontSize="20" Text="($)" TextColor="Black"/>
+                                </VerticalStackLayout>
+                              
+                                <Border Grid.Column="1" Margin="0,0,0,8" StrokeThickness="3" Stroke="{StaticResource ButtonGreen}">
+                                    <Entry Text="{Binding FuelCost}" Keyboard="Numeric" TextColor="Black" FontSize="25" Placeholder="($)"/>
+                                </Border>
+                            </Grid>
+
+                            <Grid ColumnDefinitions="60*,40*">
+                                <VerticalStackLayout>
+                                    <Label VerticalOptions="Center" FontSize="20" Text="Fuel Amount" TextColor="Black"/>
+                                    <Label VerticalOptions="Center" FontSize="20" Text="(Gallons)" TextColor="Black"/>
+                                </VerticalStackLayout>
+                              
+                                <Border Grid.Column="1" StrokeThickness="3" Stroke="{StaticResource ButtonGreen}">
+                                    <Entry Text="{Binding FuelAmount}" Keyboard="Numeric" TextColor="Black" FontSize="25" Placeholder="(Gallon)"/>
+                                </Border>
+                            </Grid>
+                           
 
                             <VerticalStackLayout.Triggers>
                                 <DataTrigger 

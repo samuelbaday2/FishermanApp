@@ -64,5 +64,6 @@ namespace FishermanApp.Objects
         public string FuelCost { get; set; }
         public string FuelAmount { get; set; }
         public string FoodCost { get; set; }
+        public string CrewNumber { get; set; }
     }
 }

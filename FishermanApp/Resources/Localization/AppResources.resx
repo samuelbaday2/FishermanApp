@@ -343,7 +343,7 @@
     <value>Upload Complete</value>
   </data>
   <data name="UploadData" xml:space="preserve">
-    <value>UPLOAD DATA</value>
+    <value>UPLOAD</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
@@ -371,5 +371,8 @@
   </data>
   <data name="Yes" xml:space="preserve">
     <value>YES</value>
+  </data>
+  <data name="Transhipment" xml:space="preserve">
+    <value>TRANSFER</value>
   </data>
 </root>
