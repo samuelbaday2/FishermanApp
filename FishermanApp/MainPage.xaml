@@ -326,7 +326,11 @@
                                     <Entry Text="{Binding FuelAmount}" Keyboard="Numeric" TextColor="Black" FontSize="25" Placeholder="(Gallon)"/>
                                 </Border>
                             </Grid>
-                           
+
+                            <!--<HorizontalStackLayout Margin="4,16">
+                                <Label FontAttributes="Bold" TextColor="Black" Text="GPS Data Saved : "/>
+                                <Label TextColor="Black" Text="{Binding GPSSaved}"/>
+                            </HorizontalStackLayout>-->
 
                             <VerticalStackLayout.Triggers>
                                 <DataTrigger 

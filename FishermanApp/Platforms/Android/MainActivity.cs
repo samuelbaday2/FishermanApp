@@ -7,6 +7,9 @@ using Android.Graphics;
 using Android.Locations;
 using Android.OS;
 using AndroidX.AppCompat.App;
+using CommunityToolkit.Mvvm.Messaging;
+using FishermanApp.Objects;
+using FishermanApp.Platforms.Android;
 using FishermanApp.Resources.Localization;
 
 namespace FishermanApp;
@@ -30,9 +33,55 @@ public class MainActivity : MauiAppCompatActivity
         //}
 
         //Preferences.Set("package_install", PackageManager.CanRequestPackageInstalls());
-         
 
+        PowerManager pm = (PowerManager)GetSystemService(Context.PowerService);
+        PowerManager.WakeLock wl = pm.NewWakeLock(WakeLockFlags.Full, "FULL_WAKE_LOCK");
+        wl.Acquire();
+
+        try
+        {
+            CheckLoc();
+        }
+        catch { }
+
+        WeakReferenceMessenger.Default.Register<string>(this, (r, m) =>
+        {
+            CheckLoc();
+        });
+      
         DisplayLocationSettingsRequest();
+    }
+    public async Task CheckLoc() {
+        PermissionStatus status = await Permissions.CheckStatusAsync<Permissions.LocationAlways>();
+
+        if (status != PermissionStatus.Granted) {
+            Preferences.Set(ConfigClass.PERMISSION_LOC, false);
+            status = await Permissions.RequestAsync<Permissions.LocationAlways>();
+        }      
+        if (status == PermissionStatus.Granted)
+        {
+#if ANDROID
+            Android.Content.Intent intent = new Android.Content.Intent(Android.App.Application.Context, typeof(LocForegroundService));
+            Task.Run(async () =>
+            {
+                Android.App.Application.Context.StartForegroundService(intent);
+            });
+
+
+            var intentMain = new Intent(Android.App.Application.Context, typeof(ScreenOffService));
+            intentMain.SetAction(ScreenOffService.ActionStartScreenOffService);
+            Android.App.Application.Context.StartForegroundService(intentMain);
+#endif
+        }
+    }
+    protected override async void OnStart()
+    {
+        base.OnStart();       
+    }
+    protected override void OnPause()
+    {
+        base.OnPause();
+
     }
     protected override void OnNewIntent(Intent intent)
     {      
@@ -72,6 +121,7 @@ public class MainActivity : MauiAppCompatActivity
         var locationRequest = Android.Gms.Location.LocationRequest.Create();
         locationRequest.SetPriority(Android.Gms.Location.LocationRequest.PriorityHighAccuracy);
         locationRequest.SetInterval(10000);
+
         locationRequest.SetFastestInterval(10000 / 2);
 
         var builder = new LocationSettingsRequest.Builder().AddLocationRequest(locationRequest);

@@ -17,6 +17,16 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.ComponentModel;
+using FishermanApp.Views.Selection;
+
+#if ANDROID
+
+using Android.OS;
+using Android.Content;
+using AndroidX.Arch.Core;
+using AndroidX.Annotations;
+#endif
 
 namespace FishermanApp.ViewModels
 {
@@ -39,7 +49,12 @@ namespace FishermanApp.ViewModels
         private string _fuelCost;
         private string _foodCost;
         private string _fuelAmount;
+        private bool _isGPSTrackingOn;
+        private Task _gpsTask;
+        private string _gPSSaved;
+        private CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
+        public string GPSSaved { get { return _gPSSaved; } set { SetProperty(ref _gPSSaved, value); } }
         public string FuelCost { get { return _fuelCost; } set { SetProperty(ref _fuelCost, value); } }
         public string FoodCost { get { return _foodCost; } set { SetProperty(ref _foodCost, value); } }
         public string FuelAmount { get { return _fuelAmount; } set { SetProperty(ref _fuelAmount, value); } }
@@ -55,14 +70,14 @@ namespace FishermanApp.ViewModels
         public ICommand StartTripCommand { private set; get; }
         public ICommand EndTripCommand { private set; get; }
         public ICommand StartSetCommand { private set; get; }
-        public ICommand AddCatchCommand { private set; get; }   
+        public ICommand AddCatchCommand { private set; get; }
 
         public MainPageViewModel(IDisplayAlertService displayAlertService, IConnectionHandlerService connectionHandlerService, ILocationFeatureService locationFeatureService, EnterSetDetailPageViewModel enterSetDetailPageViewModel) {
             StartTripCommand = new Command(DoStartTrip);
             EndTripCommand = new Command(DoEndTrip);
             StartSetCommand = new Command(DoStartSet);
             AddCatchCommand = new Command(DoAddMoreCatch);
-       
+
 
 
             _displayAlertService = displayAlertService;
@@ -73,12 +88,20 @@ namespace FishermanApp.ViewModels
 
             _locationFeatureService = locationFeatureService;
             _locationFeatureService.StartConnectionListenerAsync();
-          
+
             _enterSetDetailPageViewModel = enterSetDetailPageViewModel;
             GetGpsStatusAsync();
-           
-        }
 
+
+
+
+            GetGpsCount();
+        }
+        public async Task GetGpsCount() {
+            var count = await _trackingTable.GetItemsAsync();
+            GPSSaved = count.Count().ToString();
+        }
+      
         private async void DoAddMoreCatch(object obj)
         {
             InitializeConfig.InitializeFunction = true;
@@ -99,6 +122,7 @@ namespace FishermanApp.ViewModels
         public async Task InitializeAsync() 
         {
             _tripTable.RunQuery();
+            _isGPSTrackingOn = false;
             try
             {
                 VesselName = UserDataObject.UserObject.VesName;
@@ -113,10 +137,7 @@ namespace FishermanApp.ViewModels
                 var tripList = await _tripTable.GetItemsAsync();
 
                 HasPendingTrip = !tripList.LastOrDefault().IsTripEnded;
-                if (HasPendingTrip) 
-                {
-                    GPSTracker();
-                }
+                           
             }
             catch { }
 
@@ -182,46 +203,41 @@ namespace FishermanApp.ViewModels
             await Task.Delay(10000);
             GetGpsStatusAsync();
         }
+
         public async Task GPSTracker() 
         {
-            if (HasPendingTrip) 
+            if (HasPendingTrip)
             {
-                var gps = await GetCurrentLocation();
-                var TripLatitude = gps == null ? AppResources.GpsOff : gps.Latitude.ToString();
-                var TripLongitude = gps == null ? AppResources.GpsOff : gps.Longitude.ToString();
-                var tripList = await _tripTable.GetItemsAsync();
-                DbTripObject tripObject = tripList.LastOrDefault();
-                await _trackingTable.SaveItemAsync(new DBTrackingTable
+                try
                 {
-                    Lat = TripLatitude,
-                    Long = TripLongitude,
-                    RecordedOn = DateTime.Now,
-                    TripId = tripObject.Id,
-                });
+                    var gps = await GetCurrentLocation();
+                    var TripLatitude = gps == null ? AppResources.GpsOff : gps.Latitude.ToString();
+                    var TripLongitude = gps == null ? AppResources.GpsOff : gps.Longitude.ToString();
+                    var tripList = await _tripTable.GetItemsAsync();
+                    DbTripObject tripObject = tripList.LastOrDefault();
+                    await _trackingTable.SaveItemAsync(new DBTrackingTable
+                    {
+                        Lat = TripLatitude,
+                        Long = TripLongitude,
+                        RecordedOn = DateTime.Now,
+                        TripId = tripObject.Id,
+                    });
 
-                Console.WriteLine($"Location Saved : {_trackingTable.GetItemsBySetIdAsync(tripObject.Id)}" );
-                if (Preferences.Get("GpsTracking", 0) == 0)
-                {
-                    await Task.Delay(300000);
-                    if(HasPendingTrip)
-                        GPSTracker();
+                    var count = await _trackingTable.GetItemsAsync();
+                    Console.WriteLine($"GPS COUNT :  {count.Count()} {TripLatitude} {TripLongitude}");
+
+                    GPSSaved = count.Count().ToString();
                 }
-                else if (Preferences.Get("GpsTracking", 0) == 1) 
-                {
-                    await Task.Delay(600000);
-                    if (HasPendingTrip)
-                        GPSTracker();
+                catch(Exception ee) 
+                { 
+                
                 }
-                else if (Preferences.Get("GpsTracking", 0) == 2)
-                {
-                    await Task.Delay(900000);
-                    if (HasPendingTrip)
-                        GPSTracker();
-                }
+             
             }
         }
         private async void DoStartTrip(object obj)
         {
+            Shell.Current.Navigation.PushModalAsync(new HACCP());
             SetBusyStatusAsync(false);
             if(sephamoreSlim.CurrentCount == 0)
             {
@@ -249,7 +265,7 @@ namespace FishermanApp.ViewModels
                 var tripList = await _tripTable.GetItemsAsync();
 
                 HasPendingTrip = !tripList.LastOrDefault().IsTripEnded;
-                GPSTracker();
+              
             }
             catch(Exception ee) 
             {

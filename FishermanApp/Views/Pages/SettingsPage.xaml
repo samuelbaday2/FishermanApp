@@ -40,6 +40,7 @@
                         <x:String>5 Minutes</x:String>
                         <x:String>10Minutes</x:String>
                         <x:String>15 Minutes</x:String>
+                        <x:String>1 Minute</x:String>
                     </Picker.Items>
                 </Picker>
             </Border>

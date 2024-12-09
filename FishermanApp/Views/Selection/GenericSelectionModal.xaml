@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FishermanApp.Views.Selection.GenericSelectionModal"
+             Title=""
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             BackgroundColor="White">
+
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <CollectionView 
+         SelectionMode="Single"
+         ItemsSource="{Binding SelectionCollection}" 
+         SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}"
+        
+         SelectionChangedCommand="{Binding OnSelectCommand}">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="16,8" HeightRequest="120">
+                        <Border 
+                         StrokeShape="RoundRectangle 20,20,20,20" 
+                         BackgroundColor="{StaticResource NetColor}" 
+                         HorizontalOptions="FillAndExpand">
+
+                            <VerticalStackLayout>
+                                <Label 
+                                 Margin="0,9"
+                                 VerticalTextAlignment="Center"
+                                 FontAttributes="Bold"
+                                 FontSize="30" 
+                                 HorizontalOptions="Center" 
+                                 HorizontalTextAlignment="Center" 
+                                 Text="{Binding SelectionTitle}" 
+                                 TextColor="White"/>
+                    
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Grid VerticalOptions="End" Margin="16,8" HeightRequest="120" IsVisible="False">
+            <Border 
+                     StrokeShape="RoundRectangle 20,20,20,20" 
+                     BackgroundColor="{StaticResource NetColor}" 
+                     HorizontalOptions="FillAndExpand">
+
+                <VerticalStackLayout>
+                    <Label 
+                             Margin="0,9"
+                             VerticalTextAlignment="Center"
+                             FontAttributes="Bold"
+                             FontSize="30" 
+                             HorizontalOptions="Center" 
+                             HorizontalTextAlignment="Center" 
+                             Text="Custom" 
+                             TextColor="White"/>
+
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+            </Grid.GestureRecognizers>
+        </Grid>
+    </Grid>
+</ContentPage>

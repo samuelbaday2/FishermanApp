@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.0.25.090924" android:versionCode="25" package="com.insitesolutions.fishermanapp">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.0.34.111324" android:versionCode="34" package="com.insitesolutions.fishermanapp">
 	<application legacyExternalStorage="true" android:allowBackup="true" android:icon="@mipmap/appicon" android:supportsRtl="true" android:label="Insite Fisherman App">
 		<provider android:requestLegacyExternalStorage="true" android:name="androidx.core.content.FileProvider" android:authorities="com.insitesolutions.fishermanapp.fileprovider" android:exported="false" android:grantUriPermissions="true">
 			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths" />
@@ -12,6 +12,11 @@
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.FLASHLIGHT" />
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+	<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 	<uses-feature android:name="android.hardware.location" android:required="false" />
 	<uses-feature android:name="android.hardware.location.gps" android:required="false" />
 	<uses-feature android:name="android.hardware.location.network" android:required="false" />

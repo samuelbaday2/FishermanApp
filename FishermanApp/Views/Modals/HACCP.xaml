@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FishermanApp.Views.Modals.HACCP"
+             BackgroundColor="White"
+             Title="HACCP">
+    <Grid>
+        <Grid RowDefinitions="*,65">
+            <ScrollView>
+                <VerticalStackLayout Margin="32">
+                    <!--CLEANLINESS-->
+                    <Label  FontSize="35" Text="Boat Cleaned" TextColor="Black"/>
+                    <CheckBox x:Name="CheckClean" IsVisible="False" />
+                    <Grid
+                    Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*"/>
+                            <ColumnDefinition Width="50*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border 
+                            StrokeShape="RoundRectangle 10,10,10,10"
+                            Grid.Column="0">
+
+                            <Button 
+        BackgroundColor="LightGray"
+        FontSize="30"
+        TextColor="{StaticResource Tertiary}"
+        Text="YES"
+                                Clicked="Button_Clicked_1"
+       >
+
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button"
+            Binding="{Binding Source={x:Reference CheckClean},
+                                       Path=IsChecked}" 
+            
+            Value="True">
+                                        <Setter Property="BackgroundColor"
+            Value="{StaticResource ButtonGreen}" />
+                                        <Setter Property="TextColor"
+            Value="White" />
+
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Button"
+             Binding="{Binding DeadBait}" 
+            Value="True">
+                                        <Setter Property="BackgroundColor"
+            Value="LightGray" />
+                                        <Setter Property="TextColor"
+            Value="{StaticResource Tertiary}" />
+
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </Border>
+
+                        <Border 
+    StrokeShape="RoundRectangle 10,10,10,10"
+    Grid.Column="1">
+
+                            <Button 
+        BackgroundColor="LightGray"
+        FontSize="30"
+        Grid.Column="1"
+        TextColor="{StaticResource Tertiary}"
+        Text="NO"
+                                Clicked="Button_Clicked_2"
+       >
+
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button"
+           Binding="{Binding Source={x:Reference CheckClean},
+                           Path=IsChecked}" 
+            
+            Value="False">
+                                        <Setter Property="BackgroundColor"
+            Value="{StaticResource ButtonRed}" />
+                                        <Setter Property="TextColor"
+            Value="White" />
+
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Button"
+             Binding="{Binding LiveBait}" 
+            Value="True">
+                                        <Setter Property="BackgroundColor"
+            Value="LightGray" />
+                                        <Setter Property="TextColor"
+            Value="{StaticResource Tertiary}" />
+
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </Border>
+
+                    </Grid>
+
+                    <!--ICE-->
+                    <Label FontSize="35" Text="Ice Available" TextColor="Black"/>
+                    <CheckBox x:Name="CheckIce" IsVisible="False" />
+                    <Grid
+Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*"/>
+                            <ColumnDefinition Width="50*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border 
+    StrokeShape="RoundRectangle 10,10,10,10"
+    Grid.Column="0">
+
+                            <Button 
+        BackgroundColor="LightGray"
+        FontSize="30"
+        TextColor="{StaticResource Tertiary}"
+        Text="YES"
+                                Clicked="Button_Clicked_3"
+       >
+
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button"
+            Binding="{Binding Source={x:Reference CheckIce},
+                                       Path=IsChecked}" 
+            
+            Value="True">
+                                        <Setter Property="BackgroundColor"
+            Value="{StaticResource ButtonGreen}" />
+                                        <Setter Property="TextColor"
+            Value="White" />
+
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Button"
+             Binding="{Binding DeadBait}" 
+            Value="True">
+                                        <Setter Property="BackgroundColor"
+            Value="LightGray" />
+                                        <Setter Property="TextColor"
+            Value="{StaticResource Tertiary}" />
+
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </Border>
+
+                        <Border 
+    StrokeShape="RoundRectangle 10,10,10,10"
+    Grid.Column="1">
+
+                            <Button 
+        BackgroundColor="LightGray"
+        FontSize="30"
+        Grid.Column="1"
+        TextColor="{StaticResource Tertiary}"
+        Text="NO"
+                                Clicked="Button_Clicked_4"
+       >
+
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button"
+           Binding="{Binding Source={x:Reference CheckIce},
+                           Path=IsChecked}" 
+            
+            Value="False">
+                                        <Setter Property="BackgroundColor"
+            Value="{StaticResource ButtonRed}" />
+                                        <Setter Property="TextColor"
+            Value="White" />
+
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Button"
+             Binding="{Binding LiveBait}" 
+            Value="True">
+                                        <Setter Property="BackgroundColor"
+            Value="LightGray" />
+                                        <Setter Property="TextColor"
+            Value="{StaticResource Tertiary}" />
+
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </Border>
+
+                    </Grid>
+
+                    <!--CLEAN WATER-->
+                    <Label FontSize="35" Text="Clean Water" TextColor="Black"/>
+                    <CheckBox x:Name="CheckWater" IsVisible="False" />
+                    <Grid
+Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*"/>
+                            <ColumnDefinition Width="50*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border 
+    StrokeShape="RoundRectangle 10,10,10,10"
+    Grid.Column="0">
+
+                            <Button 
+        BackgroundColor="LightGray"
+        FontSize="30"
+        TextColor="{StaticResource Tertiary}"
+        Text="YES"
+                                Clicked="Button_Clicked_5"
+       >
+
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button"
+            Binding="{Binding Source={x:Reference CheckWater},
+                                       Path=IsChecked}" 
+            
+            Value="True">
+                                        <Setter Property="BackgroundColor"
+            Value="{StaticResource ButtonGreen}" />
+                                        <Setter Property="TextColor"
+            Value="White" />
+
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Button"
+             Binding="{Binding DeadBait}" 
+            Value="True">
+                                        <Setter Property="BackgroundColor"
+            Value="LightGray" />
+                                        <Setter Property="TextColor"
+            Value="{StaticResource Tertiary}" />
+
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </Border>
+
+                        <Border 
+    StrokeShape="RoundRectangle 10,10,10,10"
+    Grid.Column="1">
+
+                            <Button 
+        BackgroundColor="LightGray"
+        FontSize="30"
+        Grid.Column="1"
+        TextColor="{StaticResource Tertiary}"
+        Text="NO"
+                                Clicked="Button_Clicked_6"
+       >
+
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button"
+           Binding="{Binding Source={x:Reference CheckWater},
+                           Path=IsChecked}" 
+            
+            Value="False">
+                                        <Setter Property="BackgroundColor"
+            Value="{StaticResource ButtonRed}" />
+                                        <Setter Property="TextColor"
+            Value="White" />
+
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Button"
+             Binding="{Binding LiveBait}" 
+            Value="True">
+                                        <Setter Property="BackgroundColor"
+            Value="LightGray" />
+                                        <Setter Property="TextColor"
+            Value="{StaticResource Tertiary}" />
+
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </Border>
+
+                    </Grid>
+
+                    <!--Container-->
+                    <Label FontSize="35" Text="Insulated Containers" TextColor="Black"/>
+                    <CheckBox x:Name="CheckContainer" IsVisible="False" />
+                    <Grid
+Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*"/>
+                            <ColumnDefinition Width="50*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border 
+    StrokeShape="RoundRectangle 10,10,10,10"
+    Grid.Column="0">
+
+                            <Button 
+        BackgroundColor="LightGray"
+        FontSize="30"
+        TextColor="{StaticResource Tertiary}"
+        Text="YES"
+                                Clicked="Button_Clicked_7"
+       >
+
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button"
+            Binding="{Binding Source={x:Reference CheckContainer},
+                                       Path=IsChecked}" 
+            
+            Value="True">
+                                        <Setter Property="BackgroundColor"
+            Value="{StaticResource ButtonGreen}" />
+                                        <Setter Property="TextColor"
+            Value="White" />
+
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Button"
+             Binding="{Binding DeadBait}" 
+            Value="True">
+                                        <Setter Property="BackgroundColor"
+            Value="LightGray" />
+                                        <Setter Property="TextColor"
+            Value="{StaticResource Tertiary}" />
+
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </Border>
+
+                        <Border 
+    StrokeShape="RoundRectangle 10,10,10,10"
+    Grid.Column="1">
+
+                            <Button 
+        BackgroundColor="LightGray"
+        FontSize="30"
+        Grid.Column="1"
+        TextColor="{StaticResource Tertiary}"
+        Text="NO"
+                                Clicked="Button_Clicked_8"
+       >
+
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button"
+           Binding="{Binding Source={x:Reference CheckContainer},
+                           Path=IsChecked}" 
+            
+            Value="False">
+                                        <Setter Property="BackgroundColor"
+            Value="{StaticResource ButtonRed}" />
+                                        <Setter Property="TextColor"
+            Value="White" />
+
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Button"
+             Binding="{Binding LiveBait}" 
+            Value="True">
+                                        <Setter Property="BackgroundColor"
+            Value="LightGray" />
+                                        <Setter Property="TextColor"
+            Value="{StaticResource Tertiary}" />
+
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </Border>
+
+                    </Grid>
+                </VerticalStackLayout>
+            </ScrollView>
+            
+            <Button Grid.Row="1" VerticalOptions="End" Margin="16" TextColor="White" FontSize="34" HeightRequest="80" Text="Confirm" BackgroundColor="{StaticResource ButtonGreen}" Clicked="Button_Clicked"/>
+        </Grid>
+        
+    </Grid>
+</ContentPage>

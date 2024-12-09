@@ -214,7 +214,12 @@ namespace FishermanApp.ViewModels
 
         private async Task UploadTracking(int dbTripId, int dbTripIdUploaded, RestClient client2)
         {
-            var trackingData = await _trackingTable.GetItemsAsync();
+            List<DBTrackingTable> trackingData = await _trackingTable.GetItemsAsync();
+
+            trackingData = trackingData
+              .GroupBy(t => new { t.RecordedOn })
+              .Select(g => g.First())
+              .ToList();
             var tripData = await _tripTable.GetItemAsync(dbTripId);
 
             foreach (DBTrackingTable trackingObj in trackingData.Where(x => x.TripId == dbTripId))

@@ -47,7 +47,9 @@ public static class MauiProgram
 		
 		registerPlatformSpecificServices(builder);
 
-		builder.Services.AddTransient<IPermissionService, PermissionService>();
+        builder.Services.AddSingleton<IGeolocation>(Geolocation.Default);
+
+        builder.Services.AddTransient<IPermissionService, PermissionService>();
         builder.Services.AddTransient<IConnectionHandlerService, ConnectionHandlerService>();
         builder.Services.AddTransient<IUpdateService, UpdateService>();
         builder.Services.AddTransient<IAndroidEnvironmentService, AndroidEnvironmentService>();
@@ -103,6 +105,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<TripTracker>();
         builder.Services.AddSingleton<SettingsPageViewModel>();
         builder.Services.AddSingleton<CustomSpecie>();
+
+        builder.Services.AddSingleton<GenericSelectionModal>();
+        builder.Services.AddSingleton<GenericSelectionViewModel>();
 
 #if DEBUG
         builder.Logging.AddDebug();

@@ -10,5 +10,7 @@ namespace FishermanApp.Objects
     {
         public static bool GetRecentSet { get; set; } = false;
         public static bool SpeciesInitialized { get; set; } = false;
+
+        public const string PERMISSION_LOC = nameof(ConfigClass.PERMISSION_LOC);
     }
 }
