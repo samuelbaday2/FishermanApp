@@ -25,6 +25,8 @@ namespace FishermanApp.ViewModels
         private bool _liveBait;
         private bool _deadBait;
         private string _uom;
+        private string _minDepth;
+        private string _maxDepth;
         public bool LiveBait { get { return _liveBait; } set { SetProperty(ref _liveBait, value); } }
         public bool DeadBait { get { return _deadBait; } set { SetProperty(ref _deadBait, value); } }
         public string GangionLength { get { return _gangionLength; } set { SetProperty(ref _gangionLength, value); } }
@@ -35,6 +37,8 @@ namespace FishermanApp.ViewModels
         public string BasketCount { get { return _basketCount; } set { SetProperty(ref _basketCount, value); } } 
         public string HooksPerBasket { get { return _hooksPerBasket; } set { SetProperty(ref _hooksPerBasket, value); } }
         public string UoM { get { return _uom; } set { SetProperty(ref _uom, value); } }
+        public string MinDepth { get { return _minDepth; } set { SetProperty(ref _minDepth, value); } }
+        public string MaxDepth { get { return _maxDepth; } set { SetProperty(ref _maxDepth, value); } }
 
         public ICommand LiveButtonCommand { private set; get; }
         public ICommand DeadButtonCommand { private set; get; }
@@ -158,7 +162,7 @@ namespace FishermanApp.ViewModels
                 currentSet.EndSetpLongitude = gps == null ? AppResources.GpsOff : gps.Longitude.ToString();
                 currentSet.SetEnded = true;
                 currentSet.BaitSpecie = BaitSpecie;
-                
+                currentSet.SetStartedOn = currentSet.SetStartedOn;
                 currentSet.LengthOfLongLine = $"{LongLineLength}";
                 currentSet.GangionLength = $"{GangionLength}"; ;
                 currentSet.SetEndedOn = DateTime.Now;
@@ -166,6 +170,8 @@ namespace FishermanApp.ViewModels
                 currentSet.HooksPerBasket = HooksPerBasket;
                 currentSet.NumberOfBaskets = BasketCount;
                 currentSet.UoM = UoM;
+                currentSet.MinDepth = MinDepth;
+                currentSet.MaxDepth = MaxDepth;
 
                 await _tripSetTable.SaveItemAsync(currentSet);
 
@@ -276,6 +282,17 @@ namespace FishermanApp.ViewModels
                         }
                         catch { }
 
+                        try
+                        {
+                            MinDepth = lastSet.MinDepth;
+                        }
+                        catch { }
+
+                        try
+                        {
+                            MaxDepth = lastSet.MaxDepth;
+                        }
+                        catch { }
                     }
                 }
                 SetNumber = currentSetCount.ToString();

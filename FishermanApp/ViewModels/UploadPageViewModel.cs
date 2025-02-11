@@ -36,7 +36,7 @@ namespace FishermanApp.ViewModels
 
             if (pendingTrips.Count > 0)
             {
-                PendingString = $"You have {pendingTrips.Count} pending data\n\nYou will be uploading your data to GNeXTT server. Press the Upload Data button below to start.";
+                PendingString = $"You have {pendingTrips.Count} pending data\n\nYou will be uploading your data to the GNExTT server. Press the Upload Data button below to start.";
             }
             else {
                 PendingString = $"{AppResources.NoDataToUpload}";
@@ -85,8 +85,9 @@ namespace FishermanApp.ViewModels
                             request2.AddParameter("TripEndedOn", tripObject.TripEndedOn);
                             request2.AddParameter("IsActive", tripObject.IsActive);
                             request2.AddParameter("EditedOn", DateTime.Now);
+                            request2.AddParameter("TripStartedOn", tripObject.TripStartedOn);
 
-                            request2.AddUrlSegment("function", "InsertTripRecord");
+                            request2.AddUrlSegment("function", "InsertTripRecordUpdated");
 
                             IRestResponse response2 = client2.Execute(request2);
                             string resposeString = response2.Content;
@@ -96,15 +97,16 @@ namespace FishermanApp.ViewModels
 
                             Console.WriteLine($"Cloud ID: {returnValue.FirstOrDefault().Id}");
 
-                            tripObject.IsUploaded = true;
                             tripObject.UploadedId = returnValue.FirstOrDefault().Id;
-                            _tripTable.SaveItemAsync(tripObject as DbTripObject);
-
                             //UPLOAD TRIP EFFORT CONNECTED TO TRIP UPLOADED
-                            UploadTripEffort(tripObject.Id, tripObject.UploadedId, client2);
+                            await UploadTripEffort(tripObject.Id, tripObject.UploadedId, client2);
                             await UploadTracking(tripObject.Id, tripObject.UploadedId, client2);
-                        }
+                            await UploadCrew(tripObject.Id, tripObject.UploadedId, client2);
 
+                            tripObject.IsUploaded = true;
+                          
+                            _tripTable.SaveItemAsync(tripObject as DbTripObject);
+                        }
                         
                         Device.BeginInvokeOnMainThread(() =>
                         {
@@ -163,8 +165,11 @@ namespace FishermanApp.ViewModels
                 request2.AddParameter("BaitSpecie", setObject.BaitSpecie);
                 request2.AddParameter("HasCatchData", setObject.HasCatchData);
                 request2.AddParameter("EditedOn", DateTime.Now);
+                request2.AddParameter("MinDepth", setObject.MinDepth);
+                request2.AddParameter("MaxDepth", setObject.MaxDepth);
+                request2.AddParameter("SetStartedOn", setObject.SetStartedOn);
 
-                request2.AddUrlSegment("function", "InsertTripEffortRecord");
+                request2.AddUrlSegment("function", "InsertTripEffortRecordUpdated");
 
                 IRestResponse response2 = client2.Execute(request2);
                 string resposeString = response2.Content;
@@ -195,8 +200,9 @@ namespace FishermanApp.ViewModels
                 request2.AddParameter("Quantity", catchObject.Quantity);
                 request2.AddParameter("RecordedOn", catchObject.RecordedOn);
                 request2.AddParameter("EditedOn", DateTime.Now);
+                request2.AddParameter("ProcessingType", catchObject.ProcessingType);
 
-                request2.AddUrlSegment("function", "InsertCatchRecord");
+                request2.AddUrlSegment("function", "InsertCatchRecordUpdated");
 
                 IRestResponse response2 = client2.Execute(request2);
                 string resposeString = response2.Content;
@@ -241,6 +247,29 @@ namespace FishermanApp.ViewModels
 
   
                 await _trackingTable.DeleteItemAsync(trackingObj);
+            }
+        }
+
+        private async Task UploadCrew(int dbTripId, int dbTripIdUploaded, RestClient client2)
+        {
+            var crew = await _tripCrewTable.GetItemsByTripIdAsync(dbTripId);
+
+            foreach (var crewObj in crew)
+            {
+                var request2 = new RestRequest("nextt.asmx/{function}", Method.GET);
+                request2.AddParameter("TripId", dbTripIdUploaded);
+           
+                request2.AddParameter("CrewFirstname", crewObj.CrewFirstname);
+                request2.AddParameter("CrewLastname", crewObj.CrewLastname);
+                request2.AddParameter("RecordedOn", crewObj.RecordedOn);
+
+                request2.AddUrlSegment("function", "InsertCrewRecord");
+
+                IRestResponse response2 = client2.Execute(request2);
+                string resposeString = response2.Content;
+                string json = response2.Content;
+
+                await _tripCrewTable.DeleteItemAsync(crewObj);
             }
         }
     }

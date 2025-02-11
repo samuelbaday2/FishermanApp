@@ -113,6 +113,17 @@ namespace FishermanApp.ViewModels.Modals
                     }
                     catch { }
 
+                    try
+                    {
+                        MinDepth = lastSet.MinDepth;
+                    }
+                    catch { }
+
+                    try
+                    {
+                        MaxDepth = lastSet.MaxDepth;
+                    }
+                    catch { }
                 }
             }
             catch (Exception ee)

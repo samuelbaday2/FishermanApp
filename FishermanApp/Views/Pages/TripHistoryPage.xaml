@@ -9,15 +9,35 @@
 
     <Shell.TitleView>
         <Grid>
-            <DatePicker 
-                MinimumDate="{Binding MinimumPickerDate}"
-                Date="{Binding SelectedDate}"
-                DateSelected="HistoryDatePicker_DateSelected"
-                FontSize="22"
-                Format="MMMM-dd-yyyy"
-                x:Name="HistoryDatePicker" 
-                Margin="16,0" 
-                HorizontalOptions="End"/>
+
+            <HorizontalStackLayout  HorizontalOptions="End">
+
+
+                <DatePicker 
+    MinimumDate="{Binding MinimumPickerDate}"
+    Date="{Binding SelectedDate}"
+    DateSelected="HistoryDatePicker_DateSelected"
+    FontSize="22"
+    TextColor="White"
+    Format="MMM-dd-yyyy"
+    x:Name="HistoryDatePicker" VerticalOptions="Center"
+    Margin="16,0" 
+   />
+
+                <Label Text="---" VerticalOptions="Center"/>
+
+                <DatePicker 
+  MinimumDate="{Binding MinimumPickerDate}"
+ Date="{Binding SelectedMaxDate}"
+ DateSelected="HistoryDatePicker_DateSelected"
+ FontSize="22"
+ TextColor="White"
+ Format="MMM-dd-yyyy"
+ x:Name="HistoryDatePicker2" VerticalOptions="Center"
+ Margin="16,0" 
+/>
+            </HorizontalStackLayout>
+            
         </Grid>
     </Shell.TitleView>
 

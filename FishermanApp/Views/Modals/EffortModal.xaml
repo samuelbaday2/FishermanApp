@@ -148,7 +148,47 @@
 
                     </VerticalStackLayout>
 
+                    <VerticalStackLayout Margin="0,0,0,8">
+                        <Label
+        
+        TextColor="{StaticResource Primary}"
+        FontAttributes="Bold"
+        FontSize="30"
+        Text="Min Depth"/>
 
+                        <Entry
+        IsReadOnly="True"
+    Margin="8,0"
+        ReturnType="Next"
+        Keyboard="Numeric"
+        TextColor="Black"
+        FontAttributes="Bold"
+        FontSize="40"
+        Text="{Binding MinDepth}"
+        />
+
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Margin="0,0,0,8">
+                        <Label
+    
+    TextColor="{StaticResource Primary}"
+    FontAttributes="Bold"
+    FontSize="30"
+    Text="Max Depth"/>
+
+                        <Entry
+    IsReadOnly="True"
+Margin="8,0"
+    ReturnType="Next"
+    Keyboard="Numeric"
+    TextColor="Black"
+    FontAttributes="Bold"
+    FontSize="40"
+    Text="{Binding MaxDepth}"
+    />
+
+                    </VerticalStackLayout>
 
                     <VerticalStackLayout Margin="0,0,0,8">
                         <Label

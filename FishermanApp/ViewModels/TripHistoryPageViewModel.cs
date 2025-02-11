@@ -14,12 +14,16 @@ namespace FishermanApp.ViewModels
     {
         private ObservableCollection<TripHistoryObject> _tripCollection;
         private DateTime _selectedDate;
+        private DateTime _selectedMaxDate;
         private DateTime _minimumPickerDate;
+        private DateTime _maximumPickerDate;
         private bool IsTaskRunning = false;
         private bool _isRefreshing;
         private bool _isOnline;
         public DateTime SelectedDate { get { return _selectedDate; } set { SetProperty(ref _selectedDate, value); } }
+        public DateTime SelectedMaxDate { get { return _selectedMaxDate; } set { SetProperty(ref _selectedMaxDate, value); } }
         public DateTime MinimumPickerDate { get { return _minimumPickerDate; } set { SetProperty(ref _minimumPickerDate, value); } }
+        public DateTime MaximumPickerDate { get { return _maximumPickerDate; } set { SetProperty(ref _maximumPickerDate, value); } }
         public bool IsRefreshing { get { return _isRefreshing; } set { SetProperty(ref _isRefreshing, value); } }
         public bool IsOnline { get { return _isOnline; } set { SetProperty(ref _isOnline, value); } }
 
@@ -63,7 +67,7 @@ namespace FishermanApp.ViewModels
 
             try
             {
-                List<DbTripObject> tripList = await _tripTable.GetItemsAsync(SelectedDate);
+                List<DbTripObject> tripList = await _tripTable.GetItemsAsync(SelectedDate,SelectedMaxDate);
 
                 if(tripList!= null)
                 foreach (DbTripObject obj in tripList)
@@ -112,6 +116,8 @@ namespace FishermanApp.ViewModels
             catch {
                 MinimumPickerDate = DateTime.Now.Date;
             }        
+
+            MaximumPickerDate = DateTime.Now.Date;
         }
     }
 }

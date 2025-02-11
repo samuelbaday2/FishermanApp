@@ -48,10 +48,10 @@ namespace FishermanApp.Constants.LocalDatabase.Tables
             await Init();
             return await Database.Table<DbTripObject>().Where(x => x.IsTripEnded == true && x.IsUploaded == false && x.IsActive == true).ToListAsync();
         }
-        public async Task<List<DbTripObject>> GetItemsAsync(DateTime dateTime)
+        public async Task<List<DbTripObject>> GetItemsAsync(DateTime dateTime, DateTime dateTimeMax)
         {
             await Init();
-            DateTime range = dateTime.AddHours(23).AddMinutes(59).AddSeconds(59);
+            DateTime range = dateTimeMax.AddHours(23).AddMinutes(59).AddSeconds(59);
             return await Database.Table<DbTripObject>().Where(i => i.RecordedOn >= dateTime && i.RecordedOn <= range).ToListAsync();
         }
         //public async Task<List<DbTripObject>> GetItemsNotDoneAsync()

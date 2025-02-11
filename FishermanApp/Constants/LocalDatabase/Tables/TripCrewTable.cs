@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace FishermanApp.Constants.LocalDatabase.Tables
 {
-    public class CrewTable
+    public class TripCrewTable
     {
         SQLiteAsyncConnection Database;
 
-        public CrewTable()
+        public TripCrewTable()
         {
         }
 
@@ -22,30 +22,25 @@ namespace FishermanApp.Constants.LocalDatabase.Tables
                 return;
 
             Database = new SQLiteAsyncConnection(DatabaseClass.DatabasePath, DatabaseClass.Flags);
-            var result = await Database.CreateTableAsync<DBCrewObject>();
+            var result = await Database.CreateTableAsync<DBTripCrewObject>();
         }
-        public async Task<List<DBCrewObject>> GetItemsAsync()
+        public async Task<List<DBTripCrewObject>> GetItemsAsync()
         {
             await Init();
-            return await Database.Table<DBCrewObject>().ToListAsync();
+            return await Database.Table<DBTripCrewObject>().ToListAsync();
         }
-        public async Task<List<DBCrewObject>> GetAvailableCrew()
+        public async Task<List<DBTripCrewObject>> GetItemsByTripIdAsync(int tripId)
         {
             await Init();
-            return await Database.Table<DBCrewObject>().Where(x => x.IsChecked).ToListAsync();
+            return await Database.Table<DBTripCrewObject>().Where(x => x.TripId == tripId).ToListAsync();
         }
-        public async Task<List<DBCrewObject>> GetItemsBySetIdAsync(int setId)
+        public async Task<DBTripCrewObject> GetItemAsync(int id)
         {
             await Init();
-            return await Database.Table<DBCrewObject>().Where(x => x.Id == setId).ToListAsync();
-        }
-        public async Task<DBCrewObject> GetItemAsync(int id)
-        {
-            await Init();
-            return await Database.Table<DBCrewObject>().Where(i => i.Id == id).FirstOrDefaultAsync();
+            return await Database.Table<DBTripCrewObject>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<int> SaveItemAsync(DBCrewObject item)
+        public async Task<int> SaveItemAsync(DBTripCrewObject item)
         {
             await Init();
             if (item.Id != 0)
@@ -54,7 +49,7 @@ namespace FishermanApp.Constants.LocalDatabase.Tables
                 return await Database.InsertAsync(item);
         }
 
-        public async Task<int> DeleteItemAsync(DBCrewObject item)
+        public async Task<int> DeleteItemAsync(DBTripCrewObject item)
         {
             await Init();
             return await Database.DeleteAsync(item);

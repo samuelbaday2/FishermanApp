@@ -42,6 +42,7 @@ namespace FishermanApp.ViewModels
         public CrewTable _crewTable;
         public TrackingTable _trackingTable;
         public HACCPTable _hACCPTable;
+        public TripCrewTable _tripCrewTable;
         public BaseViewModel()
         {
             _tripTable = new TripTable();
@@ -52,6 +53,7 @@ namespace FishermanApp.ViewModels
             _crewTable = new CrewTable();
             _trackingTable = new TrackingTable();
             _hACCPTable = new HACCPTable();
+            _tripCrewTable = new();
 
             _catchSpeciesTable.AddSpeciesAsync();
             _baitSpeciesTable.AddSpeciesAsync();

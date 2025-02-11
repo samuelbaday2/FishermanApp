@@ -26,6 +26,8 @@ public partial class TripHistoryPage : ContentPage
             DbTripObject firstTripObject = await _viewModel._tripTable.GetFirstItemAsync();
             HistoryDatePicker.MinimumDate = firstTripObject.RecordedOn; 
             HistoryDatePicker.MaximumDate = DateTime.Today;
+            HistoryDatePicker2.MinimumDate = firstTripObject.RecordedOn;
+            HistoryDatePicker2.MaximumDate = DateTime.Today;
         }
         catch { }
 

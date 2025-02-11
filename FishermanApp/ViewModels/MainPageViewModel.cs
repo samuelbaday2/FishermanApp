@@ -257,6 +257,7 @@ namespace FishermanApp.ViewModels
                     StartTripLongitude = gps == null ? AppResources.GpsOff : gps.Longitude.ToString(),
                     IsTripEnded = false,
                     IsActive = true,
+                    TripStartedOn = DateTime.Now,
                     Captain = CaptainName,
                     CrewNumber = crew.Where(x => x.IsChecked).Count().ToString(),
                 });
@@ -315,6 +316,7 @@ namespace FishermanApp.ViewModels
                         FoodCost = FoodCost,
                         FuelCost = FuelCost,
                         CrewNumber = crew.Where(x => x.IsChecked).Count().ToString(),
+                        TripStartedOn = tripObject.TripStartedOn,
                     });
 
                     try
@@ -323,6 +325,23 @@ namespace FishermanApp.ViewModels
                         DBSetObject lastSetObject = setList.LastOrDefault();
                         lastSetObject.SetEnded = true;
                         await _tripSetTable.SaveItemAsync(lastSetObject);
+                    }
+                    catch { }
+
+                    try
+                    {
+                        var availableCrew = await _crewTable.GetAvailableCrew();
+
+                        foreach (DBCrewObject availCrew in availableCrew) 
+                        {
+                            await _tripCrewTable.SaveItemAsync(new DBTripCrewObject
+                            {
+                                TripId = tripObject.Id,
+                                CrewFirstname = availCrew.Firstname,
+                                CrewLastname = availCrew.Lastname,
+                                RecordedOn = DateTime.Now,
+                            });
+                        }
                     }
                     catch { }
 
@@ -360,7 +379,7 @@ namespace FishermanApp.ViewModels
                    
 
                     currentSet.SetEnded = true;
-          
+                    
                     currentSet.SetEndedOn = DateTime.Now;
                   
                     await _tripSetTable.SaveItemAsync(currentSet);
@@ -392,7 +411,7 @@ namespace FishermanApp.ViewModels
                     {
                         TripId = tripList.LastOrDefault().Id,
                         RecordedOn = DateTime.Now,
-
+                        SetStartedOn = DateTime.Now,
                         StartSetLatitude = gps == null ? AppResources.GpsOff : gps.Latitude.ToString(),
                         StartSetLongitude = gps == null ? AppResources.GpsOff : gps.Longitude.ToString(),
 

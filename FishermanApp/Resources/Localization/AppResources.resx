@@ -172,7 +172,7 @@
     <value>Finish Set</value>
   </data>
   <data name="EndTrip" xml:space="preserve">
-    <value>End Fishing</value>
+    <value>End Trip</value>
   </data>
   <data name="FlyoutStartTrip" xml:space="preserve">
     <value>START TRIP</value>
@@ -307,7 +307,7 @@
     <value>Begin Set</value>
   </data>
   <data name="StartTrip" xml:space="preserve">
-    <value>Start Fishing</value>
+    <value>Start Trip</value>
   </data>
   <data name="TripCoordinates" xml:space="preserve">
     <value>Trip Start Coordinates</value>

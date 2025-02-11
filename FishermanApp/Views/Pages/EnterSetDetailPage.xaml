@@ -187,7 +187,73 @@
 
                 </VerticalStackLayout>
 
+                <VerticalStackLayout Margin="0,0,0,8">
+                    <Label
+     
+     TextColor="{StaticResource Primary}"
+     FontAttributes="Bold"
+     FontSize="30"
+     Text="Min Depth"/>
 
+                    <Grid>
+                        <Border 
+             StrokeThickness="4"
+             Stroke ="{StaticResource ButtonGreen}"
+             StrokeShape="RoundRectangle 10,10,10,10"
+             HeightRequest="80">
+
+                            <Entry
+                 Completed="Entry_Completed"
+                 Margin="8,0"
+                 ReturnType="Next"
+                 Keyboard="Numeric"
+                 TextColor="Black"
+                 FontAttributes="Bold"
+                 FontSize="40"
+                 Text="{Binding MinDepth}"
+                 />
+
+                        </Border>
+
+                        <Label TextColor="Black" FontAttributes="Bold" FontSize="24" HorizontalOptions="End" WidthRequest="60" VerticalTextAlignment="Center" VerticalOptions="Center" Text="{Binding UoM}"/>
+                    </Grid>
+
+
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Margin="0,0,0,8">
+                    <Label
+
+TextColor="{StaticResource Primary}"
+FontAttributes="Bold"
+FontSize="30"
+Text="Max Depth"/>
+
+                    <Grid>
+                        <Border 
+        StrokeThickness="4"
+        Stroke ="{StaticResource ButtonGreen}"
+        StrokeShape="RoundRectangle 10,10,10,10"
+        HeightRequest="80">
+
+                            <Entry
+            Completed="Entry_Completed"
+            Margin="8,0"
+            ReturnType="Next"
+            Keyboard="Numeric"
+            TextColor="Black"
+            FontAttributes="Bold"
+            FontSize="40"
+            Text="{Binding MaxDepth}"
+            />
+
+                        </Border>
+
+                        <Label TextColor="Black" FontAttributes="Bold" FontSize="24" HorizontalOptions="End" WidthRequest="60" VerticalTextAlignment="Center" VerticalOptions="Center" Text="{Binding UoM}"/>
+                    </Grid>
+
+
+                </VerticalStackLayout>
 
                 <VerticalStackLayout Margin="0,0,0,8">
                     <Label

@@ -223,7 +223,7 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to End Fishing.
+        ///   Looks up a localized string similar to End Trip.
         /// </summary>
         public static string EndTrip {
             get {
@@ -628,7 +628,7 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start Fishing.
+        ///   Looks up a localized string similar to Start Trip.
         /// </summary>
         public static string StartTrip {
             get {
