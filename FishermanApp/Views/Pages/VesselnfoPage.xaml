@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FishermanApp.Views.Pages.VesselnfoPage"
+             Title="VESSEL INFO"
+             xmlns:res="clr-namespace:FishermanApp.Resources.Localization"
+             BackgroundColor="White">
+    <VerticalStackLayout Margin="32">
+        <VerticalStackLayout Margin="0,0,0,8">
+            <Label
+                   TextColor="{StaticResource Primary}"
+                   FontAttributes="Bold"
+                   FontSize="Large"
+                   Text="{x:Static res:AppResources.VesselName}"/>
+
+            <Label
+                   TextColor="Black"
+                   FontAttributes="Bold"
+                   FontSize="40"
+                   Text="{Binding VesselName}"/>
+
+           
+        </VerticalStackLayout>
+
+        <!--<VerticalStackLayout Margin="0,0,0,8">
+                   <Label
+                   TextColor="{StaticResource Primary}"
+                   FontAttributes="Bold"
+                   FontSize="Large"
+                   Text="{x:Static res:AppResources.HomePort}"/>
+
+                   <Label
+                       x:Name="PortLabel"
+                       TextColor="Black"
+                       FontAttributes="Bold"
+                       FontSize="40"
+                       Text="{Binding HomePort}"/>
+
+                   <VerticalStackLayout.Triggers>
+                       <DataTrigger 
+                           TargetType="VerticalStackLayout"
+                           Binding="{Binding Source={x:Reference PortLabel},
+                                   Path=Text.Length}"
+                           Value="0">
+                           <Setter Property="IsVisible"
+                           Value="False" />
+
+                       </DataTrigger>
+                   </VerticalStackLayout.Triggers>
+               </VerticalStackLayout>-->
+
+
+        <VerticalStackLayout Margin="0,0,0,8">
+            <Label
+                   TextColor="{StaticResource Primary}"
+                   FontAttributes="Bold"
+                   FontSize="Large"
+                   Text="{x:Static res:AppResources.Captain}"/>
+
+            <Border 
+                       Margin="0,0"
+                       StrokeThickness="4"
+                       Stroke ="{StaticResource ButtonGreen}"
+                       StrokeShape="RoundRectangle 10,10,10,10"
+                       HeightRequest="80">
+
+                <Entry
+                           Margin="16,0"
+                           TextColor="Black"
+                           FontAttributes="Bold"
+                           FontSize="40"
+                           Text="{Binding CaptainName}"/>
+            </Border>
+
+         
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Margin="0,0,0,8">
+            <Label
+           TextColor="{StaticResource Primary}"
+           FontAttributes="Bold"
+           FontSize="Large"
+           Text="Country"/>
+
+            <Border 
+               Margin="0,0"
+               StrokeThickness="4"
+               Stroke ="{StaticResource ButtonGreen}"
+               StrokeShape="RoundRectangle 10,10,10,10"
+               HeightRequest="80">
+
+                <Entry
+                   Margin="16,0"
+                   TextColor="Black"
+                   FontAttributes="Bold"
+                   FontSize="40"
+                    x:Name="CountryEntry"
+                   Text="{Binding Country}"/>
+            </Border>
+
+
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Margin="0,0,0,8">
+            <Label
+    TextColor="{StaticResource Primary}"
+    FontAttributes="Bold"
+    FontSize="Large"
+    Text="Home Port"/>
+
+            <Border 
+        Margin="0,0"
+        StrokeThickness="4"
+        Stroke ="{StaticResource ButtonGreen}"
+        StrokeShape="RoundRectangle 10,10,10,10"
+        HeightRequest="80">
+
+                <Entry
+            Margin="16,0"
+            TextColor="Black"
+            FontAttributes="Bold"
+            FontSize="40"
+                     x:Name="HomePortEntry"
+            Text="{Binding HomePort}"/>
+            </Border>
+
+
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,6 +1,7 @@
 using FishermanApp.Resources.Localization;
 using FishermanApp.ViewModels;
 using FishermanApp.ViewModels.Selection;
+using FishermanApp.Views.Selection;
 
 namespace FishermanApp.Views.Pages;
 
@@ -27,7 +28,9 @@ public partial class EnterSetDetailPage : ContentPage
         Entry.IsEnabled = false;
         Entry.IsEnabled = true;
 
-        Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.HookType)).FirstOrDefault();
+        //Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.HookType)).FirstOrDefault();
+        await Shell.Current.Navigation.PushAsync(new HookTypeSelection());
+
     }
 
     private async void BaitSpeciesEntry_Focused(object sender, FocusEventArgs e)
@@ -37,7 +40,8 @@ public partial class EnterSetDetailPage : ContentPage
         Entry.IsEnabled = false;
         Entry.IsEnabled = true;
 
-        Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.BaitSpecie)).FirstOrDefault();
+        //Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.BaitSpecie)).FirstOrDefault();
+        await Shell.Current.Navigation.PushAsync(new SpeciesSelection());
     }
 
     private void Entry_Completed(object sender, EventArgs e)

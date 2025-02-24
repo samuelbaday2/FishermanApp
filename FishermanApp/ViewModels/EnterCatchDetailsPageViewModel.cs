@@ -19,6 +19,7 @@ namespace FishermanApp.ViewModels
     {
         private ObservableCollection<CatchObject> _catchDataCollection;
         private string _catchQuanity;
+      
 
         private List<string> _pickerItems;
         private int counter = 0;
@@ -28,10 +29,12 @@ namespace FishermanApp.ViewModels
         public List<string> PickerItems { get { return _pickerItems; } set { SetProperty(ref _pickerItems, value); } }
 
         public ICommand AddRowCommand { private set; get; }
+        public ICommand AddETPRowCommand { private set; get; }
         public ICommand AddCatchCommand { private set; get; }
         public EnterCatchDetailsPageViewModel() 
         {
             AddRowCommand = new Command(DoAddRow);
+            AddETPRowCommand = new Command(DoAddRowETP);
             AddCatchCommand = new Command(DoAddCatch);
 
             Initialize();
@@ -71,12 +74,13 @@ namespace FishermanApp.ViewModels
                     Id = obj.Id,
                     Weight = obj.Weight, 
                     ProcessingType = obj.ProcessingType,
+                    IsEtp = obj.IsETP,
                 });
             }
 
             CatchDataCollection.Add(new CatchObject { Index = counter++ });
         }
-        public async Task UpdateCatchRow(int itemIndex,string species, string scientificName, string weight, string processgingType) {
+        public async Task UpdateCatchRow(int itemIndex,string species, string scientificName, string weight, string processgingType, bool isETP) {
             for(int x = 0;  x < CatchDataCollection.Count; x++)
             {
                 if (CatchDataCollection[x].Index == itemIndex)
@@ -86,6 +90,7 @@ namespace FishermanApp.ViewModels
                     catchObject.ScientificName = scientificName;
                     catchObject.Weight = weight;
                     catchObject.ProcessingType = processgingType;
+                    catchObject.IsEtp = isETP;
                     CatchDataCollection[x] = catchObject;
                 }
             }
@@ -155,6 +160,8 @@ namespace FishermanApp.ViewModels
                                 SetNumber = currentSetCount,
                                 Weight = catchObject.Weight,
                                 ProcessingType = catchObject.ProcessingType,
+                                IsETP = catchObject.IsEtp,
+                                IsReleased = false,
                             };
 
                             if (catchObject.Id != null) 
@@ -170,7 +177,8 @@ namespace FishermanApp.ViewModels
                     lastSet.HasCatchData = true;
                     await _tripSetTable.SaveItemAsync(lastSet);
 
-                    Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.Home)).FirstOrDefault();
+                    //Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.Home)).FirstOrDefault();
+                    Shell.Current.Navigation.PopAsync();
                 }
                 catch (Exception ee)
                 {
@@ -186,7 +194,20 @@ namespace FishermanApp.ViewModels
 
         private async void DoAddRow(object obj)
         {
-            CatchDataCollection.Add(new CatchObject { Index = counter++ });
+            CatchDataCollection.Add(new CatchObject
+            {
+                Index = counter++,
+                IsEtp = false,
+            });
+        }
+
+        private async void DoAddRowETP(object obj)
+        {
+            CatchDataCollection.Add(new CatchObject
+            {
+                Index = counter++,
+                IsEtp = true,
+            });
         }
     }
 }

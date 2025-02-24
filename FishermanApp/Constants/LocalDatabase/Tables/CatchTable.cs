@@ -29,6 +29,18 @@ namespace FishermanApp.Constants.LocalDatabase.Tables
             await Init();
             return await Database.Table<DBCatchObject>().ToListAsync();
         }
+        public async Task<bool> GetEtpItemsAsync(int setId)
+        {
+            await Init();
+            var list = await Database.Table<DBCatchObject>().Where(x => x.IsETP && x.TripId == setId).ToListAsync();
+            return list.Count > 0;
+        }
+        public async Task<List<DBCatchObject>> GetEtpItemsListAsync(int setId)
+        {
+            await Init();
+            var list = await Database.Table<DBCatchObject>().Where(x => x.IsETP && x.TripId == setId).ToListAsync();
+            return list;
+        }
         public async Task<List<DBCatchObject>> GetItemsBySetIdAsync(int setId)
         {
             await Init();

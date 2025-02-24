@@ -19,6 +19,9 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.ComponentModel;
 using FishermanApp.Views.Selection;
+using FishermanApp.Views.Pages;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 
 #if ANDROID
 
@@ -52,6 +55,9 @@ namespace FishermanApp.ViewModels
         private bool _isGPSTrackingOn;
         private Task _gpsTask;
         private string _gPSSaved;
+        private string _country;
+      
+
         private CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
         public string GPSSaved { get { return _gPSSaved; } set { SetProperty(ref _gPSSaved, value); } }
@@ -60,6 +66,7 @@ namespace FishermanApp.ViewModels
         public string FuelAmount { get { return _fuelAmount; } set { SetProperty(ref _fuelAmount, value); } }
         public string VesselName { get { return _vesselName; } set { SetProperty(ref _vesselName, value); } }
         public string HomePort { get { return _homePort; } set { SetProperty(ref _homePort, value); } }
+        public string Country { get { return _country; } set { SetProperty(ref _country, value); } }
         public string CaptainName { get { return _captainName; } set { SetProperty(ref _captainName, value); } }
         public string GpsStatus { get { return _gpsStatus; } set { SetProperty(ref _gpsStatus, value); } }
         public string ConnectionStatus { get { return _connectionStatus; } set { SetProperty(ref _connectionStatus, value); } }
@@ -67,18 +74,21 @@ namespace FishermanApp.ViewModels
         public bool IsAddCatchVisible { get { return _isAddCatchVisible; } set { SetProperty(ref _isAddCatchVisible, value); } }
         public bool IsLastSetNotEnded { get { return _isLastSetEnded; } set { SetProperty(ref _isLastSetEnded, value); } }
 
+        public bool _isReleaseVisible;
+        public bool IsReleaseVisible { get { return _isReleaseVisible; } set { SetProperty(ref _isReleaseVisible, value); } }
         public ICommand StartTripCommand { private set; get; }
         public ICommand EndTripCommand { private set; get; }
         public ICommand StartSetCommand { private set; get; }
         public ICommand AddCatchCommand { private set; get; }
+        public ICommand ReleaseCommand { private set; get; }
 
-        public MainPageViewModel(IDisplayAlertService displayAlertService, IConnectionHandlerService connectionHandlerService, ILocationFeatureService locationFeatureService, EnterSetDetailPageViewModel enterSetDetailPageViewModel) {
+        public MainPageViewModel(IDisplayAlertService displayAlertService, IConnectionHandlerService connectionHandlerService, ILocationFeatureService locationFeatureService, EnterSetDetailPageViewModel enterSetDetailPageViewModel) : base()
+        {
             StartTripCommand = new Command(DoStartTrip);
             EndTripCommand = new Command(DoEndTrip);
             StartSetCommand = new Command(DoStartSet);
             AddCatchCommand = new Command(DoAddMoreCatch);
-
-
+            ReleaseCommand =  new Command(DoRelease);
 
             _displayAlertService = displayAlertService;
             _connectionHandlerService = connectionHandlerService;
@@ -91,8 +101,6 @@ namespace FishermanApp.ViewModels
 
             _enterSetDetailPageViewModel = enterSetDetailPageViewModel;
             GetGpsStatusAsync();
-
-
 
 
             GetGpsCount();
@@ -181,6 +189,7 @@ namespace FishermanApp.ViewModels
                 if (!lastTripData.LastOrDefault().IsTripEnded )
                 {
                     IsAddCatchVisible = true;
+                    IsReleaseVisible = await _catchTable.GetEtpItemsAsync(lastTripData.LastOrDefault().Id);
                 }
                 else {
                     IsAddCatchVisible = false;
@@ -237,6 +246,7 @@ namespace FishermanApp.ViewModels
         }
         private async void DoStartTrip(object obj)
         {
+            await Shell.Current.Navigation.PushAsync(new CardHomePage(this));          
             Shell.Current.Navigation.PushModalAsync(new HACCP());
             SetBusyStatusAsync(false);
             if(sephamoreSlim.CurrentCount == 0)
@@ -317,6 +327,8 @@ namespace FishermanApp.ViewModels
                         FuelCost = FuelCost,
                         CrewNumber = crew.Where(x => x.IsChecked).Count().ToString(),
                         TripStartedOn = tripObject.TripStartedOn,
+                        HomePort = Preferences.Get("HomePortEntry",string.Empty),
+                        Country = Preferences.Get("CountryEntry", string.Empty),
                     });
 
                     try
@@ -347,6 +359,9 @@ namespace FishermanApp.ViewModels
 
                     await Shell.Current.Navigation.PushModalAsync(new CatchModal(tripObject.Id));
                     await InitializeAsync();
+
+                    
+
                 }
                 catch (Exception ee)
                 {
@@ -424,8 +439,8 @@ namespace FishermanApp.ViewModels
                     }
                     catch { }
 
-                    Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.SetDetails)).FirstOrDefault();
-
+                    //Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.SetDetails)).FirstOrDefault();
+                    await Shell.Current.Navigation.PushAsync(new EnterSetDetailPage(new()));
                 }
                 catch (Exception ee)
                 {
@@ -438,8 +453,39 @@ namespace FishermanApp.ViewModels
                     SetBusyStatusAsync(true);
                 }
             }
+
             
-            
+        }
+
+        private async void DoRelease(object obj)
+        {
+            try
+            {
+                var lastTripData = await _tripTable.GetItemsAsync();
+
+                var list = await _catchTable.GetEtpItemsListAsync(lastTripData.LastOrDefault().Id);
+
+                foreach (var item in list)
+                {
+                    item.IsReleased = true;
+                    item.ReleaseTransactionDateTime = DateTime.Now;
+                    await _catchTable.SaveItemAsync(item);
+                }
+
+                list = await _catchTable.GetEtpItemsListAsync(lastTripData.LastOrDefault().Id);
+
+                IsReleaseVisible = false;
+
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    Toast.Make("Records Updated to ETP Released", ToastDuration.Long).Show();
+                  
+                });
+            }
+            catch 
+            {
+
+            }
         }
     }
 }

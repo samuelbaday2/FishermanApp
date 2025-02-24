@@ -43,7 +43,7 @@ namespace FishermanApp.ViewModels
         public TrackingTable _trackingTable;
         public HACCPTable _hACCPTable;
         public TripCrewTable _tripCrewTable;
-        public BaseViewModel()
+        public BaseViewModel() : base()
         {
             _tripTable = new TripTable();
             _tripSetTable = new TripSetTable();

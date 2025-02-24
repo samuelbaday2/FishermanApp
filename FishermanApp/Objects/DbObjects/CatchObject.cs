@@ -17,5 +17,6 @@ namespace FishermanApp.Objects.DbObjects
         public string Weight { get; set; }
         public string ScientificName { get; set; }
         public int? Id { get; set; }
+        public bool IsEtp { get; set; }
     }
 }

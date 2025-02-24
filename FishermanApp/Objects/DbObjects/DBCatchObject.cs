@@ -26,5 +26,8 @@ namespace FishermanApp.Objects.DbObjects
         public int SetNumber { get; set; }
         public int VesselId { get; set; }
         public string VesselName { get; set; } = string.Empty;
+        public bool IsETP { get; set; }
+        public bool IsReleased { get; set; }
+        public DateTime ReleaseTransactionDateTime { get; set; }
     }
 }

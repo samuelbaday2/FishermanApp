@@ -54,12 +54,13 @@ namespace FishermanApp.ViewModels.Selection
 
         }
 
-        private void DoSelect(object obj)
+        private async void DoSelect(object obj)
         {
             SelectionObject SelectedObject = obj as SelectionObject;
-   
 
-            Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.SetDetails)).FirstOrDefault();
+
+            //Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.SetDetails)).FirstOrDefault();
+            await Shell.Current.Navigation.PopAsync();
 
             MessagingCenter.Send<HookTypeSelectionViewModel, SelectionObject>(this, AppResources.HookType, SelectedObject);
         }

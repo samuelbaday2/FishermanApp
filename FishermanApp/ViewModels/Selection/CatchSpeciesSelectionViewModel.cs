@@ -15,20 +15,20 @@ namespace FishermanApp.ViewModels.Selection
     public class CatchSpeciesSelectionViewModel : SelectionBaseViewModel
     {
         public ICommand OnSelectCommand { private set; get; }
-        public CatchSpeciesSelectionViewModel() {
+        public bool _isETP;
+        public CatchSpeciesSelectionViewModel(bool IsETP) {
+            _isETP = IsETP;
             SelectionList = new List<SelectionObject>();
 
             OnSelectCommand = new Command(DoSelect);
 
-            SelectionCollection = new ObservableCollection<SelectionObject>();
-
-          
+            SelectionCollection = new ObservableCollection<SelectionObject>();      
         }
         public async Task InitializeAsync()
         {
             SelectionCollection = new ObservableCollection<SelectionObject>();
             var SpeciesList = JsonConvert.DeserializeObject<List<DBSpeciesObject>>(Preferences.Get(Pref.CATCH_SPECIES_LIST, string.Empty));
-            foreach (var Species in SpeciesList)
+            foreach (var Species in SpeciesList.Where(x => x.IsETP == _isETP))
             {
                 SelectionCollection.Add(new SelectionObject
                 {
@@ -41,9 +41,9 @@ namespace FishermanApp.ViewModels.Selection
         private void DoSelect(object obj)
         {
             SelectionObject SelectedObject = obj as SelectionObject;
-
-            Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchDetails)).FirstOrDefault();
-
+            SelectedObject.IsETP = _isETP;
+            //Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchDetails)).FirstOrDefault();
+            Shell.Current.Navigation.PopAsync();
             MessagingCenter.Send(this, AppResources.CatchSpeciesSelection, SelectedObject);
 
         }

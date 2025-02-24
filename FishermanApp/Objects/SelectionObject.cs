@@ -12,5 +12,6 @@ namespace FishermanApp.Objects
         public string SelectionTitle { get; set; }
         public string SelectionImage { get; set; }
         public string SubTitle { get; set; }
+        public bool IsETP { get; set; }
     }
 }

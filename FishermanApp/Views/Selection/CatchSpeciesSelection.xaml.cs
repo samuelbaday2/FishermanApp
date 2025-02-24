@@ -25,8 +25,10 @@ public partial class CatchSpeciesSelection : ContentPage
 
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
-        Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchDetails)).FirstOrDefault();
+        //Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchDetails)).FirstOrDefault();
+        //Shell.Current.Navigation.PopAsync();
         //InitializeConfig.InitializeFunction = false;
-        Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains("CustomSpecie")).FirstOrDefault();
+        //Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains("CustomSpecie")).FirstOrDefault();
+        Shell.Current.Navigation.PushAsync(new CustomSpecie());
     }
 }

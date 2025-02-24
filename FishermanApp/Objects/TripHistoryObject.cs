@@ -65,6 +65,8 @@ namespace FishermanApp.Objects
         public string FuelAmount { get; set; }
         public string FoodCost { get; set; }
         public string CrewNumber { get; set; }
+        public string HomePort { get; set; }
+        public string Country { get; set; }
         public DateTime TripStartedOn { get; set; }
     }
 }

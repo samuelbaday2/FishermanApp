@@ -25,27 +25,29 @@ public partial class MainPage : ContentPage
         base.OnAppearing();
         await _viewModel.InitializeAsync();
 
-        if (Preferences.Get(ConfigClass.PERMISSION_LOC, true)) 
+        if (!Preferences.ContainsKey(ConfigClass.PERMISSION_LOC) || !Preferences.Get(ConfigClass.PERMISSION_LOC, false))
         {
             bool answer = await DisplayAlert("Location Permission", "Fisherman app collects location data to enable tracking even if the app is on background to get fishing data to determine where fishermen get more fish", "Allow", "Decline");
 
-            if (answer) 
+            if (answer)
             {
+                Preferences.Set(ConfigClass.PERMISSION_LOC, true);
                 WeakReferenceMessenger.Default.Send(ConfigClass.PERMISSION_LOC);
             }
-           
         }
-        //if (await _updateService.CheckIfFileExistsOnServerAsync())
-        //{
-        //    var result = await DisplayAlert("App Update", "A new version of the app is available, would you like to download and update?", "Download Update", "Cancel");
+            //}
+            //if (await _updateService.CheckIfFileExistsOnServerAsync())
+            //{
+            //    var result = await DisplayAlert("App Update", "A new version of the app is available, would you like to download and update?", "Download Update", "Cancel");
 
-        //    if (result)
-        //    {
-        //        _viewModel.SetBusyStatusAsync(false);
-        //        _updateService.DownloadApk(default);
-        //        _updateService.DownloadPercentageChanged += downloadPercentChanged;
-        //    }
-        //}
+            //    if (result)
+            //    {
+            //        _viewModel.SetBusyStatusAsync(false);
+            //        _updateService.DownloadApk(default);
+            //        _updateService.DownloadPercentageChanged += downloadPercentChanged;
+            //    }
+            //}
+        
     }
     public void downloadPercentChanged(object? sender, int percent)
     {
@@ -59,7 +61,22 @@ public partial class MainPage : ContentPage
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
+        await Shell.Current.Navigation.PushAsync(new CardHomePage(_viewModel));
+    }
+
+    private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
         await Shell.Current.Navigation.PushAsync(new ManageCrewPage());
+    }
+
+    private async void TapGestureRecognizer_Tapped_1(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.Navigation.PushAsync(new ConnectivityPage(_viewModel));
+    }
+
+    private async void TapGestureRecognizer_Tapped_2(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.Navigation.PushAsync(new VesselnfoPage(_viewModel));
     }
 }
 

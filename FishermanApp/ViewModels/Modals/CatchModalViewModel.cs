@@ -41,9 +41,19 @@ namespace FishermanApp.ViewModels.Modals
             }
          
         }
-        private void DoClose(object obj)
+        private async void DoClose(object obj)
         {
-            Shell.Current.Navigation.PopModalAsync();
+            await Shell.Current.Navigation.PopModalAsync();
+
+            try
+            {
+                await Task.Delay(500);
+                await Shell.Current.Navigation.PopAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

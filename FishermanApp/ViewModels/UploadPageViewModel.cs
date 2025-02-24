@@ -87,7 +87,10 @@ namespace FishermanApp.ViewModels
                             request2.AddParameter("EditedOn", DateTime.Now);
                             request2.AddParameter("TripStartedOn", tripObject.TripStartedOn);
 
-                            request2.AddUrlSegment("function", "InsertTripRecordUpdated");
+                            request2.AddParameter("HomePort", tripObject.HomePort);
+                            request2.AddParameter("Country", tripObject.Country);
+
+                            request2.AddUrlSegment("function", "InsertTripRecord");
 
                             IRestResponse response2 = client2.Execute(request2);
                             string resposeString = response2.Content;
@@ -202,7 +205,11 @@ namespace FishermanApp.ViewModels
                 request2.AddParameter("EditedOn", DateTime.Now);
                 request2.AddParameter("ProcessingType", catchObject.ProcessingType);
 
-                request2.AddUrlSegment("function", "InsertCatchRecordUpdated");
+                request2.AddParameter("IsETP", catchObject.IsETP ? catchObject.IsETP : false);
+                request2.AddParameter("IsReleased", catchObject.IsETP ? catchObject.IsReleased : false);
+                request2.AddParameter("ReleasedDateTime", catchObject.IsETP ? catchObject.ReleaseTransactionDateTime : DateTime.Now);
+
+                request2.AddUrlSegment("function", "InsertCatchRecord");
 
                 IRestResponse response2 = client2.Execute(request2);
                 string resposeString = response2.Content;

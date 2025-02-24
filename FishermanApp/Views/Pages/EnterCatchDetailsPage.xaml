@@ -11,7 +11,7 @@
 
     <Shell.TitleView>
         <Grid>
-         
+
             <Picker 
                 IsVisible="False"
                 x:Name="SetPicker"
@@ -21,6 +21,7 @@
                 FontAttributes="Bold"
                 Margin="16,0" 
                 HorizontalOptions="End"/>
+
         </Grid>
     </Shell.TitleView>
 
@@ -36,24 +37,35 @@
         <Grid 
                 Margin="16,8"
                 Grid.Row="0" 
+                ColumnDefinitions="60*,40*"
                 HorizontalOptions="FillAndExpand">
-            <Label
-                            TextColor="{StaticResource Primary}"
+            <Button              
+                Grid.Column="0"
                             FontAttributes="Bold"
-                            VerticalTextAlignment="Center"
-                            FontSize="30"
-                            Text="{x:Static res:AppResources.AddRow}"/>
+                            HorizontalOptions="FillAndExpand"
+                            FontSize="25"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="White"
+                            Text="{x:Static res:AppResources.AddRow}"
+                Command="{Binding AddRowCommand}"/>
 
-            <ImageButton 
+            <!--<Button           
+                Margin="8,0"
+                HorizontalOptions="FillAndExpand"
+                Grid.Column="1"
+                 FontAttributes="Bold"
+                 
+                 FontSize="30"
+                 BackgroundColor="{StaticResource Primary}"
+                 TextColor="White"
+                 Text="ADD ETP"
+     Command="{Binding AddETPRowCommand}"/>-->
+            <!--<ImageButton 
                     Command="{Binding AddRowCommand}"
                     Source="add_icon" 
                     HorizontalOptions="End" 
-                    WidthRequest="50">
-
-                <ImageButton.Behaviors>
-                    <toolkit:IconTintColorBehavior TintColor="{StaticResource ButtonGreen}"/>
-                </ImageButton.Behaviors>
-            </ImageButton>
+                    WidthRequest="50">-->
+            
         </Grid>
 
         <BoxView 
@@ -68,8 +80,7 @@
                 SelectionMode="None"
                 Margin="16"
                 ItemsSource="{Binding CatchDataCollection}" 
-                SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}"
-                >
+                SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>

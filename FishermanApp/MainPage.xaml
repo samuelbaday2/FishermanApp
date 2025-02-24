@@ -21,343 +21,69 @@
                 <RowDefinition Height="65"/>
             </Grid.RowDefinitions>
 
-            <Border              
-                Margin="16,16,16,0"
-                Grid.Row="0">
+            <VerticalStackLayout Grid.Row="0" Margin="16">
+                <Border StrokeShape="RoundRectangle 30,30,30,30" Stroke="{StaticResource Primary}" HeightRequest="80" Margin="0,0,0,8">
+                    <Grid>
+                        <Label Text="Vessel Info" TextColor="Black" VerticalOptions="Center" FontSize="32" FontAttributes="Bold" Margin="16"/>
 
-                <ScrollView Orientation="Vertical">
-                    <VerticalStackLayout Padding="16">
-                        <VerticalStackLayout Margin="0,0,0,8">
-                            <Label
-                            TextColor="{StaticResource Primary}"
-                            FontAttributes="Bold"
-                            FontSize="Large"
-                            Text="{x:Static res:AppResources.VesselName}"/>
+                        <Image Source="rightarrow" VerticalOptions="Center" HorizontalOptions="End" HeightRequest="30" Margin="8,0">
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}"/>
+                            </Image.Behaviors>
+                        </Image>
+                    </Grid>
 
-                            <Label
-                            TextColor="Black"
-                            FontAttributes="Bold"
-                            FontSize="40"
-                            Text="{Binding VesselName}"/>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2"/>
+                    </Border.GestureRecognizers>
+                </Border>
 
-                            <VerticalStackLayout.Triggers>
-                                <DataTrigger 
-                                    TargetType="VerticalStackLayout"
-                                    Binding="{Binding HasPendingTrip}"
-                                    Value="True">
-                                                                        <Setter Property="IsVisible"
-                                    Value="False" />
+                <Border StrokeShape="RoundRectangle 30,30,30,30" Stroke="{StaticResource Primary}" HeightRequest="80" Margin="0,0,0,8">
+                    <Grid>
+                        <Label Text="Connectivity" TextColor="Black" VerticalOptions="Center" FontSize="32" FontAttributes="Bold" Margin="16"/>
 
-                                                                    </DataTrigger>
-                                                                    <DataTrigger 
-                                    TargetType="VerticalStackLayout"
-                                    Binding="{Binding HasPendingTrip}"
-                                    Value="False">
-                                                                        <Setter Property="IsVisible"
-                                    Value="True" />
+                        <Image Source="rightarrow" VerticalOptions="Center" HorizontalOptions="End" HeightRequest="30" Margin="8,0">
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}"/>
+                            </Image.Behaviors>
+                        </Image>
+                    </Grid>
 
-                                </DataTrigger>
-                            </VerticalStackLayout.Triggers>
-                        </VerticalStackLayout>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                    </Border.GestureRecognizers>
+                </Border>
 
-                        <!--<VerticalStackLayout Margin="0,0,0,8">
-                            <Label
-                            TextColor="{StaticResource Primary}"
-                            FontAttributes="Bold"
-                            FontSize="Large"
-                            Text="{x:Static res:AppResources.HomePort}"/>
+                <Border StrokeShape="RoundRectangle 30,30,30,30" Stroke="{StaticResource Primary}" HeightRequest="80" Margin="0,0,0,32">
+                    <Grid>
+                        <Label Text="Crew" TextColor="Black" VerticalOptions="Center" FontSize="32" FontAttributes="Bold" Margin="16"/>
 
-                            <Label
-                                x:Name="PortLabel"
-                                TextColor="Black"
-                                FontAttributes="Bold"
-                                FontSize="40"
-                                Text="{Binding HomePort}"/>
+                        <Image Source="rightarrow" VerticalOptions="Center" HorizontalOptions="End" HeightRequest="30" Margin="8,0">
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}"/>
+                            </Image.Behaviors>
+                        </Image>
+                    </Grid>
 
-                            <VerticalStackLayout.Triggers>
-                                <DataTrigger 
-                                    TargetType="VerticalStackLayout"
-                                    Binding="{Binding Source={x:Reference PortLabel},
-                                            Path=Text.Length}"
-                                    Value="0">
-                                    <Setter Property="IsVisible"
-                                    Value="False" />
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                    </Border.GestureRecognizers>
+                </Border>
 
-                                </DataTrigger>
-                            </VerticalStackLayout.Triggers>
-                        </VerticalStackLayout>-->
+                <Button           
+     Margin="0,0"
+     IsEnabled="{Binding IsNotBusy}"
+     FontSize="30"
+    
+     Command="{Binding StartTripCommand}"
+     Text="{x:Static res:AppResources.StartTrip}"
+     TextColor="White"
+     BackgroundColor="{StaticResource ButtonGreen}"
+     HeightRequest="90"            
+     VerticalOptions="End"/>
+            </VerticalStackLayout>
 
-
-                        <VerticalStackLayout Margin="0,0,0,8">
-                            <Label
-                            TextColor="{StaticResource Primary}"
-                            FontAttributes="Bold"
-                            FontSize="Large"
-                            Text="{x:Static res:AppResources.Captain}"/>
-
-                            <Border 
-                                Margin="0,0"
-                                StrokeThickness="4"
-                                Stroke ="{StaticResource ButtonGreen}"
-                                StrokeShape="RoundRectangle 10,10,10,10"
-                                HeightRequest="80">
-
-                                <Entry
-                                    Margin="16,0"
-                                    TextColor="Black"
-                                    FontAttributes="Bold"
-                                    FontSize="40"
-                                    Text="{Binding CaptainName}"/>
-                            </Border>
-
-                            <VerticalStackLayout.Triggers>
-                                <DataTrigger 
-         TargetType="VerticalStackLayout"
-         Binding="{Binding HasPendingTrip}"
-         Value="True">
-                                    <Setter Property="IsVisible"
-         Value="False" />
-
-                                </DataTrigger>
-                                <DataTrigger 
-         TargetType="VerticalStackLayout"
-         Binding="{Binding HasPendingTrip}"
-         Value="False">
-                                    <Setter Property="IsVisible"
-         Value="True" />
-
-                                </DataTrigger>
-                            </VerticalStackLayout.Triggers>
-                        </VerticalStackLayout>
-                   
-
-                        <Button 
-                            Clicked="Button_Clicked"
-                             Margin="0,8"
-                             HeightRequest="65"
-                             BackgroundColor="{StaticResource ButtonBlue}" 
-                             FontSize="30" 
-                             TextColor="White" 
-                             Text="Manage Crew">
-                            <!--<Button.Triggers>
-                                <DataTrigger 
-                                     TargetType="Button"
-                                     Binding="{Binding HasPendingTrip}"
-                                     Value="True">
-                                     <Setter Property="IsVisible"
-                                     Value="False" />
-
-                                </DataTrigger>
-                                <DataTrigger 
-                                     TargetType="Button"
-                                     Binding="{Binding HasPendingTrip}"
-                                     Value="False">
-                                                                <Setter Property="IsVisible"
-                                     Value="True" />
-
-                                                            </DataTrigger>  
-                            </Button.Triggers>-->
-                        </Button>
-
-                        <Grid ColumnDefinitions="50*,50*">
-                            <VerticalStackLayout Grid.Column="0" Margin="0,0,0,8">
-                                <Label
-    TextColor="{StaticResource Primary}"
-    FontAttributes="Bold"
-    FontSize="Large"
-    Text="{x:Static res:AppResources.GpsStatus}"/>
-
-                                <HorizontalStackLayout>
-                                    <Ellipse 
-        Margin="0,0,8,0"
-        Fill="DarkBlue"
-        Stroke="{StaticResource Tertiary}"
-        StrokeThickness="4"
-        WidthRequest="20"
-        HeightRequest="20"
-        HorizontalOptions="Start" >
-
-                                        <Ellipse.Triggers>
-                                            <DataTrigger TargetType="Ellipse"
-                Binding="{Binding Source={x:Reference GpsnStatusLabel},
-                    Path=Text}" 
-                
-                Value="{x:Static res:AppResources.Online}">
-                                                <Setter Property="Fill"
-                Value="{StaticResource ButtonGreen}" />
-
-                                            </DataTrigger>
-                                            <DataTrigger TargetType="Ellipse"
-                 Binding="{Binding Source={x:Reference GpsnStatusLabel},
-                    Path=Text}" 
-                Value="{x:Static res:AppResources.Offline}">
-                                                <Setter Property="Fill"
-                Value="{StaticResource ButtonRed}" />
-
-                                            </DataTrigger>
-                                        </Ellipse.Triggers>
-                                    </Ellipse>
-
-                                    <Label
-    x:Name="GpsnStatusLabel"
-    TextColor="Black"
-    FontAttributes="Bold"
-    FontSize="20"
-    Text="{Binding GpsStatus}">
-                                        <Label.Triggers>
-                                            <Trigger TargetType="Label"
-            Property="Text"
-            Value="{x:Static res:AppResources.Online}">
-                                                <Setter Property="TextColor"
-                Value="{StaticResource ButtonGreen}" />
-
-                                            </Trigger>
-                                            <Trigger TargetType="Label"
-            Property="Text"
-            Value="{x:Static res:AppResources.Offline}">
-                                                <Setter Property="TextColor"
-                Value="{StaticResource ButtonRed}" />
-
-                                            </Trigger>
-                                        </Label.Triggers>
-                                    </Label>
-                                </HorizontalStackLayout>
-
-                            </VerticalStackLayout>
-
-                            <VerticalStackLayout Grid.Column="1" Margin="0,0,0,8">
-                                <Label
-    TextColor="{StaticResource Primary}"
-    FontAttributes="Bold"
-    FontSize="Large"
-    Text="{x:Static res:AppResources.InternetStatus}"/>
-
-                                <HorizontalStackLayout>
-                                    <Ellipse 
-        Margin="0,0,8,0"
-        Fill="DarkBlue"
-        Stroke="{StaticResource Tertiary}"
-        StrokeThickness="4"
-        WidthRequest="20"
-        HeightRequest="20"
-        HorizontalOptions="Start" >
-
-                                        <Ellipse.Triggers>
-                                            <DataTrigger TargetType="Ellipse"
-                Binding="{Binding Source={x:Reference ConnectionStatusLabel},
-                    Path=Text}" 
-                
-                Value="{x:Static res:AppResources.Online}">
-                                                <Setter Property="Fill"
-                Value="{StaticResource ButtonGreen}" />
-
-                                            </DataTrigger>
-                                            <DataTrigger TargetType="Ellipse"
-                 Binding="{Binding Source={x:Reference ConnectionStatusLabel},
-                    Path=Text}" 
-                Value="{x:Static res:AppResources.Offline}">
-                                                <Setter Property="Fill"
-                Value="{StaticResource ButtonRed}" />
-
-                                            </DataTrigger>
-                                        </Ellipse.Triggers>
-                                    </Ellipse>
-
-                                    <Label
-        x:Name="ConnectionStatusLabel"
-        TextColor="Black"
-        FontAttributes="Bold"
-        FontSize="20"
-        Text="{Binding ConnectionStatus}">
-                                        <Label.Triggers>
-                                            <Trigger TargetType="Label"
-            Property="Text"
-            Value="{x:Static res:AppResources.Online}">
-                                                <Setter Property="TextColor"
-                Value="{StaticResource ButtonGreen}" />
-
-                                            </Trigger>
-                                            <Trigger TargetType="Label"
-            Property="Text"
-            Value="{x:Static res:AppResources.Offline}">
-                                                <Setter Property="TextColor"
-                Value="{StaticResource ButtonRed}" />
-
-                                            </Trigger>
-                                        </Label.Triggers>
-                                    </Label>
-                                </HorizontalStackLayout>
-
-                            </VerticalStackLayout>
-                        </Grid>
-                        
-                        
-                       <!--Landing Form info-->
-                        <VerticalStackLayout>
-                            <Grid ColumnDefinitions="60*,40*">
-                                <VerticalStackLayout>
-                                    <Label VerticalOptions="Center" FontSize="20" Text="Food Cost" TextColor="Black"/>
-                                    <Label VerticalOptions="Center" FontSize="20" Text="($)" TextColor="Black"/>
-                                </VerticalStackLayout>
-                              
-                                <Border Grid.Column="1" Margin="0,0,0,8" StrokeThickness="3" Stroke="{StaticResource ButtonGreen}">
-                                    <Entry Text="{Binding FoodCost}" Keyboard="Numeric" TextColor="Black" FontSize="25" Placeholder="($)"/>
-                                </Border>
-                            </Grid>
-
-                            <Grid ColumnDefinitions="60*,40*">
-                                <VerticalStackLayout>
-                                    <Label VerticalOptions="Center" FontSize="20" Text="Fuel Cost" TextColor="Black"/>
-                                    <Label VerticalOptions="Center" FontSize="20" Text="($)" TextColor="Black"/>
-                                </VerticalStackLayout>
-                              
-                                <Border Grid.Column="1" Margin="0,0,0,8" StrokeThickness="3" Stroke="{StaticResource ButtonGreen}">
-                                    <Entry Text="{Binding FuelCost}" Keyboard="Numeric" TextColor="Black" FontSize="25" Placeholder="($)"/>
-                                </Border>
-                            </Grid>
-
-                            <Grid ColumnDefinitions="60*,40*">
-                                <VerticalStackLayout>
-                                    <Label VerticalOptions="Center" FontSize="20" Text="Fuel Amount" TextColor="Black"/>
-                                    <Label VerticalOptions="Center" FontSize="20" Text="(Gallons)" TextColor="Black"/>
-                                </VerticalStackLayout>
-                              
-                                <Border Grid.Column="1" StrokeThickness="3" Stroke="{StaticResource ButtonGreen}">
-                                    <Entry Text="{Binding FuelAmount}" Keyboard="Numeric" TextColor="Black" FontSize="25" Placeholder="(Gallon)"/>
-                                </Border>
-                            </Grid>
-
-                            <!--<HorizontalStackLayout Margin="4,16">
-                                <Label FontAttributes="Bold" TextColor="Black" Text="GPS Data Saved : "/>
-                                <Label TextColor="Black" Text="{Binding GPSSaved}"/>
-                            </HorizontalStackLayout>-->
-
-                            <VerticalStackLayout.Triggers>
-                                <DataTrigger 
-         TargetType="VerticalStackLayout"
-         Binding="{Binding HasPendingTrip}"
-         Value="True">
-                                    <Setter Property="IsVisible"
-         Value="True" />
-
-                                </DataTrigger>
-                                <DataTrigger 
-         TargetType="VerticalStackLayout"
-         Binding="{Binding HasPendingTrip}"
-         Value="False">
-                                    <Setter Property="IsVisible"
-         Value="False" />
-
-                                </DataTrigger>
-                            </VerticalStackLayout.Triggers>
-                        </VerticalStackLayout>
-                        
-                    </VerticalStackLayout>
-                </ScrollView>
-
-            </Border>
-
-            <Grid Grid.Row="1" VerticalOptions="Start" RowDefinitions="50*,50*" Margin="0,8,0,8">
+            <Grid Grid.Row="1" IsVisible="False" VerticalOptions="Start" RowDefinitions="50*,50*" Margin="0,8,0,8">
                
                  <Button                                       
                         Command="{Binding StartSetCommand}"
@@ -399,7 +125,7 @@
 
             </Grid>
 
-            <Grid Grid.Row="2" Margin="0,0,0,32">
+            <Grid Grid.Row="2" IsVisible="False" Margin="0,0,0,32">
                 <Button           
                     Margin="16,0"
                     IsEnabled="{Binding IsNotBusy}"

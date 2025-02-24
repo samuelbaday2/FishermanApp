@@ -1,6 +1,7 @@
 using FishermanApp.Objects;
 using FishermanApp.Resources.Localization;
 using FishermanApp.ViewModels.Modals;
+using FishermanApp.Views.Pages;
 
 namespace FishermanApp.Views.Modals;
 
@@ -35,7 +36,9 @@ public partial class SetSelect : ContentPage
 
         CurrentSetObjectStatic.SetNumberObject = item;
 
-        Shell.Current.Navigation.PopModalAsync();
-        Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchDetails)).FirstOrDefault();
+        //Shell.Current.Navigation.PopModalAsync();
+        //Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchDetails)).FirstOrDefault();
+
+        Shell.Current.Navigation.PushAsync(new EnterCatchDetailsPage());
     }
 }

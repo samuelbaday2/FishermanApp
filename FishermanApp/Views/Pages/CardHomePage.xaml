@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FishermanApp.Views.Pages.CardHomePage"
+             xmlns:res="clr-namespace:FishermanApp.Resources.Localization"
+             Title="ONGOING TRIP"
+             xmlns:vm="clr-namespace:FishermanApp.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             BackgroundColor="White">
+
+    <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="16">
+        <VerticalStackLayout Margin="16">
+            <!--Landing Form info-->
+            <VerticalStackLayout>
+                <Grid ColumnDefinitions="60*,40*">
+                    <VerticalStackLayout>
+                        <Label VerticalOptions="Center" FontSize="20" Text="Food Cost" TextColor="Black"/>
+                        <Label VerticalOptions="Center" FontSize="20" Text="($)" TextColor="Black"/>
+                    </VerticalStackLayout>
+
+                    <Border Grid.Column="1" Margin="0,0,0,8" StrokeThickness="3" Stroke="{StaticResource ButtonGreen}">
+                        <Entry Text="{Binding FoodCost}" Keyboard="Numeric" TextColor="Black" FontSize="25" Placeholder="($)"/>
+                    </Border>
+                </Grid>
+
+                <Grid ColumnDefinitions="60*,40*">
+                    <VerticalStackLayout>
+                        <Label VerticalOptions="Center" FontSize="20" Text="Fuel Cost" TextColor="Black"/>
+                        <Label VerticalOptions="Center" FontSize="20" Text="($)" TextColor="Black"/>
+                    </VerticalStackLayout>
+
+                    <Border Grid.Column="1" Margin="0,0,0,8" StrokeThickness="3" Stroke="{StaticResource ButtonGreen}">
+                        <Entry Text="{Binding FuelCost}" Keyboard="Numeric" TextColor="Black" FontSize="25" Placeholder="($)"/>
+                    </Border>
+                </Grid>
+
+                <Grid ColumnDefinitions="60*,40*">
+                    <VerticalStackLayout>
+                        <Label VerticalOptions="Center" FontSize="20" Text="Fuel Amount" TextColor="Black"/>
+                        <Label VerticalOptions="Center" FontSize="20" Text="(Gallons)" TextColor="Black"/>
+                    </VerticalStackLayout>
+
+                    <Border Grid.Column="1" StrokeThickness="3" Stroke="{StaticResource ButtonGreen}">
+                        <Entry Text="{Binding FuelAmount}" Keyboard="Numeric" TextColor="Black" FontSize="25" Placeholder="(Gallon)"/>
+                    </Border>
+                </Grid>
+
+                <!--<HorizontalStackLayout Margin="4,16">
+                       <Label FontAttributes="Bold" TextColor="Black" Text="GPS Data Saved : "/>
+                       <Label TextColor="Black" Text="{Binding GPSSaved}"/>
+                   </HorizontalStackLayout>-->
+
+                <VerticalStackLayout.Triggers>
+                    <DataTrigger 
+TargetType="VerticalStackLayout"
+Binding="{Binding HasPendingTrip}"
+Value="True">
+                        <Setter Property="IsVisible"
+Value="True" />
+
+                    </DataTrigger>
+                    <DataTrigger 
+TargetType="VerticalStackLayout"
+Binding="{Binding HasPendingTrip}"
+Value="False">
+                        <Setter Property="IsVisible"
+Value="False" />
+
+                    </DataTrigger>
+                </VerticalStackLayout.Triggers>
+            </VerticalStackLayout>
+
+            <Grid>
+                <Button                                       
+Command="{Binding StartSetCommand}"
+FontSize="30"
+  
+IsEnabled="{Binding HasPendingTrip}"
+Text="{x:Static res:AppResources.StartSet}"
+TextColor="White"
+BackgroundColor="{StaticResource ButtonGreen}"
+HeightRequest="90"
+Margin="16,16"
+/>
+
+                <Button                                       
+Command="{Binding StartSetCommand}"
+FontSize="30"
+IsVisible="{Binding IsLastSetNotEnded}"
+IsEnabled="{Binding HasPendingTrip}"
+Text="{x:Static res:AppResources.EndSet}"
+TextColor="White"
+BackgroundColor="{StaticResource ButtonRed}"
+HeightRequest="90"
+Margin="16,16"/>
+            </Grid>
+           
+
+      
+            <Button                        
+   
+    Command="{Binding AddCatchCommand}"
+    FontSize="30"
+ 
+    IsEnabled="{Binding IsAddCatchVisible}"
+    Text="{x:Static res:AppResources.AddMoreCatchData}"
+    TextColor="White"
+    BackgroundColor="{StaticResource ButtonOrange}"
+    HeightRequest="90"
+    Margin="16,16"
+    />
+
+            <Button                        
+   
+Command="{Binding ReleaseCommand}"
+FontSize="30"
+ 
+IsEnabled="{Binding IsReleaseVisible}"
+Text="Release ETPs"
+TextColor="White"
+BackgroundColor="{StaticResource ButtonGreen}"
+HeightRequest="90"
+Margin="16,16"
+/>
+
+            <Button 
+     Margin="16,16"
+     IsEnabled="{Binding IsNotBusy}"
+    
+     Command="{Binding EndTripCommand}"
+     Text="{x:Static res:AppResources.EndTrip}"
+     TextColor="White"
+     BackgroundColor="{StaticResource ButtonRed}"
+     HeightRequest="90"
+     FontSize="30"
+     IsVisible="{Binding HasPendingTrip}"
+     VerticalOptions="End"/>
+        </VerticalStackLayout>
+
+      
+
+    </Grid>
+</ContentPage>

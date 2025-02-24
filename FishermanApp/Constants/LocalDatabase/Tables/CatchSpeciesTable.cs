@@ -24,29 +24,54 @@ namespace FishermanApp.Constants.LocalDatabase.Tables
                     Species = "Albacore Tuna",
                     ScientificName = "Thunnus alalunga",
                     IsActive = true,
+                    IsETP = false,
                 },
                 new DBSpeciesObject
                 {
                     Species = "Bigeye Tuna",
                     ScientificName = "Thunnus obesus",
                     IsActive = true,
-
+                    IsETP = false,
                 },
                 new DBSpeciesObject
                 {
                     Species = "Northern Bluefin Tuna",
                     ScientificName = "Thunnus thynnus",
                     IsActive = true,
-
+                    IsETP = false,
                 },
                 new DBSpeciesObject
                 {
                     Species = "Yellowfin Tuna",
                     ScientificName = "Thunnus albacares",
                     IsActive = true,
-
+                    IsETP = false,
                 },
                 
+                //ETP Species
+                new DBSpeciesObject
+                {
+                    Species = "Whale Shark",
+                    ScientificName = "Rhincodon typus",
+                    IsActive = true,
+                    IsETP = true,
+                },
+
+                 new DBSpeciesObject
+                {
+                    Species = "Turtle",
+                    ScientificName = "",
+                    IsActive = true,
+                    IsETP = true,
+                },
+
+                   new DBSpeciesObject
+                {
+                    Species = "Birds",
+                    ScientificName = "",
+                    IsActive = true,
+                    IsETP = true,
+                },
             };
 
             foreach (DBSpeciesObject obj in SelectionCollection)

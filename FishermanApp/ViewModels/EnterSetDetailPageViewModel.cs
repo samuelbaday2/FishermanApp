@@ -117,8 +117,8 @@ namespace FishermanApp.ViewModels
                 await _tripSetTable.SaveItemAsync(currentSet);
 
                 InitializeConfig.InitializeFunction = true;
-                Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.Home)).FirstOrDefault();
-
+                //Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.Home)).FirstOrDefault();
+                await Shell.Current.Navigation.PopAsync();
             }
             catch (Exception ee)
             {
@@ -176,8 +176,8 @@ namespace FishermanApp.ViewModels
                 await _tripSetTable.SaveItemAsync(currentSet);
 
                 InitializeConfig.InitializeFunction = true;
-                Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.Home)).FirstOrDefault();
-
+                //Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.Home)).FirstOrDefault();
+                await Shell.Current.Navigation.PopAsync();
             }
             catch (Exception ee)
             {

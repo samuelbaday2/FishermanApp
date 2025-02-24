@@ -3,6 +3,8 @@ using FishermanApp.Objects.DbObjects;
 using FishermanApp.Resources.Localization;
 using FishermanApp.ViewModels;
 using FishermanApp.ViewModels.Selection;
+using FishermanApp.Views.Modals;
+using FishermanApp.Views.Selection;
 
 namespace FishermanApp.Views.Pages;
 
@@ -33,25 +35,28 @@ public partial class EnterCatchDetailsPage : ContentPage
         Entry Entry = (Entry)sender;
 
         CurrentObject = Entry.ReturnCommandParameter;
+        CatchObject catchObject = CurrentObject as CatchObject;
         MessagingCenter.Subscribe<CatchSpeciesSelectionViewModel, SelectionObject>(this, AppResources.CatchSpeciesSelection, async (sender, arg) =>
         {
-            CatchObject catchObject = CurrentObject as CatchObject;
-            viewModel.UpdateCatchRow(catchObject.Index,arg.SelectionTitle, catchObject.ScientificName, catchObject.Weight, catchObject.ProcessingType);
+            
+            viewModel.UpdateCatchRow(catchObject.Index,arg.SelectionTitle, catchObject.ScientificName, catchObject.Weight, catchObject.ProcessingType, arg.IsETP);
             MessagingCenter.Unsubscribe<CatchSpeciesSelectionViewModel, SelectionObject>(this, AppResources.CatchSpeciesSelection);
         });
 
         MessagingCenter.Subscribe<string, SelectionObject>("custom_species", "custom_species", async (sender, arg) =>
         {
-            CatchObject catchObject = CurrentObject as CatchObject;
+           
             //MessagingCenter.Send(this, AppResources.CatchSpeciesSelection, arg);
-            viewModel.UpdateCatchRow(catchObject.Index, arg.SelectionTitle, arg.SubTitle, catchObject.Weight, catchObject.ProcessingType);
+            viewModel.UpdateCatchRow(catchObject.Index, arg.SelectionTitle, arg.SubTitle, catchObject.Weight, catchObject.ProcessingType, arg.IsETP);
             MessagingCenter.Unsubscribe<CatchSpeciesSelectionViewModel, SelectionObject>(this, "custom_species");
         });
 
         Entry.IsEnabled = false;
         Entry.IsEnabled = true;
 
-        Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchSpeciesSelection)).FirstOrDefault();
+        //Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.CatchSpeciesSelection)).FirstOrDefault();
+        Shell.Current.Navigation.PushAsync(new SpecieETPSelection());
+        //Shell.Current.Navigation.PushAsync(new CatchSpeciesSelection(new(catchObject.IsEtp)));
     }
     private void Entry_Focused1(object sender, FocusEventArgs e)
     {
@@ -70,6 +75,15 @@ public partial class EnterCatchDetailsPage : ContentPage
 
     private void Button_Clicked_1(object sender, EventArgs e)
     {
-        Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.Home)).FirstOrDefault();
+        //Shell.Current.CurrentItem = Shell.Current.Items.Where(x => x.Title.Contains(AppResources.Home)).FirstOrDefault();
+        Shell.Current.Navigation.PopAsync();
+        try
+        {
+            Shell.Current.Navigation.PopAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 }

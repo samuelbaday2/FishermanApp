@@ -88,7 +88,7 @@ namespace FishermanApp.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add Another Row.
+        ///   Looks up a localized string similar to Add More Fish.
         /// </summary>
         public static string AddRow {
             get {
